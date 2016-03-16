@@ -6,11 +6,10 @@
  */
 
 #include "Object.h"
-#include <stdio.h>
-#include <Elementary_GL_Helpers.h>
 #include "TGA.h"
-#include "flyingbird_utils.h"
+#include <stdio.h>
 #include <app.h>
+#include <Elementary_GL_Helpers.h>
 
 #include "Camera.h"
 
@@ -31,10 +30,11 @@ fgmt_shader(0),
 texture(0),
 idx_vbo(0),
 idx_ibo(0),
-idx_vposition(0)
+idx_vposition(0),
+type(NONE)
 {}
 
-void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int magFilter)
+void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, OBJECT_TYPE _type)
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -52,7 +52,11 @@ void Object::Init(const char* path, Vertex coords[4], const char *vs, const char
 			GL_STATIC_DRAW);
 
 	InitShader(vs, fs);
-	InitTexture(path, texture, magFilter);
+	InitTexture(path, texture);
+
+	type = _type;
+
+	matrix.InitIdentity();
 }
 
 void Object::InitShader(const char *vs, const char *fs)
@@ -100,7 +104,7 @@ void Object::InitShader(const char *vs, const char *fs)
 	glLinkProgram(program);
 }
 
-void Object::InitTexture(const char* path, unsigned int &_texture, unsigned int magFilter)
+void Object::InitTexture(const char* path, unsigned int &_texture)
 {
 	int width, height, bpp;
 
@@ -113,8 +117,8 @@ void Object::InitTexture(const char* path, unsigned int &_texture, unsigned int 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, // int texture_width, texture_height;
 			0, GL_RGBA, GL_UNSIGNED_BYTE, bufferTGA); // void *texture_data;
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, magFilter);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, magFilter);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
@@ -132,9 +136,6 @@ void Object::Draw(double dt, double offset)
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	Matrix4f matrix;
-	matrix.InitIdentity();
-
 	float u_mvp = glGetUniformLocation(program, "u_mvpMatrix");
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
@@ -145,6 +146,11 @@ void Object::Draw(double dt, double offset)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glUseProgram(0);
+}
+
+Matrix4f& Object::GetMatrix()
+{
+	return matrix;
 }
 
 const Vertex Object::GetVertexByIdx(int idx) const

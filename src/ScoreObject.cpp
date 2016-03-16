@@ -24,12 +24,12 @@ void ScoreObject::Init(const char* path1, Vertex coords[4], const char *vs, cons
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		Object* tmp = new Object();
+		Object tmp;
 		char a[15];
 
 		snprintf(a, 15, "%s%d%s","digit_", i , ".tga" );
 
-		tmp->Init(a, btn_start_verticies, "digitShader.vs", "digitShader.fs");
+		tmp.Init(a, btn_start_verticies, "digitShader.vs", "digitShader.fs", Object::SCORE);
 
 		m_digits.push_back(tmp);
 	}
@@ -41,25 +41,28 @@ void ScoreObject::Draw(double dr, double offset)
 {
 	if (m_value < 10)
 	{
-		m_digits[m_value]->Draw(dr);
+		m_digits[m_value].Draw(dr);
 	}
 	else if (m_value < 100)
 	{
 		int v1 = m_value / 10.0;
 		int v2 = m_value % 10;
-		m_digits[v1]->Draw(dr, -0.10);
-		m_digits[v2]->Draw(dr, 0.10);
+		m_digits[v1].Draw(dr, -0.10);
+		m_digits[v2].Draw(dr, 0.10);
 	}
 	else
 	{
 		int v1 = m_value / 100.0;
 		int v2 = (m_value % 100) / 10.0;
 		int v3 = (m_value % 100) % 10;
-		m_digits[v1]->Draw(dr, -0.30);
-		m_digits[v2]->Draw(dr, -0.10);
-		m_digits[v3]->Draw(dr, 0.10);
+		m_digits[v1].Draw(dr, -0.30);
+		m_digits[v2].Draw(dr, -0.10);
+		m_digits[v3].Draw(dr, 0.10);
 	}
 }
+
+ScoreObject::~ScoreObject()
+{}
 
 void ScoreObject::IncreaseScore()
 {

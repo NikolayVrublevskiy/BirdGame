@@ -3,6 +3,7 @@
 #include <time.h>
 #include <stdlib.h>
 #include "BirdObject.h"
+#include "ScoreObject.h"
 #include <Elementary_GL_Helpers.h>
 
 	Vertex initial_top_position[4] = {
@@ -20,18 +21,13 @@
 	};
 
 PipeManager::PipeManager()
-	:m_pipesCount(0)
-	, m_lastRnd(0.0)
+:m_lastRnd(0.0f)
 {
 	time(NULL);
 }
 
 PipeManager::~PipeManager()
 {
-	for(size_t i = 0 ; i < m_pipes.size(); i++)
-	{
-		delete m_pipes[i];
-	}
 	m_pipes.clear();
 }
 
@@ -51,8 +47,8 @@ void PipeManager::AddPipe(bool isTop)
 				initial_top_position[i].m_pos.y = 0.8 - m_lastRnd;
 			}
 		}
-		PipeObject* top_pipe = new PipeObject();
-		top_pipe->Init("top_tube.tga", initial_top_position, "PipeShader.vs", "PipeShader.fs", PipeObject::TOP, GL_LINEAR);
+		PipeObject top_pipe;
+		top_pipe.Init("top_tube.tga", initial_top_position, "PipeShader.vs", "PipeShader.fs", PipeObject::TOP);
 		m_pipes.push_back(top_pipe);
 	}
 	else
@@ -65,31 +61,27 @@ void PipeManager::AddPipe(bool isTop)
 				initial_bot_position[i].m_pos.y = 0.2 - m_lastRnd;
 			}
 		}
-		PipeObject* bot_pipe = new PipeObject();
-		bot_pipe->Init("bot_tube.tga", initial_bot_position, "PipeShader.vs", "PipeShader.fs", PipeObject::BOTTOM, GL_LINEAR);
+		PipeObject bot_pipe;
+		bot_pipe.Init("bot_tube.tga", initial_bot_position, "PipeShader.vs", "PipeShader.fs", PipeObject::BOTTOM);
 		m_pipes.push_back(bot_pipe);
 		m_lastRnd = 0.0;
 	}
-
-	m_pipesCount++;
 }
 
 void PipeManager::DrawPipes(double dt)
 {
 	for(size_t i = 0 ; i < m_pipes.size(); i++)
 	{
-		m_pipes[i]->Draw(dt);
+		m_pipes[i].Draw(dt);
 	}
 }
 
 void PipeManager::CheckTubes(BirdObject& bird, ScoreObject& so, ScoreObject& so2)
 {
-	if (m_pipes[0]->ShouldBeDeleted())
+	if (m_pipes[0].ShouldBeDeleted())
 	{
 		AddPipe(true);
 		AddPipe(false);
-		delete m_pipes[0];
-		delete m_pipes[1];
 		m_pipes.erase(m_pipes.begin() + 0);
 		m_pipes.erase(m_pipes.begin() + 0);
 	}
@@ -97,11 +89,11 @@ void PipeManager::CheckTubes(BirdObject& bird, ScoreObject& so, ScoreObject& so2
 	{
 		bird.SetIsDead(true);
 	}
-	else if (!m_pipes[0]->IsScored() && m_pipes[0]->GetType() == PipeObject::TOP)
+	else if (!m_pipes[0].IsScored() && m_pipes[0].GetType() == PipeObject::TOP)
 	{
 		if (bird.ChechScore(m_pipes[0]))
 		{
-			m_pipes[0]->SetIsScored(true);
+			m_pipes[0].SetIsScored(true);
 			{
 				so.IncreaseScore();
 				so2.IncreaseScore();
@@ -110,19 +102,16 @@ void PipeManager::CheckTubes(BirdObject& bird, ScoreObject& so, ScoreObject& so2
 	}
 }
 
-std::vector<PipeObject*> PipeManager::GetPipes() const
+std::vector<PipeObject> PipeManager::GetPipes() const
 {
 	return m_pipes;
 }
 
 void PipeManager::DeletePipes()
 {
-	for (size_t i = 0; i < m_pipes.size(); i++)
-	{
-		delete m_pipes[i];
-	}
 	m_pipes.clear();
 }
+
 void PipeManager::ReinitVerticies()
 {
 	initial_top_position[0] = Vertex(Vector3f(0.f, 0.8f, 0.f), Vector2f(0.0f, 0.0f));

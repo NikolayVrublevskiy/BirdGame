@@ -1,5 +1,4 @@
 #pragma once
-#include "flyingbird_utils.h"
 #include "ISingleton.h"
 #include "math_3d.h"
 #include <Elementary_GL_Helpers.h>
@@ -14,8 +13,6 @@ public:
 	~Camera();
 
 	void UpdateMoveAndRotation();
-
-
 
 	const Matrix4f & GetWorldMatrix() const;
 	const Matrix4f & GetViewMatrix() const;

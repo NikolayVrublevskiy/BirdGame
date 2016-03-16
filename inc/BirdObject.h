@@ -9,7 +9,8 @@
 #define BIRD_OBJECT_H_
 
 #include "Object.h"
-#include "PipeObject.h"
+
+class PipeObject;
 
 class BirdObject : public Object
 {
@@ -18,10 +19,10 @@ public:
 
 	void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
 
-	void Draw(double dt, double offset = 0, Evas_Object * obj = 0);
+	void Draw(double dt, double offset = 0);
 
-	bool CheckInteractWithTube(PipeObject * ob);
-	bool ChechScore(PipeObject * ob);
+	bool CheckInteractWithTube(const PipeObject& ob);
+	bool ChechScore(const PipeObject& ob);
 
 	void SetShouldUp(bool value);
 
@@ -39,7 +40,6 @@ private:
 	bool m_isDead;
 
 	float m_rotationAngle;
-	Matrix4f matrix;
 };
 
 

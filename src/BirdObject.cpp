@@ -6,8 +6,8 @@
  */
 
 #include "BirdObject.h"
-#include "flyingbird_utils.h"
 #include "Camera.h"
+#include "PipeObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
 
@@ -31,9 +31,9 @@ BirdObject::BirdObject()
 
 void BirdObject::Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs)
 {
-	Object::Init(path1, coords, vs, fs, GL_LINEAR);
-	Object::InitTexture(path2, texture_2, GL_LINEAR);
-	Object::InitTexture(path3, texture_3, GL_LINEAR);
+	Object::Init(path1, coords, vs, fs, Object::BIRD);
+	Object::InitTexture(path2, texture_2);
+	Object::InitTexture(path3, texture_3);
 
 	m_speed = 0.01f;
 	m_shouldUpBird = false;
@@ -46,7 +46,7 @@ void BirdObject::Init(const char* path1, const char* path2, const char* path3, V
 }
 
 float rot = 0;
-void BirdObject::Draw(double dt, double offset, Evas_Object * obj)
+void BirdObject::Draw(double dt, double offset)
 {
 	glUseProgram(program);
 	glEnableVertexAttribArray(0);
@@ -100,9 +100,9 @@ void BirdObject::Draw(double dt, double offset, Evas_Object * obj)
 
 }
 
-bool BirdObject::CheckInteractWithTube(PipeObject * ob)
+bool BirdObject::CheckInteractWithTube(const PipeObject& ob)
 {
-	switch (ob->GetType())
+	/*switch (ob->GetType())
 	{
 	case PipeObject::TOP:
 		if (verticies[2].m_pos.y >= ob->GetVertexByIdx(0).m_pos.y && verticies[2].m_pos.x >= ob->GetVertexByIdx(0).m_pos.x &&
@@ -120,18 +120,18 @@ bool BirdObject::CheckInteractWithTube(PipeObject * ob)
 	default:
 		break;
 	}
-
+*/
 	return false;
 }
 
-bool BirdObject::ChechScore(PipeObject * ob)
+bool BirdObject::ChechScore(const PipeObject& ob)
 {
-	if (verticies[2].m_pos.x >= ((ob->GetVertexByIdx(0).m_pos.x + ob->GetVertexByIdx(3).m_pos.x) / 2.0))
+	/*if (verticies[2].m_pos.x >= ((ob->GetVertexByIdx(0).m_pos.x + ob->GetVertexByIdx(3).m_pos.x) / 2.0))
 	{
 		m_score++;
 		return true;
 	}
-
+*/
 	return false;
 }
 

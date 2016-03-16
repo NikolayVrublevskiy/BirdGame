@@ -17,7 +17,7 @@ public:
 
 	PipeObject();
 
-	void Init(const char* path1, Vertex coords[4], const char *vs, const char *fs, TYPE type, unsigned int magFilet);
+	void Init(const char* path1, Vertex coords[4], const char *vs, const char *fs, TYPE type);
 
 	bool ShouldBeDeleted();
 

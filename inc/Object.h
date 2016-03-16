@@ -9,21 +9,25 @@
 #define OBJECT_H_
 
 #include "math_3d.h"
-#include "flyingbird.h"
 
 class Object
 {
 public:
+
+	enum OBJECT_TYPE{NONE, BG, FLAG, BIRD, SCORE, PIPE};
+
 	Object();
 
-	void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int magFilter = 0x2600);
+	void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, OBJECT_TYPE _type);
 
 	void InitShader(const char *vs, const char *fs);
-	void InitTexture(const char* path, unsigned int &_texture, unsigned int magFilter);
+	void InitTexture(const char* path, unsigned int &_texture);
 
 	const Vertex GetVertexByIdx(int idx) const;
 
 	void Draw(double dt, double offset = 0);
+
+	Matrix4f& GetMatrix();
 
 protected:
 	unsigned int program;
@@ -38,7 +42,9 @@ protected:
 
 	Vertex verticies[4];
 
-	static double _dtp;
+	Matrix4f matrix;
+
+	OBJECT_TYPE type;
 
 	float model[16];
 };

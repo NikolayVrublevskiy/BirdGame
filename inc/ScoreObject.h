@@ -7,6 +7,7 @@ class ScoreObject : public Object
 public:
 
 	ScoreObject();
+	~ScoreObject();
 
 	void Init(const char* path1, Vertex coords[4], const char *vs, const char *fs, int tp);
 
@@ -15,7 +16,7 @@ public:
 	void IncreaseScore();
 
 private:
-	std::vector<Object* > m_digits;
+	std::vector<Object> m_digits;
 
 	bool m_isMultiDigit;
 	int m_value;

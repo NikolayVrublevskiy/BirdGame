@@ -16,9 +16,9 @@ PipeObject::PipeObject()
 , m_isScored(false)
 {}
 
-void PipeObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, TYPE type, unsigned int magFilet)
+void PipeObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, TYPE type)
 {
-	Object::Init(path, coords, vs, fs, magFilet);
+	Object::Init(path, coords, vs, fs, Object::PIPE);
 	m_type = type;
 }
 

@@ -1,2 +1,2 @@
 src/math_3d.o: ../src/math_3d.cpp \
- C:/Users/exelim/workspace/FlyingBird/inc/math_3d.h
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h

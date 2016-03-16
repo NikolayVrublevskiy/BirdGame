@@ -1,11 +1,9 @@
 #pragma once
 #include<vector>
-#include "math_3d.h"
-#include "ScoreObject.h"
 
 class PipeObject;
 class BirdObject;
-
+class ScoreObject;
 
 class PipeManager
 {
@@ -13,7 +11,7 @@ public:
 	PipeManager();
 	~PipeManager();
 
-	std::vector<PipeObject*> GetPipes() const;
+	std::vector<PipeObject> GetPipes() const;
 
 	void AddPipe( bool isTop);
 	void CheckTubes(BirdObject& bird, ScoreObject& so, ScoreObject& so2);
@@ -24,8 +22,6 @@ public:
 
 private:
 
-	int m_pipesCount;
-	std::vector<PipeObject*> m_pipes;
-
+	std::vector<PipeObject> m_pipes;
 	double m_lastRnd;
 };
