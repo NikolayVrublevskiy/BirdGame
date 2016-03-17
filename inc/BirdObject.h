@@ -16,6 +16,7 @@ class BirdObject : public Object
 {
 public:
 	BirdObject();
+	BirdObject(const BirdObject &);
 
 	void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
 
@@ -29,6 +30,8 @@ public:
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
 
+	Object* Clone();
+
 private:
 	unsigned int texture_2;
 	unsigned int texture_3;
@@ -40,6 +43,8 @@ private:
 	bool m_isDead;
 
 	float m_rotationAngle;
+
+	int m_currentTexture;
 };
 
 

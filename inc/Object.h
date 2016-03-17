@@ -17,15 +17,19 @@ public:
 	enum OBJECT_TYPE{NONE, BG, FLAG, BIRD, SCORE, PIPE};
 
 	Object();
+	Object(const Object &);
+	Object& operator=(const Object &);
 
-	void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, OBJECT_TYPE _type);
+	void Init(const char* path, Vertex coords[4], const char *vs, const char *fs);
 
 	void InitShader(const char *vs, const char *fs);
 	void InitTexture(const char* path, unsigned int &_texture);
 
 	const Vertex GetVertexByIdx(int idx) const;
 
-	void Draw(double dt, double offset = 0);
+	virtual void Draw(double dt, double offset = 0);
+
+	virtual Object* Clone();
 
 	Matrix4f& GetMatrix();
 
@@ -45,8 +49,6 @@ protected:
 	Matrix4f matrix;
 
 	OBJECT_TYPE type;
-
-	float model[16];
 };
 
 

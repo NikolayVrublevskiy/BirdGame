@@ -15,9 +15,6 @@ extern Evas_GL_API * __evas_gl_glapi;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int text = 1;
-float mDrawCount = 0;
-
 BirdObject::BirdObject()
 :texture_2(0),
  texture_3(0),
@@ -26,12 +23,35 @@ BirdObject::BirdObject()
  m_UpTime(0.0f),
  m_score(0),
  m_isDead(false),
- m_rotationAngle(0.0f)
+ m_rotationAngle(0.0f),
+ m_currentTexture(1)
 {}
+
+BirdObject::BirdObject(const BirdObject & rhs)
+: Object(rhs)
+{
+	texture_2 = rhs.texture_2;
+	texture_3 = rhs.texture_3;
+
+	m_speed = rhs.m_speed;
+	m_shouldUpBird = rhs.m_shouldUpBird;
+	m_UpTime = rhs.m_UpTime;
+	m_score = rhs.m_score;
+	m_isDead = rhs.m_isDead;
+
+	m_rotationAngle = rhs.m_rotationAngle;
+
+	m_currentTexture = rhs.m_currentTexture;
+}
+
+Object* BirdObject::Clone()
+{
+	return new BirdObject(*this);
+}
 
 void BirdObject::Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs)
 {
-	Object::Init(path1, coords, vs, fs, Object::BIRD);
+	Object::Init(path1, coords, vs, fs);
 	Object::InitTexture(path2, texture_2);
 	Object::InitTexture(path3, texture_3);
 
@@ -56,29 +76,29 @@ void BirdObject::Draw(double dt, double offset)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3*sizeof(float)));
 
-	if (text <= 6)
+	if (m_currentTexture <= 6)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture); // unsigned int texture_id;
-		text++;
+		m_currentTexture++;
 	}
-	else if (text <= 12)
+	else if (m_currentTexture <= 12)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_2); // unsigned int texture_id;
-		text++;
+		m_currentTexture++;
 	}
-	else if (text <= 18)
+	else if (m_currentTexture <= 18)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_3); // unsigned int texture_id;
-		text++;
+		m_currentTexture++;
 	}
 	else
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_3); // unsigned int texture_id;
-		text = 1;
+		m_currentTexture = 1;
 	}
 
 	matrix.SetRotationZ(rot);
@@ -95,9 +115,6 @@ void BirdObject::Draw(double dt, double offset)
 	glUseProgram(0);
 
 	rot -= 0.016;
-
-	mDrawCount += 1;
-
 }
 
 bool BirdObject::CheckInteractWithTube(const PipeObject& ob)

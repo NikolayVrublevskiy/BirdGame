@@ -34,7 +34,52 @@ idx_vposition(0),
 type(NONE)
 {}
 
-void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, OBJECT_TYPE _type)
+Object::Object(const Object & rhs)
+{
+	program = rhs.program;
+	vtx_shader = rhs.vtx_shader;
+	fgmt_shader = rhs.fgmt_shader;
+	texture = rhs.texture;
+	idx_vbo = rhs.idx_vbo;
+	idx_ibo = rhs.idx_ibo;
+	idx_vposition = rhs.idx_vposition;
+	type = rhs.type;
+
+	for(int i = 0; i < 4; i++)
+	{
+		verticies[i] = rhs.verticies[i];
+	}
+
+	matrix = rhs.matrix;
+}
+
+Object* Object::Clone()
+{
+	return new Object(*this);
+}
+
+Object& Object::operator=(const Object & rhs)
+{
+	program = rhs.program;
+	vtx_shader = rhs.vtx_shader;
+	fgmt_shader = rhs.fgmt_shader;
+	texture = rhs.texture;
+	idx_vbo = rhs.idx_vbo;
+	idx_ibo = rhs.idx_ibo;
+	idx_vposition = rhs.idx_vposition;
+	type = rhs.type;
+
+	for(int i = 0; i < 4; i++)
+	{
+		verticies[i] = rhs.verticies[i];
+	}
+
+	matrix = rhs.matrix;
+
+	return *this;
+}
+
+void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs)
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -53,8 +98,6 @@ void Object::Init(const char* path, Vertex coords[4], const char *vs, const char
 
 	InitShader(vs, fs);
 	InitTexture(path, texture);
-
-	type = _type;
 
 	matrix.InitIdentity();
 }

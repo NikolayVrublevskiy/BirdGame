@@ -8,6 +8,7 @@ cppflags = -I"C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc" -O0 -g3 -Wall
 
 build src/BirdObject.o: build_cpp ../src/BirdObject.cpp 
 build src/Camera.o: build_cpp ../src/Camera.cpp 
+build src/Font.o: build_cpp ../src/Font.cpp 
 build src/Game.o: build_cpp ../src/Game.cpp 
 build src/Object.o: build_cpp ../src/Object.cpp 
 build src/PipeManager.o: build_cpp ../src/PipeManager.cpp 

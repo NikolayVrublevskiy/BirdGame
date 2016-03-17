@@ -1,9 +1,10 @@
-src/flyingbird.o: ../src/flyingbird.cpp \
+src/Font.o: ../src/Font.cpp \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app_control.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app_common.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app_types.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app_i18n.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Font.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/Elementary_GL_Helpers.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/Elementary.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/eina-1/Eina.h \
@@ -224,27 +225,5 @@ src/flyingbird.o: ../src/flyingbird.cpp \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/elm_deprecated.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES1_Helpers.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES2_Helpers.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/efl_extension.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/efl_extension_events.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_surface.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_progressbar.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_slider.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_genlist.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_datetime.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_scroller.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_circle_object_spinner.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/circle/efl_extension_rotary.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/common/efl_extension_common.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/common/efl_extension_rotary_selector.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/efl-extension/common/efl_extension_more_option.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/flyingbird.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/dlog/dlog.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Camera.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Game.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/PipeManager.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Screen.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Object.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/GameHelper.h
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/TGA.h

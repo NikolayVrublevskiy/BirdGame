@@ -16,13 +16,23 @@ class Screen
 {
 public:
 	Screen();
+	Screen(const Screen & rhs);
+	Screen& operator=(const Screen & rhs);
+	~Screen();
 
 	void Draw(double dt, double offset = 0);
 	void Init(GAME_SCREEN _screen);
 
 private:
 
-	std::vector<Object> m_objects;
+	void InitLanguageScreen();
+	void InitGameScreen();
+
+	void InitBackground();
+
+private:
+
+	std::vector<Object*> m_objects;
 };
 
 

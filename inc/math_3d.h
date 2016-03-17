@@ -45,6 +45,10 @@ struct Vector2f
 	}
 };
 
+class trololo
+{
+
+};
 
 struct Vector3f
 {
@@ -235,6 +239,14 @@ public:
 		InitIdentity();
 	}
 
+	/*Matrix4f(const Matrix4f& rhs)
+	{
+		m[0][0] = rhs.m[0][0]; m[0][1] = rhs.m[0][1]; m[0][2] = rhs.m[0][2]; m[0][3] = rhs.m[0][3];
+		m[1][0] = rhs.m[1][0]; m[1][1] = rhs.m[1][1]; m[1][2] = rhs.m[1][2]; m[1][3] = rhs.m[1][3];
+		m[2][0] = rhs.m[2][0]; m[2][1] = rhs.m[2][1]; m[2][2] = rhs.m[2][2]; m[2][3] = rhs.m[2][3];
+		m[3][0] = rhs.m[3][0]; m[3][1] = rhs.m[3][1]; m[3][2] = rhs.m[3][2]; m[3][3] = rhs.m[3][3];
+	}*/
+
 	Matrix4f(float val)
 	{
 		m[0][0] = val; m[0][1] = val; m[0][2] = val; m[0][3] = val;
@@ -347,6 +359,12 @@ struct Vertex
 	{
 		m_pos = pos;
 		m_tex = tex;
+	}
+
+	Vertex(const Vertex & rhs)
+	{
+		m_pos = rhs.m_pos;
+		m_tex = rhs.m_tex;
 	}
 };
 

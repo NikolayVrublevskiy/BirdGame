@@ -11,7 +11,7 @@
 #include "ISingleton.h"
 #include "PipeManager.h"
 #include "Screen.h"
-#include <vector>
+#include <map>
 
 class Game : public ISingleton<Game>
 {
@@ -25,14 +25,17 @@ public:
 
 	void Init();
 
-	//void Draw(GAME_STATE _state);
-	//void ChangeState(GAME_STATE _state);
+	void Draw(double dt);
+	void SetCurrentScreen(GAME_SCREEN _screen);
+	GAME_SCREEN GetCurrentScreen() const;
 
 private:
 
 	PipeManager			m_pipeManager;
-	std::vector<Screen> m_screens;
-	Screen 				m_currentScreen;
+	std::map<GAME_SCREEN, Screen *> m_screens;
+
+	Screen 			m_screenToDraw;
+	GAME_SCREEN			m_currentScreen;
 };
 
 

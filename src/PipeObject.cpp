@@ -18,7 +18,7 @@ PipeObject::PipeObject()
 
 void PipeObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, TYPE type)
 {
-	Object::Init(path, coords, vs, fs, Object::PIPE);
+	Object::Init(path, coords, vs, fs);
 	m_type = type;
 }
 
