@@ -7,6 +7,7 @@
 
 #include "Screen.h"
 #include "BirdObject.h"
+#include <Elementary_GL_Helpers.h>
 
 Screen::Screen()
 {
@@ -53,10 +54,9 @@ void Screen::InitGameScreen()
 		Vertex(Vector3f(0.5f,	-0.5f,	0.0f), Vector2f(1.0f, 0.0f))
 	};
 	bird.Init("bird.tga", "bird_2.tga", "bird_3.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
-	bird.GetMatrix().SetTranslation(2.0f, 5.0f, 0.0f);
+	bird.GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 
-
-	m_objects.push_back(new BirdObject(bird));
+	m_objects.push_back(bird.Clone());
 }
 
 void Screen::InitLanguageScreen()
@@ -72,13 +72,13 @@ void Screen::InitLanguageScreen()
 			Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs");
+	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST);
 	US.GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
-	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs");
+	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST);
 	UA.GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
 
-	m_objects.push_back(new Object(US));
-	m_objects.push_back(new Object(UA));
+	m_objects.push_back(US.Clone());
+	m_objects.push_back(UA.Clone());
 }
 
 void Screen::InitBackground()
@@ -91,9 +91,14 @@ void Screen::InitBackground()
 			Vertex(Vector3f(5.0f,	-5.0f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	bg.Init("bg.tga", Vertices, "BgShader.vs", "BgShader.fs");
+	bg.Init("bg.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST);
 	bg.GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
-	m_objects.push_back(new Object(bg));
+	m_objects.push_back(bg.Clone());
+}
+
+Object* Screen::GetBirdObject()
+{
+	return m_objects[m_objects.size() - 1];
 }
 
 void Screen::Draw(double dt, double offset)

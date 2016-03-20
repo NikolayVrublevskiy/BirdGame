@@ -8,6 +8,7 @@
 #include "Game.h"
 
 Game::Game()
+: m_currentScreen(NONE)
 {}
 
 void Game::Init()
@@ -19,11 +20,22 @@ void Game::Init()
 	Screen screen2;
 	screen2.Init(GAME);
 	m_screens[GAME] = new Screen(screen2);
+
+	for(int i = 0; i < 5; ++i)
+	{
+		m_pipeManager.AddPipe(true);
+		m_pipeManager.AddPipe(false);
+	}
 }
 
 void Game::Draw(double dt)
 {
 	m_screenToDraw.Draw(dt);
+	if(m_currentScreen == GAME)
+	{
+		m_pipeManager.CheckTubes(*m_screenToDraw.GetBirdObject());
+		m_pipeManager.DrawPipes(dt);
+	}
 }
 
 void Game::SetCurrentScreen(GAME_SCREEN _screen)
@@ -35,6 +47,11 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 GAME_SCREEN Game::GetCurrentScreen() const
 {
 	return m_currentScreen;
+}
+
+Screen* Game::GetCurrentTODrawScreen()
+{
+	return &m_screenToDraw;
 }
 
 Game::~Game()

@@ -2,10 +2,10 @@ attribute vec3 a_position;
 attribute vec2 TexCoord;
 varying vec2 TexCoord0;
 
-uniform float u_time;
+uniform mat4 u_mvpMatrix;  
 
 void main()
 {
-   gl_Position = vec4(a_position.x - u_time,a_position.y,a_position.z,1.0);
+   gl_Position = u_mvpMatrix* vec4(a_position.x,a_position.y,a_position.z,1.0);
 	TexCoord0 = TexCoord;
 }

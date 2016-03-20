@@ -22,15 +22,19 @@ public:
 
 	void Draw(double dt, double offset = 0);
 
-	bool CheckInteractWithTube(const PipeObject& ob);
+	bool CheckInteractWithTube(PipeObject& ob);
 	bool ChechScore(const PipeObject& ob);
 
 	void SetShouldUp(bool value);
+
+	void SetRotationAngle(float value);
 
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
 
 	Object* Clone();
+
+	~BirdObject();
 
 private:
 	unsigned int texture_2;
@@ -45,6 +49,8 @@ private:
 	float m_rotationAngle;
 
 	int m_currentTexture;
+
+	Vector3f m_position;
 };
 
 

@@ -24,7 +24,8 @@ BirdObject::BirdObject()
  m_score(0),
  m_isDead(false),
  m_rotationAngle(0.0f),
- m_currentTexture(1)
+ m_currentTexture(1),
+ m_position(1.0, 5.0, 0.0)
 {}
 
 BirdObject::BirdObject(const BirdObject & rhs)
@@ -42,6 +43,8 @@ BirdObject::BirdObject(const BirdObject & rhs)
 	m_rotationAngle = rhs.m_rotationAngle;
 
 	m_currentTexture = rhs.m_currentTexture;
+
+	m_position= rhs.m_position;
 }
 
 Object* BirdObject::Clone()
@@ -51,21 +54,20 @@ Object* BirdObject::Clone()
 
 void BirdObject::Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs)
 {
-	Object::Init(path1, coords, vs, fs);
-	Object::InitTexture(path2, texture_2);
-	Object::InitTexture(path3, texture_3);
+	Object::Init(path1, coords, vs, fs, GL_NEAREST);
+	Object::InitTexture(path2, texture_2, GL_NEAREST);
+	Object::InitTexture(path3, texture_3, GL_NEAREST);
 
 	m_speed = 0.01f;
 	m_shouldUpBird = false;
-	m_UpTime = 1.0f;
+	m_UpTime = 0.0f;
 	m_score = 0;
 	m_isDead = false;
-	m_rotationAngle = 0;
+	m_rotationAngle = 0.0f;
 	matrix.InitIdentity();
 	matrix.SetTranslation(2.0f, 5.0f, 0.0f);
 }
 
-float rot = 0;
 void BirdObject::Draw(double dt, double offset)
 {
 	glUseProgram(program);
@@ -76,19 +78,19 @@ void BirdObject::Draw(double dt, double offset)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3*sizeof(float)));
 
-	if (m_currentTexture <= 6)
+	if (m_currentTexture <= 4)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture); // unsigned int texture_id;
 		m_currentTexture++;
 	}
-	else if (m_currentTexture <= 12)
+	else if (m_currentTexture <= 8)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_2); // unsigned int texture_id;
 		m_currentTexture++;
 	}
-	else if (m_currentTexture <= 18)
+	else if (m_currentTexture <= 12)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture_3); // unsigned int texture_id;
@@ -101,7 +103,32 @@ void BirdObject::Draw(double dt, double offset)
 		m_currentTexture = 1;
 	}
 
-	matrix.SetRotationZ(rot);
+	if(m_rotationAngle > -0.8f)
+	{
+		if(!m_shouldUpBird)
+		{
+			m_rotationAngle -= 0.05;
+		}
+		matrix.SetRotationZ(m_rotationAngle);
+	}
+
+	if(m_shouldUpBird && m_UpTime < 0.60)
+	{
+		if(m_rotationAngle < 0.0f)
+		{
+			m_rotationAngle += 0.10;
+		}
+		m_position.y += dt * 20 ;
+		m_UpTime += 0.1;
+	}
+	else
+	{
+		m_shouldUpBird = false;
+		m_UpTime = 0.0;
+		m_position.y -= dt * 15;
+	}
+
+	matrix.SetTranslation(m_position.x , m_position.y, m_position.z);
 
 	float u_mvp = glGetUniformLocation(program, "u_mvpMatrix");
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * matrix);
@@ -113,31 +140,36 @@ void BirdObject::Draw(double dt, double offset)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glUseProgram(0);
-
-	rot -= 0.016;
 }
 
-bool BirdObject::CheckInteractWithTube(const PipeObject& ob)
+void BirdObject::SetRotationAngle(float value)
 {
-	/*switch (ob->GetType())
+	//m_rotationAngle = 0.1;
+	//matrix.Translate(0.0, 0.15 * 9, 0.0);
+	m_UpTime = 0.0;
+	m_shouldUpBird = true;
+}
+
+bool BirdObject::CheckInteractWithTube(PipeObject& ob)
+{
+	switch (ob.GetType())
 	{
 	case PipeObject::TOP:
-		if (verticies[2].m_pos.y >= ob->GetVertexByIdx(0).m_pos.y && verticies[2].m_pos.x >= ob->GetVertexByIdx(0).m_pos.x &&
-				verticies[1].m_pos.x <= ob->GetVertexByIdx(3).m_pos.x
+		if ((matrix.m[3][0] + 0.5f >= ob.GetMatrix().m[3][0] - 0.5f) && (matrix.m[3][1] + 0.4f >= ob.GetMatrix().m[3][1] - 3.0f)
+			&& (matrix.m[3][0] - 0.5f <= ob.GetMatrix().m[3][0] + 0.5f)
 			)
 			return true;
 		break;
 	case PipeObject::BOTTOM:
-		if (verticies[3].m_pos.y <= ob->GetVertexByIdx(1).m_pos.y && verticies[2].m_pos.x >= ob->GetVertexByIdx(0).m_pos.x
-			&&
-			verticies[1].m_pos.x <= ob->GetVertexByIdx(3).m_pos.x
+		if ((matrix.m[3][0] + 0.5f >= ob.GetMatrix().m[3][0] - 0.5f) && (matrix.m[3][1] - 0.4f <= ob.GetMatrix().m[3][1] + 3.0f)
+			&& (matrix.m[3][0] - 0.5f <= ob.GetMatrix().m[3][0] + 0.5f)
 			)
 			return true;
 		break;
 	default:
 		break;
 	}
-*/
+
 	return false;
 }
 
@@ -166,3 +198,6 @@ void BirdObject::SetShouldUp(bool value)
 {
 	m_shouldUpBird = value;
 }
+
+BirdObject::~BirdObject()
+{}

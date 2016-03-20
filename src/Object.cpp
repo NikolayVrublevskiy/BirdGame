@@ -79,7 +79,7 @@ Object& Object::operator=(const Object & rhs)
 	return *this;
 }
 
-void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs)
+void Object::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param)
 {
 	for(int i = 0; i < 4; i++)
 	{
@@ -97,7 +97,7 @@ void Object::Init(const char* path, Vertex coords[4], const char *vs, const char
 			GL_STATIC_DRAW);
 
 	InitShader(vs, fs);
-	InitTexture(path, texture);
+	InitTexture(path, texture, param);
 
 	matrix.InitIdentity();
 }
@@ -147,7 +147,7 @@ void Object::InitShader(const char *vs, const char *fs)
 	glLinkProgram(program);
 }
 
-void Object::InitTexture(const char* path, unsigned int &_texture)
+void Object::InitTexture(const char* path, unsigned int &_texture, unsigned int param)
 {
 	int width, height, bpp;
 
@@ -160,8 +160,8 @@ void Object::InitTexture(const char* path, unsigned int &_texture)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, // int texture_width, texture_height;
 			0, GL_RGBA, GL_UNSIGNED_BYTE, bufferTGA); // void *texture_data;
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, param);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, param);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
@@ -199,4 +199,13 @@ Matrix4f& Object::GetMatrix()
 const Vertex Object::GetVertexByIdx(int idx) const
 {
 	return verticies[idx];
+}
+
+bool Object::CheckInteractWithTube( PipeObject& ob)
+{
+	return false;
+}
+
+Object::~Object()
+{
 }

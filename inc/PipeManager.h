@@ -4,6 +4,7 @@
 class PipeObject;
 class BirdObject;
 class ScoreObject;
+class Object;
 
 class PipeManager
 {
@@ -14,9 +15,8 @@ public:
 	std::vector<PipeObject> GetPipes() const;
 
 	void AddPipe( bool isTop);
-	void CheckTubes(BirdObject& bird, ScoreObject& so, ScoreObject& so2);
+	void CheckTubes(Object& bird/*, ScoreObject& so, ScoreObject& so2*/);
 	void DrawPipes(double dt);
-	void ReinitVerticies();
 
 	void DeletePipes();
 
@@ -24,4 +24,5 @@ private:
 
 	std::vector<PipeObject> m_pipes;
 	double m_lastRnd;
+	float m_offset;
 };

@@ -49,12 +49,12 @@ build main-build: phony all
 #################################################################################
 
 rule pre_build
-  command = $prebuildcmd
+  command = $bashshell $prebuildcmd
   description = Executing Prebuild Steps
   pool = console
 
 rule post_build
-  command = $postbuildcmd
+  command = $bashshell $postbuildcmd
   description = Executing Postbuild Steps
   pool = console
 
@@ -78,13 +78,13 @@ build post-build: post_build | main_build
 #################################################################################
 
 rule build_edc
-  command = $edctool -deps $out.d $edcflags $in $out
+  command = $edctool $edje-cc-options $out.d $edcflags $in $out
   description = Building $out
   depfile = $out.d
   deps = gcc
 
 rule build_long_edc
-  command = $edctool -deps $out.d @$out.rsp $in $out
+  command = $edctool $edje-cc-options $out.d @$out.rsp $in $out
   description = Building $out
   depfile = $out.d
   deps = gcc
@@ -100,6 +100,39 @@ rule build_long_po
   description = Building $out
   rspfile = $out.rsp
   rspfile_content = $in
+
+
+#################################################################################
+# APIChecker Rules
+#################################################################################
+
+rule build_c_api
+  command = APIChecker $apichecker-options $in -o $out -- $pchInc $cflags -w -fretain-comments-from-system-headers
+  description = Building $out
+
+rule build_long_c_api
+  command = APIChecker $apichecker-options $in -o $out -- @$out.rsp -w -fretain-comments-from-system-headers
+  description = Building $out
+  rspfile = $out.rsp
+  rspfile_content = $pchInc $cflags
+
+rule build_cpp_api
+  command = APIChecker $apichecker-options $in -o $out -- $pchInc $cppflags -w -fretain-comments-from-system-headers
+  description = Building $out
+
+rule build_long_cpp_api
+  command = APIChecker $apichecker-options $in -o $out -- @$out.rsp -w -fretain-comments-from-system-headers
+  description = Building $out
+  rspfile = $out.rsp
+  rspfile_content = $pchInc $cppflags
+
+#################################################################################
+# APIChecker Unused Privilege Rules
+#################################################################################
+
+rule unusedapi_rule
+  command = APIChecker -o $out $in $apichecker-misc-options $apichecker-options --
+  description = Running Unused Privilege Check $out
 
 #################################################################################
 # AST Rules

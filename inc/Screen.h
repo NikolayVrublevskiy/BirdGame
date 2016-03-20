@@ -23,6 +23,8 @@ public:
 	void Draw(double dt, double offset = 0);
 	void Init(GAME_SCREEN _screen);
 
+	Object* GetBirdObject();
+
 private:
 
 	void InitLanguageScreen();
@@ -32,7 +34,7 @@ private:
 
 private:
 
-	std::vector<Object*> m_objects;
+	std::vector<Object*>	m_objects;
 };
 
 

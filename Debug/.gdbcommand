@@ -1,4 +1,4 @@
-set sysroot D:\Tizen\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core
-set debug-file-directory D:\Tizen\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core\usr\lib\debug
-set solib-search-path C:\Users\nikolay.vrublevskiy\workspace\BirdGame\Debug
-dir D:\Tizen\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core\usr\src\debug
+set sysroot C:\tizen-sdk\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core
+set debug-file-directory C:\tizen-sdk\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core\usr\lib\debug
+set solib-search-path C:\Users\exelim\workspace\FlyingBird\Debug
+dir C:\tizen-sdk\platforms\tizen-2.3.1\wearable\rootstraps\wearable-2.3.1-emulator.core\usr\src\debug

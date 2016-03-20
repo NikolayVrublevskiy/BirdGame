@@ -95,6 +95,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 		break;
 
 	case GAME:
+		game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 		break;
 
 	case NONE:

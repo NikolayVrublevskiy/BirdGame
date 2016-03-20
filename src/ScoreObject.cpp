@@ -1,5 +1,6 @@
 #include "ScoreObject.h"
 #include <stdlib.h>
+#include <Elementary_GL_Helpers.h>
 
 ScoreObject::ScoreObject()
 : m_isMultiDigit(false),
@@ -29,7 +30,7 @@ void ScoreObject::Init(const char* path1, Vertex coords[4], const char *vs, cons
 
 		snprintf(a, 15, "%s%d%s","digit_", i , ".tga" );
 
-		tmp.Init(a, btn_start_verticies, "digitShader.vs", "digitShader.fs");
+		tmp.Init(a, btn_start_verticies, "digitShader.vs", "digitShader.fs", GL_NEAREST);
 
 		m_digits.push_back(tmp);
 	}

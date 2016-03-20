@@ -25,6 +25,8 @@ public:
 
 	void SetIsScored(bool value);
 
+	virtual void Draw(double dt, double offset = 0);
+
 	PipeObject::TYPE GetType() const;
 
 	~PipeObject();
