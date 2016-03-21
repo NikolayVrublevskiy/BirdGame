@@ -35,9 +35,15 @@ public:
 
 	virtual bool CheckInteractWithTube( PipeObject& ob);
 
+	virtual void SetIsDead(bool value) {};
+	virtual bool GetIsDead() const { return false; };
+
 	virtual Object* Clone();
 
 	virtual Matrix4f& GetMatrix();
+	virtual const Matrix4f& GetMatrix() const;
+
+	virtual bool ChechScore(const PipeObject& ob) { return false; };
 
 	virtual ~Object();
 

@@ -58,10 +58,11 @@ void PipeManager::DrawPipes(double dt)
 	}
 }
 
-void PipeManager::CheckTubes(Object& bird/*, ScoreObject& so, ScoreObject& so2*/)
+void PipeManager::CheckTubes(Object& bird, ScoreObject& so)
 {
 	if (m_pipes[0].ShouldBeDeleted())
 	{
+		CorrectOffset();
 		m_pipes.erase(m_pipes.begin() + 0);
 		m_pipes.erase(m_pipes.begin() + 0);
 		AddPipe(true);
@@ -69,19 +70,21 @@ void PipeManager::CheckTubes(Object& bird/*, ScoreObject& so, ScoreObject& so2*/
 	}
 	else if (bird.CheckInteractWithTube(m_pipes[0]) || bird.CheckInteractWithTube(m_pipes[1]))
 	{
-		//bird.SetIsDead(true);
+		bird.SetIsDead(true);
 	}
-	/*else if (!m_pipes[0].IsScored() && m_pipes[0].GetType() == PipeObject::TOP)
+	else if (!m_pipes[0].IsScored())
 	{
 		if (bird.ChechScore(m_pipes[0]))
 		{
 			m_pipes[0].SetIsScored(true);
-			{
-				so.IncreaseScore();
-				so2.IncreaseScore();
-			}
+			so.IncreaseScore();
 		}
-	}*/
+	}
+}
+
+void PipeManager::CorrectOffset()
+{
+	m_offset = m_pipes[m_pipes.size() - 1].GetMatrix().m[3][0] - 2.5f;
 }
 
 std::vector<PipeObject> PipeManager::GetPipes() const

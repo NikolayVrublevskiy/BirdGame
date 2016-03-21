@@ -53,7 +53,7 @@ void Screen::InitGameScreen()
 		Vertex(Vector3f(0.5f,	0.5f,	0.0f), Vector2f(1.0f, 1.0f)),
 		Vertex(Vector3f(0.5f,	-0.5f,	0.0f), Vector2f(1.0f, 0.0f))
 	};
-	bird.Init("bird.tga", "bird_2.tga", "bird_3.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
+	bird.Init("bird.tga", "bird.tga", "bird.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
 	bird.GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 
 	m_objects.push_back(bird.Clone());

@@ -15,8 +15,9 @@ public:
 	std::vector<PipeObject> GetPipes() const;
 
 	void AddPipe( bool isTop);
-	void CheckTubes(Object& bird/*, ScoreObject& so, ScoreObject& so2*/);
+	void CheckTubes(Object& bird, ScoreObject& so);
 	void DrawPipes(double dt);
+	void CorrectOffset();
 
 	void DeletePipes();
 

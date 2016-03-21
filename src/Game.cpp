@@ -26,6 +26,8 @@ void Game::Init()
 		m_pipeManager.AddPipe(true);
 		m_pipeManager.AddPipe(false);
 	}
+
+	m_scoreObject.Init();
 }
 
 void Game::Draw(double dt)
@@ -33,8 +35,9 @@ void Game::Draw(double dt)
 	m_screenToDraw.Draw(dt);
 	if(m_currentScreen == GAME)
 	{
-		m_pipeManager.CheckTubes(*m_screenToDraw.GetBirdObject());
+		m_pipeManager.CheckTubes(*m_screenToDraw.GetBirdObject(), m_scoreObject);
 		m_pipeManager.DrawPipes(dt);
+		m_scoreObject.Draw(dt);
 	}
 }
 

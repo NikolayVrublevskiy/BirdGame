@@ -196,6 +196,11 @@ Matrix4f& Object::GetMatrix()
 	return matrix;
 }
 
+const Matrix4f& Object::GetMatrix() const
+{
+	return matrix;
+}
+
 const Vertex Object::GetVertexByIdx(int idx) const
 {
 	return verticies[idx];

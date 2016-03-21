@@ -11,6 +11,7 @@
 #include "ISingleton.h"
 #include "PipeManager.h"
 #include "Screen.h"
+#include "ScoreObject.h"
 #include <map>
 
 class Game : public ISingleton<Game>
@@ -36,6 +37,7 @@ private:
 	std::map<GAME_SCREEN, Screen *> m_screens;
 	Screen 							m_screenToDraw;
 	GAME_SCREEN						m_currentScreen;
+	ScoreObject						m_scoreObject;
 };
 
 

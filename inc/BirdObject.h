@@ -9,6 +9,7 @@
 #define BIRD_OBJECT_H_
 
 #include "Object.h"
+#include <vector>
 
 class PipeObject;
 
@@ -19,11 +20,14 @@ public:
 	BirdObject(const BirdObject &);
 
 	void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
+	void InitPoints();
 
 	void Draw(double dt, double offset = 0);
 
 	bool CheckInteractWithTube(PipeObject& ob);
 	bool ChechScore(const PipeObject& ob);
+
+	bool CheckPoints(PipeObject& ob);
 
 	void SetShouldUp(bool value);
 
@@ -43,7 +47,6 @@ private:
 	float m_speed;
 	bool m_shouldUpBird;
 	float m_UpTime;
-	int m_score;
 	bool m_isDead;
 
 	float m_rotationAngle;
@@ -51,6 +54,8 @@ private:
 	int m_currentTexture;
 
 	Vector3f m_position;
+
+	std::vector<Vector2f> m_points;
 };
 
 
