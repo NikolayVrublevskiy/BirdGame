@@ -35,23 +35,17 @@ type(NONE)
 {}
 
 Object::Object(const Object & rhs)
-{
-	program = rhs.program;
-	vtx_shader = rhs.vtx_shader;
-	fgmt_shader = rhs.fgmt_shader;
-	texture = rhs.texture;
-	idx_vbo = rhs.idx_vbo;
-	idx_ibo = rhs.idx_ibo;
-	idx_vposition = rhs.idx_vposition;
-	type = rhs.type;
-
-	for(int i = 0; i < 4; i++)
-	{
-		verticies[i] = rhs.verticies[i];
-	}
-
-	matrix = rhs.matrix;
-}
+:program(rhs.program),
+ vtx_shader(rhs.vtx_shader),
+ fgmt_shader(rhs.fgmt_shader),
+ texture(rhs.texture),
+ idx_vbo(rhs.idx_vbo),
+ idx_ibo(rhs.idx_ibo),
+ idx_vposition(rhs.idx_vposition),
+ type(rhs.type),
+ verticies(rhs.verticies),
+ matrix(rhs.matrix)
+{}
 
 Object* Object::Clone()
 {
@@ -60,6 +54,11 @@ Object* Object::Clone()
 
 Object& Object::operator=(const Object & rhs)
 {
+	if(this == &rhs)
+	{
+		return *this;
+	}
+
 	program = rhs.program;
 	vtx_shader = rhs.vtx_shader;
 	fgmt_shader = rhs.fgmt_shader;

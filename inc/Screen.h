@@ -29,6 +29,7 @@ private:
 
 	void InitLanguageScreen();
 	void InitGameScreen();
+	void InitScoreScreen();
 
 	void InitBackground();
 

@@ -38,6 +38,7 @@ void Screen::Init(GAME_SCREEN _screen)
 	{
 	case CHOOSE_LANGUAGE:	InitLanguageScreen();	break;
 	case GAME:				InitGameScreen();		break;
+	case SCORE_SCREEN:		InitScoreScreen();		break;
 	case NONE:										break;
 	}
 }
@@ -57,6 +58,24 @@ void Screen::InitGameScreen()
 	bird.GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 
 	m_objects.push_back(bird.Clone());
+}
+
+void Screen::InitScoreScreen()
+{
+	InitBackground();
+
+	Object ScoreBoard;
+	Vertex Vertices_ScoreBoard[4] = {
+		Vertex(Vector3f(-2.0f,	-1.5f,	0.0f), Vector2f(0.0f, 0.0f)),
+		Vertex(Vector3f(-2.0f,	1.5f,	0.0f), Vector2f(0.0f, 1.0f)),
+		Vertex(Vector3f(2.0f,	1.5f,	0.0f), Vector2f(1.0f, 1.0f)),
+		Vertex(Vector3f(2.0f,	-1.5f,	0.0f), Vector2f(1.0f, 0.0f))
+	};
+
+	ScoreBoard.Init("score_board_UA.tga", Vertices_ScoreBoard, "BgShader.vs", "BgShader.fs", GL_NEAREST);
+	ScoreBoard.GetMatrix().SetTranslation(5.0f, 7.0f, 0.0f);
+
+	m_objects.push_back(ScoreBoard.Clone());
 }
 
 void Screen::InitLanguageScreen()

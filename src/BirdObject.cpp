@@ -28,24 +28,18 @@ BirdObject::BirdObject()
 {}
 
 BirdObject::BirdObject(const BirdObject & rhs)
-: Object(rhs)
-{
-	texture_2 = rhs.texture_2;
-	texture_3 = rhs.texture_3;
-
-	m_speed = rhs.m_speed;
-	m_shouldUpBird = rhs.m_shouldUpBird;
-	m_UpTime = rhs.m_UpTime;
-	m_isDead = rhs.m_isDead;
-
-	m_rotationAngle = rhs.m_rotationAngle;
-
-	m_currentTexture = rhs.m_currentTexture;
-
-	m_position= rhs.m_position;
-
-	m_points = rhs.m_points;
-}
+: Object(rhs),
+  texture_2(rhs.texture_2),
+  texture_3(rhs.texture_3),
+  m_speed(rhs.m_speed),
+  m_shouldUpBird(rhs.m_shouldUpBird),
+  m_UpTime(rhs.m_UpTime),
+  m_isDead(rhs.m_isDead),
+  m_rotationAngle(rhs.m_rotationAngle),
+  m_currentTexture(rhs.m_currentTexture),
+  m_position(rhs.m_position),
+  m_points(rhs.m_points)
+{}
 
 Object* BirdObject::Clone()
 {
@@ -110,7 +104,7 @@ void BirdObject::Draw(double dt, double offset)
 		{
 			m_rotationAngle -= 0.05;
 		}
-		//matrix.SetRotationZ(m_rotationAngle);
+		matrix.SetRotationZ(m_rotationAngle);
 	}
 
 	if(m_shouldUpBird && m_UpTime < 0.60)
@@ -145,8 +139,6 @@ void BirdObject::Draw(double dt, double offset)
 
 void BirdObject::SetRotationAngle(float value)
 {
-	//m_rotationAngle = 0.1;
-	//matrix.Translate(0.0, 0.15 * 9, 0.0);
 	m_UpTime = 0.0;
 	m_shouldUpBird = true;
 }
@@ -156,18 +148,11 @@ bool BirdObject::CheckInteractWithTube(PipeObject& ob)
 	switch (ob.GetType())
 	{
 	case PipeObject::TOP:
-		/*if ((matrix.m[3][0] + 0.355f >= ob.GetMatrix().m[3][0] - 0.5f) && (matrix.m[3][1] + 0.4f >= ob.GetMatrix().m[3][1] - 3.0f)
-			&& (matrix.m[3][0] - 0.5f <= ob.GetMatrix().m[3][0] + 0.5f)
-			)
-			return true;*/
-		CheckPoints(ob);
+		return CheckTopPoints(ob);
 		break;
-	/*case PipeObject::BOTTOM:
-		if ((matrix.m[3][0] + 0.355f >= ob.GetMatrix().m[3][0] - 0.5f) && (matrix.m[3][1] - 0.4f <= ob.GetMatrix().m[3][1] + 3.0f)
-			&& (matrix.m[3][0] - 0.5f <= ob.GetMatrix().m[3][0] + 0.5f)
-			)
-			return true;
-		break;*/
+	case PipeObject::BOTTOM:
+		return CheckBotPoints(ob);
+		break;
 	default:
 		break;
 	}
@@ -177,15 +162,27 @@ bool BirdObject::CheckInteractWithTube(PipeObject& ob)
 
 void BirdObject::InitPoints()
 {
-	m_points.push_back(Vector2f(0.355, 0.105f));
+	m_points.push_back(Vector2f(0.35, 0.105f));
 	//m_points.push_back(Vector2f(0.488f, -0.1875));
 }
 
-bool BirdObject::CheckPoints(PipeObject& ob)
+bool BirdObject::CheckTopPoints(PipeObject& ob)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
 		if(	(matrix.m[3][1] + m_points[i].y) >= (ob.GetMatrix().m[3][1] - 3.0f)
+		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
+		)
+			return true;
+	}
+	return false;
+}
+
+bool BirdObject::CheckBotPoints(PipeObject& ob)
+{
+	for(size_t i = 0; i < m_points.size(); i++)
+	{
+		if(	(matrix.m[3][1] + m_points[i].y) <= (ob.GetMatrix().m[3][1] + 3.0f)
 		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
 		)
 			return true;

@@ -13,14 +13,22 @@ Game::Game()
 
 void Game::Init()
 {
-	Screen screen;
-	screen.Init(CHOOSE_LANGUAGE);
-	m_screens[CHOOSE_LANGUAGE] = new Screen(screen);
+	size_t size = GetArraySize(SCREENS_ARR);
+	for(size_t i = 0; i < size; i++)
+	{
+		Screen screen;
+		screen.Init((GAME_SCREEN)i);
+		m_screens[(GAME_SCREEN)i] = new Screen(screen);
+	}
 
-	Screen screen2;
+/*	Screen screen2;
 	screen2.Init(GAME);
 	m_screens[GAME] = new Screen(screen2);
 
+	Screen screen3;
+	screen3.Init(SCORE_SCREEN);
+	m_screens[SCORE_SCREEN] = new Screen(screen3);
+*/
 	for(int i = 0; i < 5; ++i)
 	{
 		m_pipeManager.AddPipe(true);
@@ -32,10 +40,13 @@ void Game::Init()
 
 void Game::Draw(double dt)
 {
-	m_screenToDraw.Draw(dt);
+	m_screenToDraw->Draw(dt);
 	if(m_currentScreen == GAME)
 	{
-		m_pipeManager.CheckTubes(*m_screenToDraw.GetBirdObject(), m_scoreObject);
+		if(m_screenToDraw->GetBirdObject()->GetIsDead())
+			SetCurrentScreen(SCORE_SCREEN);
+
+		m_pipeManager.CheckTubes(*m_screenToDraw->GetBirdObject(), m_scoreObject);
 		m_pipeManager.DrawPipes(dt);
 		m_scoreObject.Draw(dt);
 	}
@@ -44,7 +55,7 @@ void Game::Draw(double dt)
 void Game::SetCurrentScreen(GAME_SCREEN _screen)
 {
 	m_currentScreen = _screen;
-	m_screenToDraw = *m_screens[_screen];
+	m_screenToDraw = m_screens[_screen];
 }
 
 GAME_SCREEN Game::GetCurrentScreen() const
@@ -54,7 +65,7 @@ GAME_SCREEN Game::GetCurrentScreen() const
 
 Screen* Game::GetCurrentTODrawScreen()
 {
-	return &m_screenToDraw;
+	return m_screenToDraw;
 }
 
 Game::~Game()

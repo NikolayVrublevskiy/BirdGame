@@ -27,8 +27,6 @@ public:
 	bool CheckInteractWithTube(PipeObject& ob);
 	bool ChechScore(const PipeObject& ob);
 
-	bool CheckPoints(PipeObject& ob);
-
 	void SetShouldUp(bool value);
 
 	void SetRotationAngle(float value);
@@ -39,6 +37,11 @@ public:
 	Object* Clone();
 
 	~BirdObject();
+
+private:
+
+	bool CheckTopPoints(PipeObject& ob);
+	bool CheckBotPoints(PipeObject& ob);
 
 private:
 	unsigned int texture_2;

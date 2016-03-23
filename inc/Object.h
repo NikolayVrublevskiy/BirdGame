@@ -31,18 +31,14 @@ public:
 
 	virtual void Draw(double dt, double offset = 0);
 
-	virtual void SetRotationAngle(float value) {};
-
-	virtual bool CheckInteractWithTube( PipeObject& ob);
-
-	virtual void SetIsDead(bool value) {};
-	virtual bool GetIsDead() const { return false; };
-
 	virtual Object* Clone();
-
 	virtual Matrix4f& GetMatrix();
 	virtual const Matrix4f& GetMatrix() const;
 
+	virtual void SetRotationAngle(float value) {};
+	virtual bool CheckInteractWithTube( PipeObject& ob);
+	virtual void SetIsDead(bool value) {};
+	virtual bool GetIsDead() const { return false; };
 	virtual bool ChechScore(const PipeObject& ob) { return false; };
 
 	virtual ~Object();
@@ -58,11 +54,11 @@ protected:
 	unsigned int idx_ibo;
 	unsigned int idx_vposition;
 
+	OBJECT_TYPE type;
+
 	Vertex verticies[4];
 
 	Matrix4f matrix;
-
-	OBJECT_TYPE type;
 };
 
 
