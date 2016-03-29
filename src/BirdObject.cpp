@@ -63,7 +63,7 @@ void BirdObject::Init(const char* path1, const char* path2, const char* path3, V
 	InitPoints();
 }
 
-void BirdObject::Draw(double dt, double offset)
+void BirdObject::Draw(double dt)
 {
 	glUseProgram(program);
 	glEnableVertexAttribArray(0);

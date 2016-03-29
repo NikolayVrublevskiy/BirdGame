@@ -66,10 +66,10 @@ void Screen::InitScoreScreen()
 
 	Object ScoreBoard;
 	Vertex Vertices_ScoreBoard[4] = {
-		Vertex(Vector3f(-2.0f,	-1.5f,	0.0f), Vector2f(0.0f, 0.0f)),
-		Vertex(Vector3f(-2.0f,	1.5f,	0.0f), Vector2f(0.0f, 1.0f)),
-		Vertex(Vector3f(2.0f,	1.5f,	0.0f), Vector2f(1.0f, 1.0f)),
-		Vertex(Vector3f(2.0f,	-1.5f,	0.0f), Vector2f(1.0f, 0.0f))
+		Vertex(Vector3f(-4.0f,	-2.5f,	0.0f), Vector2f(0.0f, 0.0f)),
+		Vertex(Vector3f(-4.0f,	2.5f,	0.0f), Vector2f(0.0f, 1.0f)),
+		Vertex(Vector3f(4.0f,	2.5f,	0.0f), Vector2f(1.0f, 1.0f)),
+		Vertex(Vector3f(4.0f,	-2.5f,	0.0f), Vector2f(1.0f, 0.0f))
 	};
 
 	ScoreBoard.Init("score_board_UA.tga", Vertices_ScoreBoard, "BgShader.vs", "BgShader.fs", GL_NEAREST);
@@ -126,7 +126,7 @@ void Screen::Draw(double dt, double offset)
 	{
 		if(m_objects[i])
 		{
-			m_objects[i]->Draw(dt, offset);
+			m_objects[i]->Draw(dt);
 		}
 	}
 }

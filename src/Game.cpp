@@ -8,7 +8,8 @@
 #include "Game.h"
 
 Game::Game()
-: m_currentScreen(NONE)
+: m_currentScreen(NONE),
+  m_screenToDraw(NULL)
 {}
 
 void Game::Init()
@@ -21,14 +22,6 @@ void Game::Init()
 		m_screens[(GAME_SCREEN)i] = new Screen(screen);
 	}
 
-/*	Screen screen2;
-	screen2.Init(GAME);
-	m_screens[GAME] = new Screen(screen2);
-
-	Screen screen3;
-	screen3.Init(SCORE_SCREEN);
-	m_screens[SCORE_SCREEN] = new Screen(screen3);
-*/
 	for(int i = 0; i < 5; ++i)
 	{
 		m_pipeManager.AddPipe(true);

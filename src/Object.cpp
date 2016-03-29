@@ -19,7 +19,7 @@ extern Evas_GL_API * __evas_gl_glapi;
 
 const unsigned short Indices[] = { 0, 1, 2,
 							   0, 2, 3
-	};;
+	};
 
 GLuint gSampler;
 
@@ -30,8 +30,7 @@ fgmt_shader(0),
 texture(0),
 idx_vbo(0),
 idx_ibo(0),
-idx_vposition(0),
-type(NONE)
+idx_vposition(0)
 {}
 
 Object::Object(const Object & rhs)
@@ -42,7 +41,6 @@ Object::Object(const Object & rhs)
  idx_vbo(rhs.idx_vbo),
  idx_ibo(rhs.idx_ibo),
  idx_vposition(rhs.idx_vposition),
- type(rhs.type),
  verticies(rhs.verticies),
  matrix(rhs.matrix)
 {}
@@ -66,7 +64,6 @@ Object& Object::operator=(const Object & rhs)
 	idx_vbo = rhs.idx_vbo;
 	idx_ibo = rhs.idx_ibo;
 	idx_vposition = rhs.idx_vposition;
-	type = rhs.type;
 
 	for(int i = 0; i < 4; i++)
 	{
@@ -165,7 +162,7 @@ void Object::InitTexture(const char* path, unsigned int &_texture, unsigned int 
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
-void Object::Draw(double dt, double offset)
+void Object::Draw(double dt)
 {
 	glUseProgram(program);
 	glEnableVertexAttribArray(0);
@@ -198,16 +195,6 @@ Matrix4f& Object::GetMatrix()
 const Matrix4f& Object::GetMatrix() const
 {
 	return matrix;
-}
-
-const Vertex Object::GetVertexByIdx(int idx) const
-{
-	return verticies[idx];
-}
-
-bool Object::CheckInteractWithTube( PipeObject& ob)
-{
-	return false;
 }
 
 Object::~Object()

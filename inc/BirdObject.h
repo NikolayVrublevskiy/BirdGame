@@ -22,7 +22,7 @@ public:
 	void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
 	void InitPoints();
 
-	void Draw(double dt, double offset = 0);
+	void Draw(double dt);
 
 	bool CheckInteractWithTube(PipeObject& ob);
 	bool ChechScore(const PipeObject& ob);

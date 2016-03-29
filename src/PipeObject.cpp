@@ -34,7 +34,7 @@ bool PipeObject::ShouldBeDeleted()
 	return false;
 }
 
-void PipeObject::Draw(double dt, double offset)
+void PipeObject::Draw(double dt)
 {
 	glUseProgram(program);
 	glEnableVertexAttribArray(0);

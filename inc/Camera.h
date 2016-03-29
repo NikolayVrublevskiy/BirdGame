@@ -19,7 +19,6 @@ public:
 	const Matrix4f & GetProjectionMatrix() const;
 
 private:
-public:
 	GLfloat m_fov;
 	Vector3f m_position;
 	GLfloat m_horizontalAngle;

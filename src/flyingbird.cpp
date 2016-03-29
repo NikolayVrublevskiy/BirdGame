@@ -98,49 +98,11 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 		game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 		break;
 
+	case SCORE_SCREEN:
+		break;
+
 	case NONE:
 		break;
-
-	/*case MAIN_MENU:
-		if(px >= -0.45 && px <= 0.45
-			&& py <= -0.15 && py >= -0.45
-		)
-		{
-		}
-
-		if(px >= -0.45 && px <= 0.45
-			&& py >= 0.0 && py <= 0.3
-		)
-		{
-		}
-
-		if(px >= -0.2 && px <= 0.2
-			&& py >= -0.89 && py <= -0.59
-		)
-		{
-			exit(0);
-		}
-		break;
-
-	case IN_GAME:
-		break;
-	case SCORE:
-		if(px >= -0.45 && px <= -0.05
-			&& py >= -0.85 && py <= -0.55
-		)
-		{
-		}
-
-		if(px >= 0.05 && px <= 0.45
-			&& py >= -0.85 && py <= -0.55
-		)
-		{
-			exit(0);
-		}
-		break;
-
-	case TRAINING:
-		break;*/
 	}
 }
 

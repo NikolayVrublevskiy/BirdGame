@@ -40,17 +40,17 @@ void ScoreObject::Draw(double dr, double offset)
 	{
 		int v1 = m_value / 10.0;
 		int v2 = m_value % 10;
-		m_digits[v1].Draw(dr, -0.10);
-		m_digits[v2].Draw(dr, 0.10);
+		m_digits[v1].Draw(dr);
+		m_digits[v2].Draw(dr);
 	}
 	else
 	{
 		int v1 = m_value / 100.0;
 		int v2 = (m_value % 100) / 10.0;
 		int v3 = (m_value % 100) % 10;
-		m_digits[v1].Draw(dr, -0.30);
-		m_digits[v2].Draw(dr, -0.10);
-		m_digits[v3].Draw(dr, 0.10);
+		m_digits[v1].Draw(dr);
+		m_digits[v2].Draw(dr);
+		m_digits[v3].Draw(dr);
 	}
 }
 

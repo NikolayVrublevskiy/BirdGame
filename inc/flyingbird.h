@@ -34,7 +34,7 @@ typedef struct appdata {
 	int glview_h, glview_w;
 
 	/* GL related data here... */
-	unsigned int program;
+	/*unsigned int program;
 	unsigned int vtx_shader;
 	unsigned int fgmt_shader;
 
@@ -42,7 +42,7 @@ typedef struct appdata {
 
 	unsigned int idx_vbo;
 	unsigned int idx_ibo;
-	unsigned int idx_vposition;
+	unsigned int idx_vposition;*/
 
 	Eina_Bool initialized :1;
 } appdata_s;

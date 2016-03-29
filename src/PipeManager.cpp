@@ -10,6 +10,11 @@ PipeManager::PipeManager()
 :m_lastRnd(0.0f),
  m_offset(0.0f)
 {
+	m_initVerticies[0] = Vertex(Vector3f(-0.5f,	-3.0f,	0.0f), Vector2f(0.0f, 0.0f));
+	m_initVerticies[1] = Vertex(Vector3f(-0.5f,	3.0f,	0.0f), Vector2f(0.0f, 1.0f));
+	m_initVerticies[2] = Vertex(Vector3f(0.5f,	3.0f,	0.0f), Vector2f(1.0f, 1.0f));
+	m_initVerticies[3] = Vertex(Vector3f(0.5f,	-3.0f,	0.0f), Vector2f(1.0f, 0.0f));
+
 	time(NULL);
 }
 
@@ -23,26 +28,19 @@ void PipeManager::AddPipe(bool isTop)
 	if(m_pipes.size() == 10)
 		return;
 
-	Vertex Vertices[4] = {
-				Vertex(Vector3f(-0.5f,	-3.0f,	0.0f), Vector2f(0.0f, 0.0f)),
-				Vertex(Vector3f(-0.5f,	3.0f,	0.0f), Vector2f(0.0f, 1.0f)),
-				Vertex(Vector3f(0.5f,	3.0f,	0.0f), Vector2f(1.0f, 1.0f)),
-				Vertex(Vector3f(0.5f,	-3.0f,	0.0f), Vector2f(1.0f, 0.0f))
-			};
-
 	if (isTop)
 	{
 		m_lastRnd = (rand() % 64) / 16.0 ;
 
 		PipeObject top_pipe;
-		top_pipe.Init("top_tube.tga", Vertices, "PipeShader.vs", "PipeShader.fs", PipeObject::TOP);
+		top_pipe.Init("top_tube.tga", m_initVerticies, "PipeShader.vs", "PipeShader.fs", PipeObject::TOP);
 		top_pipe.GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd, 0.0f);
 		m_pipes.push_back(top_pipe);
 	}
 	else
 	{
 		PipeObject bot_pipe;
-		bot_pipe.Init("bot_tube.tga", Vertices, "PipeShader.vs", "PipeShader.fs", PipeObject::BOTTOM);
+		bot_pipe.Init("bot_tube.tga", m_initVerticies, "PipeShader.vs", "PipeShader.fs", PipeObject::BOTTOM);
 		bot_pipe.GetMatrix().SetTranslation(6.0f + m_offset, 3.0f - m_lastRnd, 0.0f);
 		m_pipes.push_back(bot_pipe);
 		m_lastRnd = 0.0;

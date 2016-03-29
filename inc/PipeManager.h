@@ -1,8 +1,9 @@
 #pragma once
 #include<vector>
 
+#include "math_3d.h"
+
 class PipeObject;
-class BirdObject;
 class ScoreObject;
 class Object;
 
@@ -26,4 +27,5 @@ private:
 	std::vector<PipeObject> m_pipes;
 	double m_lastRnd;
 	float m_offset;
+	Vertex m_initVerticies[4];
 };

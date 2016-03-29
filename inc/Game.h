@@ -35,8 +35,8 @@ private:
 
 	PipeManager						m_pipeManager;
 	std::map<GAME_SCREEN, Screen *> m_screens;
-	Screen*							m_screenToDraw;
 	GAME_SCREEN						m_currentScreen;
+	Screen*							m_screenToDraw;
 	ScoreObject						m_scoreObject;
 };
 
