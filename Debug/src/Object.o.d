@@ -1,6 +1,7 @@
 src/Object.o: ../src/Object.cpp \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Object.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ButtonAction.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/TGA.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/appfw/app_control.h \

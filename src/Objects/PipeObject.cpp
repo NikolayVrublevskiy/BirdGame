@@ -5,7 +5,7 @@
  *      Author: exelim
  */
 
-#include "PipeObject.h"
+#include "Objects/PipeObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
 

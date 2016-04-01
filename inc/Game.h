@@ -11,7 +11,7 @@
 #include "ISingleton.h"
 #include "PipeManager.h"
 #include "Screen.h"
-#include "ScoreObject.h"
+#include "Objects/ScoreObject.h"
 #include <map>
 
 class Game : public ISingleton<Game>

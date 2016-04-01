@@ -6,8 +6,10 @@
  */
 
 #include "Screen.h"
-#include "BirdObject.h"
+#include "Objects/BirdObject.h"
 #include <Elementary_GL_Helpers.h>
+#include "ButtonActions/ChangeStateAction.h"
+
 
 Screen::Screen()
 {
@@ -20,6 +22,11 @@ Screen::Screen(const Screen & rhs)
 	{
 		m_objects.push_back(rhs.m_objects[i]->Clone());
 	}
+
+	for(size_t i = 0; i < rhs.m_buttons.size(); i++)
+	{
+		m_buttons.push_back(rhs.m_buttons[i]->Clone());
+	}
 }
 
 Screen& Screen::operator=(const Screen & rhs)
@@ -27,6 +34,11 @@ Screen& Screen::operator=(const Screen & rhs)
 	for(size_t i = 0; i < rhs.m_objects.size(); i++)
 	{
 		m_objects.push_back(rhs.m_objects[i]->Clone());
+	}
+
+	for(size_t i = 0; i < rhs.m_buttons.size(); i++)
+	{
+		m_buttons.push_back(rhs.m_buttons[i]->Clone());
 	}
 
 	return *this;
@@ -76,13 +88,35 @@ void Screen::InitScoreScreen()
 	ScoreBoard.GetMatrix().SetTranslation(5.0f, 7.0f, 0.0f);
 
 	m_objects.push_back(ScoreBoard.Clone());
+
+
+	ButtonObject playButton, goToMMButton;
+	Vertex Vertices_Buttons[4] = {
+			Vertex(Vector3f(-0.75f,	-0.75f,	0.0f), Vector2f(0.0f, 0.0f)),
+			Vertex(Vector3f(-0.75f,	0.75f,	0.0f), Vector2f(0.0f, 1.0f)),
+			Vertex(Vector3f(0.75f,	0.75f,	0.0f), Vector2f(1.0f, 1.0f)),
+			Vertex(Vector3f(0.75f,	-0.75f,	0.0f), Vector2f(1.0f, 0.0f))
+		};
+
+	playButton.Init("restart.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
+	playButton.GetMatrix().SetTranslation(3.5f, 2.0f, 0.0f);
+	playButton.SetXSize(0.75f);
+	playButton.SetYSize(0.75f);
+
+	goToMMButton.Init("exit.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(CHOOSE_LANGUAGE));
+	goToMMButton.GetMatrix().SetTranslation(6.5f, 2.0f, 0.0f);
+	goToMMButton.SetXSize(0.75f);
+	goToMMButton.SetYSize(0.75f);
+
+	m_buttons.push_back(playButton.Clone());
+	m_buttons.push_back(goToMMButton.Clone());
 }
 
 void Screen::InitLanguageScreen()
 {
 	InitBackground();
 
-	Object US, UA;
+	ButtonObject US, UA;
 
 	Vertex flag_verticies[4] = {
 			Vertex(Vector3f(-3.0f,	-1.5f,	0.0f),	Vector2f(0.0f, 0.0f)),
@@ -91,13 +125,19 @@ void Screen::InitLanguageScreen()
 			Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST);
+	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
 	US.GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
-	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST);
-	UA.GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
+	US.SetXSize(3.0f);
+	US.SetYSize(1.5f);
 
-	m_objects.push_back(US.Clone());
-	m_objects.push_back(UA.Clone());
+
+	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
+	UA.GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
+	UA.SetXSize(3.0f);
+	UA.SetYSize(1.5f);
+
+	m_buttons.push_back(US.Clone());
+	m_buttons.push_back(UA.Clone());
 }
 
 void Screen::InitBackground()
@@ -129,6 +169,24 @@ void Screen::Draw(double dt, double offset)
 			m_objects[i]->Draw(dt);
 		}
 	}
+
+	for(size_t i = 0; i < m_buttons.size(); i++)
+	{
+		if(m_buttons[i])
+		{
+			m_buttons[i]->Draw(dt);
+		}
+	}
+}
+
+std::vector<Object*> Screen::GetObjects() const
+{
+	return m_objects;
+}
+
+std::vector<Object*> Screen::GetButtons() const
+{
+	return m_buttons;
 }
 
 Screen::~Screen()
@@ -137,5 +195,11 @@ Screen::~Screen()
 	{
 		if(m_objects[i])
 			delete m_objects[i];
+	}
+
+	for(size_t i = 0; i < m_buttons.size(); i++)
+	{
+		if(m_buttons[i])
+			delete m_buttons[i];
 	}
 }

@@ -11,8 +11,6 @@
 
 enum GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN};
 
-static int SCREENS_ARR[] = {CHOOSE_LANGUAGE, GAME, SCORE_SCREEN};
-
-template <typename T, size_t N> size_t GetArraySize(T(&)[N]) { return N; }
+template <typename T, unsigned int N> unsigned int GetArraySize(T(&)[N]) { return N; }
 
 #endif /* GAMEHELPER_H_ */

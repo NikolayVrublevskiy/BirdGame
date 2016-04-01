@@ -1,5 +1,5 @@
-src/PipeObject.o: ../src/PipeObject.cpp \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/PipeObject.h \
+src/ButtonObject.o: ../src/ButtonObject.cpp \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonObject.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Object.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ButtonAction.h \
@@ -222,6 +222,4 @@ src/PipeObject.o: ../src/PipeObject.cpp \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/elm_win.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/elm_deprecated.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES1_Helpers.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES2_Helpers.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Camera.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h
+ D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES2_Helpers.h

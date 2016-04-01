@@ -15,6 +15,8 @@ public:
 
 	void IncreaseScore();
 
+	void TransateDigits();
+
 private:
 	std::vector<Object> m_digits;
 

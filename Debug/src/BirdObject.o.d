@@ -2,6 +2,7 @@ src/BirdObject.o: ../src/BirdObject.cpp \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/BirdObject.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Object.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ButtonAction.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Camera.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/Elementary_GL_Helpers.h \

@@ -7,6 +7,8 @@
 
 #include "Game.h"
 
+static int SCREENS_ARR[] = {CHOOSE_LANGUAGE, GAME, SCORE_SCREEN};
+
 Game::Game()
 : m_currentScreen(NONE),
   m_screenToDraw(NULL)
@@ -34,14 +36,20 @@ void Game::Init()
 void Game::Draw(double dt)
 {
 	m_screenToDraw->Draw(dt);
-	if(m_currentScreen == GAME)
+	switch(m_currentScreen)
 	{
+	case GAME:
 		if(m_screenToDraw->GetBirdObject()->GetIsDead())
 			SetCurrentScreen(SCORE_SCREEN);
 
 		m_pipeManager.CheckTubes(*m_screenToDraw->GetBirdObject(), m_scoreObject);
 		m_pipeManager.DrawPipes(dt);
 		m_scoreObject.Draw(dt);
+		break;
+	case SCORE_SCREEN:
+		m_scoreObject.Draw(dt);
+		break;
+
 	}
 }
 
@@ -49,6 +57,11 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 {
 	m_currentScreen = _screen;
 	m_screenToDraw = m_screens[_screen];
+	if(_screen == SCORE_SCREEN)
+	{
+		m_scoreObject.GetMatrix().SetTranslation(5.0f, 6.5f, 0.0f);
+		m_scoreObject.TransateDigits();
+	}
 }
 
 GAME_SCREEN Game::GetCurrentScreen() const

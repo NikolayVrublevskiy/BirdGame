@@ -9,6 +9,7 @@
 #define OBJECT_H_
 
 #include "math_3d.h"
+#include "ButtonActions/ButtonAction.h"
 
 class PipeObject;
 
@@ -36,6 +37,13 @@ public:
 	virtual void SetIsDead(bool value) {};
 	virtual bool GetIsDead() const { return false; };
 	virtual bool ChechScore(const PipeObject& ob) { return false; };
+	virtual ButtonAction* GetAction() const {return NULL;};
+
+	float GetXSize() const;
+	void SetXSize(float value);
+
+	float GetYSize() const;
+	void SetYSize(float value);
 
 	virtual ~Object();
 
@@ -49,6 +57,9 @@ protected:
 	unsigned int idx_vbo;
 	unsigned int idx_ibo;
 	unsigned int idx_vposition;
+
+	float xSize;
+	float ySize;
 
 	Vertex verticies[4];
 

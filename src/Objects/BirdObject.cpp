@@ -5,9 +5,9 @@
  *      Author: exelim
  */
 
-#include "BirdObject.h"
+#include "Objects/BirdObject.h"
 #include "Camera.h"
-#include "PipeObject.h"
+#include "Objects/PipeObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
 

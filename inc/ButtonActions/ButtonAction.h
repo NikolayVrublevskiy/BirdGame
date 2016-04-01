@@ -1,0 +1,27 @@
+/*
+ * ButtonAction.h
+ *
+ *  Created on: Apr 1, 2016
+ *      Author: nikolay.vrublevskiy
+ */
+
+#ifndef BUTTONACTION_H_
+#define BUTTONACTION_H_
+
+
+class ButtonAction
+{
+public:
+
+	ButtonAction();
+	ButtonAction(const ButtonAction& rhs);
+	ButtonAction& operator=(const ButtonAction& rhs);
+	virtual ~ButtonAction();
+
+	virtual void DoAction() = 0;
+
+	virtual ButtonAction* Clone() = 0;
+};
+
+
+#endif /* BUTTONACTION_H_ */

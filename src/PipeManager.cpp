@@ -1,9 +1,9 @@
 #include "PipeManager.h"
-#include "PipeObject.h"
+#include "Objects/PipeObject.h"
 #include <time.h>
 #include <stdlib.h>
-#include "BirdObject.h"
-#include "ScoreObject.h"
+#include "Objects/BirdObject.h"
+#include "Objects/ScoreObject.h"
 #include <Elementary_GL_Helpers.h>
 
 PipeManager::PipeManager()

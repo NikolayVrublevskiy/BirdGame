@@ -71,38 +71,37 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 	appdata_s *ad = (appdata_s *)data;
 	_Evas_Event_Mouse_Down *ev = (_Evas_Event_Mouse_Down *)event_info;
 
-	float px = (ev->canvas.x / ((float)ad->glview_w / 2.0)) -1.0;
-	float py = -(ev->canvas.y / ((float)ad->glview_w / 2.0)) +1.0;
+	float px = ev->canvas.x / (float)ad->glview_w;
+	float py = ((float)ad->glview_h - ev->canvas.y) / (float)ad->glview_h;
 
 	Game *game = Game::GetInstance();
+	Screen* screen = NULL;
+	std::vector<Object*> buttons;
+	const float size = 10.0f;
 
-	switch(game->GetCurrentScreen())
+	if(game->GetCurrentScreen() == GAME)
 	{
-	case CHOOSE_LANGUAGE:
-		if(px >= -0.4 && px <= 0.4
-			&& py <= -0.2 && py >= -0.7
-		)
-		{
-			game->SetCurrentScreen(GAME);
-		}
-
-		if(px >= -0.4 && px <= 0.4
-			&& py >= 0.0 && py <= 0.5
-		)
-		{
-			game->SetCurrentScreen(GAME);
-		}
-		break;
-
-	case GAME:
 		game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
-		break;
+	}
+	else
+	{
+		screen = game->GetCurrentTODrawScreen();
+		buttons = screen->GetButtons();
+		for(size_t i = 0; i < buttons.size(); i++)
+		{
+			float xPos = buttons[i]->GetMatrix().m[3][0];
+			float yPos = buttons[i]->GetMatrix().m[3][1];
+			float xSize = buttons[i]->GetXSize();
+			float ySize = buttons[i]->GetYSize();
 
-	case SCORE_SCREEN:
-		break;
-
-	case NONE:
-		break;
+			if(px >= (xPos - xSize) / size && px <= (xPos + xSize) / size &&
+			   py >= (yPos - ySize) / size && py <= (yPos + ySize) / size
+				)
+			{
+				if(buttons[i]->GetAction())
+					buttons[i]->GetAction()->DoAction();
+			}
+		}
 	}
 }
 

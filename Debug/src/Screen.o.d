@@ -1,9 +1,12 @@
 src/Screen.o: ../src/Screen.cpp \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Screen.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Object.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/Object.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ButtonAction.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/ButtonObject.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/Object.h \
  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/GameHelper.h \
- C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/BirdObject.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/BirdObject.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/Elementary_GL_Helpers.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/Elementary.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/eina-1/Eina.h \
@@ -223,4 +226,7 @@ src/Screen.o: ../src/Screen.cpp \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/elm_win.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1/elm_deprecated.h \
  D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES1_Helpers.h \
- D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES2_Helpers.h
+ D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1/Evas_GL_GLES2_Helpers.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ChangeStateAction.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ButtonActions/ButtonAction.h \
+ C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/GameHelper.h

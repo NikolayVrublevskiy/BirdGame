@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>02t40soYeGkS8+KtLYW8EziOZpRTbfYuExBcOVBgMws=</DigestValue>
+<DigestValue>aZwZwVtSpfpD5gl08+w7R0leqMUNljLorGXpeniTrNw=</DigestValue>
 </Reference>
 <Reference URI="res%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -211,11 +211,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-YdRdN/7XFMF+gT/x/ppUsg4rM87q3uGpC1H3QxOsMFim/IKhUJnbsbTZcaj9YNnX8HASriremYhJ
-QJZmgKi3s2fhE94izJaS73IF5C/36ICgPLBrxbHS6ND7NOwAqM6dhova7UOgVxqH1wWfihDT+/7u
-860YvoO8YiM8pYqcv/VbguROCTU6/wy8daQmyv2a2ql7u1BAeQGSCAKX41pRhuiGsxnyeEbm9Dyf
-nSCTO5+N88g65ey8ynQNX6Jm5aup1aCcQfTaHOTrK6sB/Lj2yWlcS5+WQoudyCb1Qn4bC9qP1NaZ
-4tmyDXpjH4U1xCuW78EIgOI10XnnluQucndfEw==
+MgZ9bZ63kXg+q4IUAnpN3FfDSPHxXLqwsxzLIgsUt7Wt9P22jRceNnwsvyuwwJdDeq3r8rTO8990
+zt6LRnGpLFXhCTrNeblABWI0hVi0LvkfSb9YjPlLRQkHEw+pLsFI+jZwRq2vW/8YsbjzHQy6Pso3
+poesCvj/CT446sIY8PaIhsBIYsc+ABNopF0iEGNr/tH3xsOnwV4Yew0MRz2HeNBPxD8XPlFDiXfT
+dfaLYlG6mPdbEiAyXvOR8vK7kjIsR7BkdBqq32Dh1lJrqHWgo37ep7SnD/vm5RfWIK2ifzrRnDxK
+zS4tefVhB18ixZzcyE+YQCwIXTDdQLKnPRY/Cg==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

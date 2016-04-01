@@ -8,7 +8,8 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
 
-#include "Object.h"
+#include "Objects/Object.h"
+#include "Objects/ButtonObject.h"
 #include "GameHelper.h"
 #include <vector>
 
@@ -25,6 +26,9 @@ public:
 
 	Object* GetBirdObject();
 
+	std::vector<Object*> 		GetObjects() const;
+	std::vector<Object*>	GetButtons() const;
+
 private:
 
 	void InitLanguageScreen();
@@ -35,7 +39,8 @@ private:
 
 private:
 
-	std::vector<Object*>	m_objects;
+	std::vector<Object*>		m_objects;
+	std::vector<Object*>	m_buttons;
 };
 
 

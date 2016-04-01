@@ -5,7 +5,7 @@
  *      Author: exelim
  */
 
-#include "Object.h"
+#include "Objects/Object.h"
 #include "TGA.h"
 #include <stdio.h>
 #include <app.h>
@@ -30,7 +30,9 @@ fgmt_shader(0),
 texture(0),
 idx_vbo(0),
 idx_ibo(0),
-idx_vposition(0)
+idx_vposition(0),
+xSize(0.0f),
+ySize(0.0f)
 {}
 
 Object::Object(const Object & rhs)
@@ -41,9 +43,12 @@ Object::Object(const Object & rhs)
  idx_vbo(rhs.idx_vbo),
  idx_ibo(rhs.idx_ibo),
  idx_vposition(rhs.idx_vposition),
+ xSize(rhs.xSize),
+ ySize(rhs.ySize),
  verticies(rhs.verticies),
  matrix(rhs.matrix)
-{}
+{
+}
 
 Object* Object::Clone()
 {
@@ -71,6 +76,9 @@ Object& Object::operator=(const Object & rhs)
 	}
 
 	matrix = rhs.matrix;
+
+	xSize = rhs.xSize;
+	ySize = rhs.ySize;
 
 	return *this;
 }
@@ -185,6 +193,26 @@ void Object::Draw(double dt)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glUseProgram(0);
+}
+
+float Object::GetXSize() const
+{
+	return xSize;
+}
+
+float Object::GetYSize() const
+{
+	return ySize;
+}
+
+void Object::SetXSize(float value)
+{
+	xSize = value;
+}
+
+void Object::SetYSize(float value)
+{
+	ySize = value;
 }
 
 Matrix4f& Object::GetMatrix()
