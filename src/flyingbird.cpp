@@ -62,7 +62,7 @@ static void draw_gl(Evas_Object *obj)
 static void init_gl(Evas_Object *obj)
 {
 	Game::GetInstance()->Init();
-	Game::GetInstance()->SetCurrentScreen(CHOOSE_LANGUAGE);
+	Game::GetInstance()->SetCurrentScreen(GAME_SCREEN::CHOOSE_LANGUAGE);
 }
 
 static void
@@ -79,7 +79,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 	std::vector<Object*> buttons;
 	const float size = 10.0f;
 
-	if(game->GetCurrentScreen() == GAME)
+	if(game->GetCurrentScreen() == GAME_SCREEN::GAME)
 	{
 		game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}

@@ -9,7 +9,8 @@
 #define CHANGESTATEACTION_H_
 
 #include "ButtonAction.h"
-#include "GameHelper.h"
+
+enum class GAME_SCREEN;
 
 class ChangeStateAction : public ButtonAction
 {
@@ -21,8 +22,9 @@ public:
 
 	~ChangeStateAction();
 
-	virtual void DoAction();
-	virtual ButtonAction* Clone();
+
+	virtual void			DoAction()	override;
+	virtual ButtonAction*	Clone() 	override;
 
 private:
 	GAME_SCREEN m_screen;

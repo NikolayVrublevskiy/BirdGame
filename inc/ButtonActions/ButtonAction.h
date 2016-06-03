@@ -12,15 +12,9 @@
 class ButtonAction
 {
 public:
-
-	ButtonAction();
-	ButtonAction(const ButtonAction& rhs);
-	ButtonAction& operator=(const ButtonAction& rhs);
-	virtual ~ButtonAction();
-
-	virtual void DoAction() = 0;
-
-	virtual ButtonAction* Clone() = 0;
+	virtual void 			DoAction() = 0;
+	virtual ButtonAction*	Clone() = 0;
+	virtual 				~ButtonAction(){};
 };
 
 

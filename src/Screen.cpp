@@ -48,10 +48,10 @@ void Screen::Init(GAME_SCREEN _screen)
 {
 	switch(_screen)
 	{
-	case CHOOSE_LANGUAGE:	InitLanguageScreen();	break;
-	case GAME:				InitGameScreen();		break;
-	case SCORE_SCREEN:		InitScoreScreen();		break;
-	case NONE:										break;
+	case GAME_SCREEN::CHOOSE_LANGUAGE:	InitLanguageScreen();	break;
+	case GAME_SCREEN::GAME:				InitGameScreen();		break;
+	case GAME_SCREEN::SCORE_SCREEN:		InitScoreScreen();		break;
+	case GAME_SCREEN::NONE:										break;
 	}
 }
 
@@ -98,12 +98,12 @@ void Screen::InitScoreScreen()
 			Vertex(Vector3f(0.75f,	-0.75f,	0.0f), Vector2f(1.0f, 0.0f))
 		};
 
-	playButton.Init("restart.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
+	playButton.Init("restart.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
 	playButton.GetMatrix().SetTranslation(3.5f, 2.0f, 0.0f);
 	playButton.SetXSize(0.75f);
 	playButton.SetYSize(0.75f);
 
-	goToMMButton.Init("exit.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(CHOOSE_LANGUAGE));
+	goToMMButton.Init("exit.tga", Vertices_Buttons, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::CHOOSE_LANGUAGE));
 	goToMMButton.GetMatrix().SetTranslation(6.5f, 2.0f, 0.0f);
 	goToMMButton.SetXSize(0.75f);
 	goToMMButton.SetYSize(0.75f);
@@ -125,13 +125,13 @@ void Screen::InitLanguageScreen()
 			Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
+	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
 	US.GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
 	US.SetXSize(3.0f);
 	US.SetYSize(1.5f);
 
 
-	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME));
+	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
 	UA.GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
 	UA.SetXSize(3.0f);
 	UA.SetYSize(1.5f);

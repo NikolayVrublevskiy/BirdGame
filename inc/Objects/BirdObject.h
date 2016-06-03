@@ -19,7 +19,8 @@ public:
 	BirdObject();
 	BirdObject(const BirdObject &);
 
-	void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
+	virtual void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
+	virtual void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param);
 	void InitPoints();
 
 	void Draw(double dt);
@@ -34,7 +35,7 @@ public:
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
 
-	Object* Clone();
+	BirdObject* Clone();
 
 	~BirdObject();
 

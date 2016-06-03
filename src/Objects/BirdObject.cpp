@@ -41,7 +41,7 @@ BirdObject::BirdObject(const BirdObject & rhs)
   m_points(rhs.m_points)
 {}
 
-Object* BirdObject::Clone()
+BirdObject* BirdObject::Clone()
 {
 	return new BirdObject(*this);
 }
@@ -62,6 +62,9 @@ void BirdObject::Init(const char* path1, const char* path2, const char* path3, V
 
 	InitPoints();
 }
+
+void BirdObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param)
+{}
 
 void BirdObject::Draw(double dt)
 {
