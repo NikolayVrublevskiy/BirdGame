@@ -1,4 +1,4 @@
-#include "Objects/ScoreObject.h"
+/*#include "Objects/ScoreObject.h"
 #include <stdlib.h>
 #include <Elementary_GL_Helpers.h>
 
@@ -70,3 +70,4 @@ void ScoreObject::IncreaseScore()
 {
 	m_value++;
 }
+*/

@@ -10,26 +10,42 @@
 #include "Objects/PipeObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
+#include "Objects/DrawInformation.h"
+#include "memory"
 
 extern Evas_GL_API * __evas_gl_glapi;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BirdObject::BirdObject()
+BirdObject::BirdObject(const char* _path1, const char* _path2, const char* _path3, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
 :texture_2(0),
  texture_3(0),
- m_speed(0.0f),
+ m_speed(0.01f),
  m_shouldUpBird(false),
  m_UpTime(0.0f),
  m_isDead(false),
  m_rotationAngle(0.0f),
  m_currentTexture(1),
  m_position(1.0, 5.0, 0.0)
-{}
+{
+
+	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_NEAREST));
+
+	std::shared_ptr<DrawInformation> di = GetDrawInformation();
+	di->AddTexture(_path2, texture_2, GL_NEAREST);
+	di->AddTexture(_path3, texture_2, GL_NEAREST);
+
+	m_shouldUpBird = false;
+	m_UpTime = 0.0f;
+	m_isDead = false;
+	m_rotationAngle = 0.0f;
+	di->GetMatrix().SetTranslation(2.0f, 5.0f, 0.0f);
+
+	InitPoints();
+}
 
 BirdObject::BirdObject(const BirdObject & rhs)
-: Object(rhs),
-  texture_2(rhs.texture_2),
+: texture_2(rhs.texture_2),
   texture_3(rhs.texture_3),
   m_speed(rhs.m_speed),
   m_shouldUpBird(rhs.m_shouldUpBird),
@@ -41,45 +57,21 @@ BirdObject::BirdObject(const BirdObject & rhs)
   m_points(rhs.m_points)
 {}
 
-BirdObject* BirdObject::Clone()
+void BirdObject::Draw(float dt)
 {
-	return new BirdObject(*this);
-}
-
-void BirdObject::Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs)
-{
-	Object::Init(path1, coords, vs, fs, GL_NEAREST);
-	Object::InitTexture(path2, texture_2, GL_NEAREST);
-	Object::InitTexture(path3, texture_3, GL_NEAREST);
-
-	m_speed = 0.01f;
-	m_shouldUpBird = false;
-	m_UpTime = 0.0f;
-	m_isDead = false;
-	m_rotationAngle = 0.0f;
-	matrix.InitIdentity();
-	matrix.SetTranslation(2.0f, 5.0f, 0.0f);
-
-	InitPoints();
-}
-
-void BirdObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param)
-{}
-
-void BirdObject::Draw(double dt)
-{
-	glUseProgram(program);
+	std::shared_ptr<DrawInformation> di = GetDrawInformation();
+	glUseProgram(di->m_program);
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 
-	glBindBuffer(GL_ARRAY_BUFFER, idx_vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, di->m_idxVbo);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (void*)(3*sizeof(float)));
 
 	if (m_currentTexture <= 4)
 	{
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture); // unsigned int texture_id;
+		glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 		m_currentTexture++;
 	}
 	else if (m_currentTexture <= 8)
@@ -107,7 +99,7 @@ void BirdObject::Draw(double dt)
 		{
 			m_rotationAngle -= 0.05;
 		}
-		matrix.SetRotationZ(m_rotationAngle);
+		di->GetMatrix().SetRotationZ(m_rotationAngle);
 	}
 
 	if(m_shouldUpBird && m_UpTime < 0.60)
@@ -126,13 +118,13 @@ void BirdObject::Draw(double dt)
 		m_position.y -= dt * 15;
 	}
 
-	matrix.SetTranslation(m_position.x , m_position.y, m_position.z);
+	di->GetMatrix().SetTranslation(m_position.x , m_position.y, m_position.z);
 
-	float u_mvp = glGetUniformLocation(program, "u_mvpMatrix");
-	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * matrix);
+	float u_mvp = glGetUniformLocation(di->m_program, "u_mvpMatrix");
+	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * di->m_matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, idx_ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, di->m_idxIbo);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 
 	glDisableVertexAttribArray(0);
@@ -148,7 +140,7 @@ void BirdObject::SetRotationAngle(float value)
 
 bool BirdObject::CheckInteractWithTube(PipeObject& ob)
 {
-	switch (ob.GetType())
+	/*switch (ob.GetType())
 	{
 	case PipeObject::TOP:
 		return CheckTopPoints(ob);
@@ -158,7 +150,7 @@ bool BirdObject::CheckInteractWithTube(PipeObject& ob)
 		break;
 	default:
 		break;
-	}
+	}*/
 
 	return false;
 }
@@ -173,10 +165,10 @@ bool BirdObject::CheckTopPoints(PipeObject& ob)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
-		if(	(matrix.m[3][1] + m_points[i].y) >= (ob.GetMatrix().m[3][1] - 3.0f)
+		/*if(	(matrix.m[3][1] + m_points[i].y) >= (ob.GetMatrix().m[3][1] - 3.0f)
 		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
 		)
-			return true;
+			return true;*/
 	}
 	return false;
 }
@@ -185,20 +177,20 @@ bool BirdObject::CheckBotPoints(PipeObject& ob)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
-		if(	(matrix.m[3][1] + m_points[i].y) <= (ob.GetMatrix().m[3][1] + 3.0f)
+		/*if(	(matrix.m[3][1] + m_points[i].y) <= (ob.GetMatrix().m[3][1] + 3.0f)
 		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
 		)
-			return true;
+			return true;*/
 	}
 	return false;
 }
 
 bool BirdObject::ChechScore(const PipeObject& ob)
 {
-	if (matrix.m[3][0] >= ob.GetMatrix().m[3][0])
+	/*if (matrix.m[3][0] >= ob.GetMatrix().m[3][0])
 	{
 		return true;
-	}
+	}*/
 
 return false;
 }

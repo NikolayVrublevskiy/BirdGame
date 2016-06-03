@@ -81,15 +81,15 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 
 	if(game->GetCurrentScreen() == GAME_SCREEN::GAME)
 	{
-		game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
+	//	game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}
 	else
 	{
 		screen = game->GetCurrentTODrawScreen();
-		buttons = screen->GetButtons();
-		for(size_t i = 0; i < buttons.size(); i++)
+	//	buttons = screen->GetButtons();
+	//	for(size_t i = 0; i < buttons.size(); i++)
 		{
-			float xPos = buttons[i]->GetMatrix().m[3][0];
+	/*		float xPos = buttons[i]->GetMatrix().m[3][0];
 			float yPos = buttons[i]->GetMatrix().m[3][1];
 			float xSize = buttons[i]->GetXSize();
 			float ySize = buttons[i]->GetYSize();
@@ -100,7 +100,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 			{
 				if(buttons[i]->GetAction())
 					buttons[i]->GetAction()->DoAction();
-			}
+			}*/
 		}
 	}
 }
@@ -281,8 +281,6 @@ int main(int argc, char *argv[])
 	int ret = 0;
 	appdata_s ad = { NULL, };
 	ui_app_lifecycle_callback_s event_callback = {NULL,};
-
-	//current_state = CHOOSE_LANGUAGE;
 
 	ad.name = "flyingbird";
 

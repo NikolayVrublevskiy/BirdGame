@@ -8,22 +8,21 @@
 #ifndef BIRD_OBJECT_H_
 #define BIRD_OBJECT_H_
 
-#include "Object.h"
+#include "Logical2DObject.h"
+#include "math_3d.h"
 #include <vector>
 
 class PipeObject;
 
-class BirdObject : public Object
+class BirdObject : public Logical2DObject
 {
 public:
-	BirdObject();
+	BirdObject(const char* _path1, const char* _path2, const char* _path3, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 	BirdObject(const BirdObject &);
 
-	virtual void Init(const char* path1, const char* path2, const char* path3, Vertex coords[4], const char *vs, const char *fs);
-	virtual void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param);
 	void InitPoints();
 
-	void Draw(double dt);
+	void Draw(float dt);
 
 	bool CheckInteractWithTube(PipeObject& ob);
 	bool ChechScore(const PipeObject& ob);
@@ -34,8 +33,6 @@ public:
 
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
-
-	BirdObject* Clone();
 
 	~BirdObject();
 

@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "Object.h"
 #include "ButtonActions/ButtonAction.h"
@@ -25,3 +25,4 @@ private:
 	ButtonAction* m_action;
 
 };
+*/

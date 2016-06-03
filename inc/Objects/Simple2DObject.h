@@ -12,9 +12,11 @@
 
 class Simple2DObject : public Drawable2DObject
 {
-	virtual void Draw(float dt) = 0;
 
-	virtual ~Simple2DObject();
+public:
+	virtual void Draw(float dt);
+
+	virtual ~Simple2DObject(){};
 };
 
 

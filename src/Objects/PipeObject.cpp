@@ -4,7 +4,7 @@
  *  Created on: Jan 31, 2016
  *      Author: exelim
  */
-
+/*
 #include "Objects/PipeObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
@@ -79,4 +79,4 @@ PipeObject::TYPE PipeObject::GetType() const
 PipeObject::~PipeObject()
 {
 
-}
+}*/

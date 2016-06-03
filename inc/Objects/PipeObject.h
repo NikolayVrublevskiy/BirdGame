@@ -4,7 +4,7 @@
  *  Created on: Jan 31, 2016
  *      Author: exelim
  */
-
+/*
 #ifndef PIPE_OBJECT_H_
 #define PIPE_OBJECT_H_
 

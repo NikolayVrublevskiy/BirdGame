@@ -12,9 +12,10 @@
 
 class Logical2DObject: public Drawable2DObject
 {
+public:
 	virtual void Draw(float dt) = 0;
 
-	virtual ~Logical2DObject();
+	virtual ~Logical2DObject() {};
 };
 
 #endif /* LOGICAL2DOBJECT_H_ */

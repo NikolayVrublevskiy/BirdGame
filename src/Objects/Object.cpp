@@ -4,7 +4,7 @@
  *  Created on: Jan 31, 2016
  *      Author: exelim
  */
-
+/*
 #include "Objects/Object.h"
 #include "TGA.h"
 #include <stdio.h>
@@ -17,7 +17,7 @@ extern Evas_GL_API * __evas_gl_glapi;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-GLuint gSampler;
+extern GLuint gSampler;
 
 Object::Object()
 :program(0),
@@ -249,4 +249,4 @@ const Matrix4f& Object::GetMatrix() const
 
 Object::~Object()
 {
-}
+}*/

@@ -33,11 +33,11 @@ public:
 
 private:
 
-	PipeManager						m_pipeManager;
+	//PipeManager						m_pipeManager;
 	std::map<GAME_SCREEN, Screen *> m_screens;
 	GAME_SCREEN						m_currentScreen;
 	Screen*							m_screenToDraw;
-	ScoreObject						m_scoreObject;
+	//ScoreObject						m_scoreObject;
 };
 
 

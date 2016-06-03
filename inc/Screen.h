@@ -8,10 +8,16 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
 
-#include "Objects/Object.h"
-#include "Objects/ButtonObject.h"
 #include "GameHelper.h"
 #include <vector>
+#include <memory>
+
+class SimpleElement;
+class Logical2DObject;
+class BirdObject;
+
+using simpleElement_ptr = std::shared_ptr<SimpleElement>;
+using logical2DObject_ptr = std::shared_ptr<Logical2DObject>;
 
 class Screen
 {
@@ -21,13 +27,11 @@ public:
 	Screen& operator=(const Screen & rhs);
 	~Screen();
 
-	void Draw(double dt, double offset = 0);
 	void Init(GAME_SCREEN _screen);
+	void DrawObjects(double dt, double offset = 0);
 
-	Object* GetBirdObject();
-
-	std::vector<Object*> 		GetObjects() const;
-	std::vector<Object*>	GetButtons() const;
+	std::vector<simpleElement_ptr> 		GetSimpleObjects() const;
+	std::vector<logical2DObject_ptr>	GetButtons() const;
 
 private:
 
@@ -39,8 +43,9 @@ private:
 
 private:
 
-	std::vector<Object*>		m_objects;
-	std::vector<Object*>	m_buttons;
+	std::vector<simpleElement_ptr>		m_simpleObjects; // simple static elements
+	std::vector<logical2DObject_ptr>	m_buttons;
+	std::shared_ptr<BirdObject>			m_birdObject;
 };
 
 

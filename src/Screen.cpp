@@ -9,7 +9,8 @@
 #include "Objects/BirdObject.h"
 #include <Elementary_GL_Helpers.h>
 #include "ButtonActions/ChangeStateAction.h"
-
+#include "Objects/DrawInformation.h"
+#include "Objects/SimpleElement.h"
 
 Screen::Screen()
 {
@@ -18,20 +19,20 @@ Screen::Screen()
 
 Screen::Screen(const Screen & rhs)
 {
-	for(size_t i = 0; i < rhs.m_objects.size(); i++)
+	/*for(size_t i = 0; i < rhs.m_simpleObjects.size(); i++)
 	{
-		m_objects.push_back(rhs.m_objects[i]->Clone());
+		//m_objects.push_back(rhs.m_objects[i]->Clone());
 	}
 
 	for(size_t i = 0; i < rhs.m_buttons.size(); i++)
 	{
-		m_buttons.push_back(rhs.m_buttons[i]->Clone());
-	}
+		//m_buttons.push_back(rhs.m_buttons[i]->Clone());
+	}*/
 }
 
 Screen& Screen::operator=(const Screen & rhs)
 {
-	for(size_t i = 0; i < rhs.m_objects.size(); i++)
+	/*for(size_t i = 0; i < rhs.m_objects.size(); i++)
 	{
 		m_objects.push_back(rhs.m_objects[i]->Clone());
 	}
@@ -39,7 +40,7 @@ Screen& Screen::operator=(const Screen & rhs)
 	for(size_t i = 0; i < rhs.m_buttons.size(); i++)
 	{
 		m_buttons.push_back(rhs.m_buttons[i]->Clone());
-	}
+	}*/
 
 	return *this;
 }
@@ -59,22 +60,20 @@ void Screen::InitGameScreen()
 {
 	InitBackground();
 
-	BirdObject bird;
-	Vertex Vertices_bird[4] = {
+	std::vector<Vertex> Vertices_bird = {
 		Vertex(Vector3f(-0.5f,	-0.5f,	0.0f), Vector2f(0.0f, 0.0f)),
 		Vertex(Vector3f(-0.5f,	0.5f,	0.0f), Vector2f(0.0f, 1.0f)),
 		Vertex(Vector3f(0.5f,	0.5f,	0.0f), Vector2f(1.0f, 1.0f)),
 		Vertex(Vector3f(0.5f,	-0.5f,	0.0f), Vector2f(1.0f, 0.0f))
 	};
-	bird.Init("bird.tga", "bird.tga", "bird.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
-	bird.GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 
-	m_objects.push_back(bird.Clone());
+	m_birdObject = std::make_shared<BirdObject>("bird.tga", "bird.tga", "bird.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
+	m_birdObject->GetDrawInformation()->GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 }
 
 void Screen::InitScoreScreen()
 {
-	InitBackground();
+	/*InitBackground();
 
 	Object ScoreBoard;
 	Vertex Vertices_ScoreBoard[4] = {
@@ -109,12 +108,12 @@ void Screen::InitScoreScreen()
 	goToMMButton.SetYSize(0.75f);
 
 	m_buttons.push_back(playButton.Clone());
-	m_buttons.push_back(goToMMButton.Clone());
+	m_buttons.push_back(goToMMButton.Clone());*/
 }
 
 void Screen::InitLanguageScreen()
 {
-	InitBackground();
+	/*InitBackground();
 
 	ButtonObject US, UA;
 
@@ -137,12 +136,12 @@ void Screen::InitLanguageScreen()
 	UA.SetYSize(1.5f);
 
 	m_buttons.push_back(US.Clone());
-	m_buttons.push_back(UA.Clone());
+	m_buttons.push_back(UA.Clone());*/
 }
 
 void Screen::InitBackground()
 {
-	Object bg;
+	/*Object bg;
 	Vertex Vertices[4] = {
 			Vertex(Vector3f(-5.0f,	-5.0f,	0.0f),	Vector2f(0.0f, 0.0f)),
 			Vertex(Vector3f(-5.0f,	5.0f,	0.0f),	Vector2f(0.0f, 1.0f)),
@@ -152,54 +151,34 @@ void Screen::InitBackground()
 
 	bg.Init("bg.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST);
 	bg.GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
-	m_objects.push_back(bg.Clone());
+	m_objects.push_back(bg.Clone());*/
 }
 
-Object* Screen::GetBirdObject()
+void Screen::DrawObjects(double dt, double offset)
 {
-	return m_objects[m_objects.size() - 1];
-}
-
-void Screen::Draw(double dt, double offset)
-{
-	for(size_t i = 0; i < m_objects.size(); i++)
+	for(const auto & object : m_simpleObjects)
 	{
-		if(m_objects[i])
-		{
-			m_objects[i]->Draw(dt);
-		}
+		if(object)
+			object->Draw(dt);
 	}
 
-	for(size_t i = 0; i < m_buttons.size(); i++)
+	for(const auto & button : m_buttons)
 	{
-		if(m_buttons[i])
-		{
-			m_buttons[i]->Draw(dt);
-		}
+		if(button)
+			button->Draw(dt);
 	}
 }
 
-std::vector<Object*> Screen::GetObjects() const
+std::vector<simpleElement_ptr> Screen::GetSimpleObjects() const
 {
-	return m_objects;
+	return m_simpleObjects;
 }
 
-std::vector<Object*> Screen::GetButtons() const
+std::vector<logical2DObject_ptr> Screen::GetButtons() const
 {
 	return m_buttons;
 }
 
 Screen::~Screen()
 {
-	for(size_t i = 0; i < m_objects.size(); i++)
-	{
-		if(m_objects[i])
-			delete m_objects[i];
-	}
-
-	for(size_t i = 0; i < m_buttons.size(); i++)
-	{
-		if(m_buttons[i])
-			delete m_buttons[i];
-	}
 }

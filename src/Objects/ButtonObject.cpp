@@ -1,4 +1,4 @@
-#include "Objects/ButtonObject.h"
+/*#include "Objects/ButtonObject.h"
 #include <stdlib.h>
 #include <Elementary_GL_Helpers.h>
 
@@ -53,3 +53,4 @@ void ButtonObject::Draw(double dr)
 
 ButtonObject::~ButtonObject()
 {}
+*/

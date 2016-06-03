@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "Object.h"
 #include <vector>
 
@@ -22,3 +22,4 @@ private:
 
 	int m_value;
 };
+*/
