@@ -1,23 +1,32 @@
-/*#include "Objects/ButtonObject.h"
+#include "Objects/ButtonObject.h"
 #include <stdlib.h>
 #include <Elementary_GL_Helpers.h>
+#include "Objects/DrawInformation.h"
 
-ButtonObject::ButtonObject()
+ButtonObject::ButtonObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action)
 :m_action(NULL)
-{}
+{
+	SetDrawInformation(std::make_shared<DrawInformation>(_path, _coords, _vs, _fs, GL_NEAREST));
+
+	std::shared_ptr<DrawInformation> di = GetDrawInformation();
+
+	di->GetMatrix().SetTranslation(2.0f, 5.0f, 0.0f);
+
+	m_action = _action;
+}
 
 ButtonObject::ButtonObject(const ButtonObject& rhs)
-: Object(rhs)
+ //Object(rhs)
 {
-	if(rhs.m_action)
+	/*if(rhs.m_action)
 		m_action = rhs.m_action->Clone();
 	else
-		m_action = NULL;
+		m_action = NULL;*/
 }
 
 ButtonObject& ButtonObject::operator=(const ButtonObject& rhs)
 {
-	if(this == &rhs)
+	/*if(this == &rhs)
 	{
 		return *this;
 	}
@@ -27,7 +36,7 @@ ButtonObject& ButtonObject::operator=(const ButtonObject& rhs)
 	else
 		m_action = NULL;
 
-	return *this;
+	return *this;*/
 }
 
 ButtonObject* ButtonObject::Clone()
@@ -35,22 +44,17 @@ ButtonObject* ButtonObject::Clone()
 	return new ButtonObject(*this);
 }
 
-void ButtonObject::Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param, ButtonAction* _action)
-{
-	Object::Init(path, coords, vs, fs, param);
-	m_action = _action->Clone();
-}
 
-ButtonAction* ButtonObject::GetAction() const
+/*ButtonAction* ButtonObject::GetAction() const
 {
 	return m_action;
-}
+}*/
 
-void ButtonObject::Draw(double dr)
+void ButtonObject::Draw(float dt)
 {
-	Object::Draw(dr);
+	Logical2DObject::Draw(dt);
 }
 
 ButtonObject::~ButtonObject()
 {}
-*/
+

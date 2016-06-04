@@ -10,8 +10,6 @@
 static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN};
 
 Game::Game()
-: m_currentScreen(GAME_SCREEN::NONE),
-  m_screenToDraw(NULL)
 {}
 
 void Game::Init()
@@ -19,9 +17,7 @@ void Game::Init()
 	size_t size = GetArraySize(SCREENS_ARR);
 	for(size_t i = 0; i < size; i++)
 	{
-		/*Screen screen;
-		screen.Init((GAME_SCREEN)i);
-		m_screens[(GAME_SCREEN)i] = new Screen(screen);*/
+		m_screens[(GAME_SCREEN)i] = std::make_shared<Screen>(static_cast<GAME_SCREEN>(i));// new Screen(screen);
 	}
 
 	for(int i = 0; i < 5; ++i)
@@ -35,8 +31,8 @@ void Game::Init()
 
 void Game::Draw(double dt)
 {
-	//m_screenToDraw->Draw(dt);
-	switch(m_currentScreen)
+	m_currentScreen->DrawObjects(dt);
+	switch(m_currentScreen->GetType())
 	{
 	case GAME_SCREEN::GAME:
 		//if(m_screenToDraw->GetBirdObject()->GetIsDead())
@@ -58,8 +54,8 @@ void Game::Draw(double dt)
 
 void Game::SetCurrentScreen(GAME_SCREEN _screen)
 {
-	m_currentScreen = _screen;
-	m_screenToDraw = m_screens[_screen];
+	m_currentScreen = m_screens[_screen];
+	//m_screenToDraw = m_screens[_screen];
 	if(_screen == GAME_SCREEN::SCORE_SCREEN)
 	{
 		//m_scoreObject.GetMatrix().SetTranslation(5.0f, 6.5f, 0.0f);
@@ -67,7 +63,7 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 	}
 }
 
-GAME_SCREEN Game::GetCurrentScreen() const
+/*GAME_SCREEN Game::GetCurrentScreen() const
 {
 	return m_currentScreen;
 }
@@ -75,7 +71,7 @@ GAME_SCREEN Game::GetCurrentScreen() const
 Screen* Game::GetCurrentTODrawScreen()
 {
 	return m_screenToDraw;
-}
+}*/
 /*
 Game::~Game()
 {}*/

@@ -1,19 +1,18 @@
 /*
- * Simple2DObject.cpp
+ * Logical2DObject.cpp
  *
- *  Created on: Jun 3, 2016
+ *  Created on: Jun 4, 2016
  *      Author: nikolay.vrublevskiy
  */
 
-#include "Objects/Simple2DObject.h"
+#include "Objects/Logical2DObject.h"
 #include <Elementary_GL_Helpers.h>
 #include "Objects/DrawInformation.h"
 #include "Camera.h"
-#include <memory>
 
 extern Evas_GL_API * __evas_gl_glapi;
 
-void Simple2DObject::Draw(float dt)
+void Logical2DObject::Draw(float dt)
 {
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
 	glUseProgram(di->m_program);
@@ -38,3 +37,5 @@ void Simple2DObject::Draw(float dt)
 	glDisableVertexAttribArray(1);
 	glUseProgram(0);
 }
+
+

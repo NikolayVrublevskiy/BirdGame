@@ -24,7 +24,6 @@ public:
 
 
 	virtual void			DoAction()	override;
-	virtual ButtonAction*	Clone() 	override;
 
 private:
 	GAME_SCREEN m_screen;

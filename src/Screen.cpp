@@ -6,15 +6,23 @@
  */
 
 #include "Screen.h"
-#include "Objects/BirdObject.h"
 #include <Elementary_GL_Helpers.h>
-#include "ButtonActions/ChangeStateAction.h"
+#include "Objects/BirdObject.h"
 #include "Objects/DrawInformation.h"
 #include "Objects/SimpleElement.h"
+#include "Objects/ButtonObject.h"
+#include "ButtonActions/ChangeStateAction.h"
 
-Screen::Screen()
+Screen::Screen(GAME_SCREEN _screen)
+: m_type(_screen)
 {
-
+	switch(_screen)
+	{
+	case GAME_SCREEN::CHOOSE_LANGUAGE:	InitLanguageScreen();	break;
+	case GAME_SCREEN::GAME:				InitGameScreen();		break;
+	case GAME_SCREEN::SCORE_SCREEN:		InitScoreScreen();		break;
+	case GAME_SCREEN::NONE:										break;
+	}
 }
 
 Screen::Screen(const Screen & rhs)
@@ -43,17 +51,6 @@ Screen& Screen::operator=(const Screen & rhs)
 	}*/
 
 	return *this;
-}
-
-void Screen::Init(GAME_SCREEN _screen)
-{
-	switch(_screen)
-	{
-	case GAME_SCREEN::CHOOSE_LANGUAGE:	InitLanguageScreen();	break;
-	case GAME_SCREEN::GAME:				InitGameScreen();		break;
-	case GAME_SCREEN::SCORE_SCREEN:		InitScoreScreen();		break;
-	case GAME_SCREEN::NONE:										break;
-	}
 }
 
 void Screen::InitGameScreen()
@@ -113,45 +110,56 @@ void Screen::InitScoreScreen()
 
 void Screen::InitLanguageScreen()
 {
-	/*InitBackground();
+	InitBackground();
 
-	ButtonObject US, UA;
+	//ButtonObject US, UA;
 
-	Vertex flag_verticies[4] = {
+	std::vector<Vertex> flag_verticies = {
 			Vertex(Vector3f(-3.0f,	-1.5f,	0.0f),	Vector2f(0.0f, 0.0f)),
 			Vertex(Vector3f(-3.0f,	1.5f,	0.0f),	Vector2f(0.0f, 1.0f)),
 			Vertex(Vector3f(3.0f,	1.5f,	0.0f),	Vector2f(1.0f, 1.0f)),
 			Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
+	logical2DObject_ptr US = std::make_shared<ButtonObject>("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::GAME));
+	//US->SetDrawInformation(std::make_shared<DrawInformation>("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME)));
+	US->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
+	US->GetDrawInformation()->SetXSize(3.0f);
+	US->GetDrawInformation()->SetYSize(1.5f);
+
+	/*US.Init("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
 	US.GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
 	US.SetXSize(3.0f);
-	US.SetYSize(1.5f);
+	US.SetYSize(1.5f);*/
 
+	logical2DObject_ptr UA = std::make_shared<ButtonObject>("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::GAME));
+	//UA->SetDrawInformation(std::make_shared<DrawInformation>("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME)));
+	UA->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
+	UA->GetDrawInformation()->SetXSize(3.0f);
+	UA->GetDrawInformation()->SetYSize(1.5f);
 
-	UA.Init("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
+	/*UA.Init("UA.tga",flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, new ChangeStateAction(GAME_SCREEN::GAME));
 	UA.GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
 	UA.SetXSize(3.0f);
-	UA.SetYSize(1.5f);
+	UA.SetYSize(1.5f);*/
 
-	m_buttons.push_back(US.Clone());
-	m_buttons.push_back(UA.Clone());*/
+	m_buttons.push_back(US);
+	m_buttons.push_back(UA);
 }
 
 void Screen::InitBackground()
 {
-	/*Object bg;
-	Vertex Vertices[4] = {
+	std::vector<Vertex> Vertices = {
 			Vertex(Vector3f(-5.0f,	-5.0f,	0.0f),	Vector2f(0.0f, 0.0f)),
 			Vertex(Vector3f(-5.0f,	5.0f,	0.0f),	Vector2f(0.0f, 1.0f)),
 			Vertex(Vector3f(5.0f,	5.0f,	0.0f),	Vector2f(1.0f, 1.0f)),
 			Vertex(Vector3f(5.0f,	-5.0f,	0.0f),	Vector2f(1.0f, 0.0f))
 		};
 
-	bg.Init("bg.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST);
-	bg.GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
-	m_objects.push_back(bg.Clone());*/
+	simpleElement_ptr bg = std::make_shared<SimpleElement>();
+	bg->SetDrawInformation(std::make_shared<DrawInformation>("bg.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST));
+	bg->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
+	m_simpleObjects.push_back(bg);
 }
 
 void Screen::DrawObjects(double dt, double offset)
@@ -167,6 +175,11 @@ void Screen::DrawObjects(double dt, double offset)
 		if(button)
 			button->Draw(dt);
 	}
+}
+
+GAME_SCREEN Screen::GetType() const
+{
+	return m_type;
 }
 
 std::vector<simpleElement_ptr> Screen::GetSimpleObjects() const

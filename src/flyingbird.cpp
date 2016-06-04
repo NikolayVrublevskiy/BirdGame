@@ -79,7 +79,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 	std::vector<Object*> buttons;
 	const float size = 10.0f;
 
-	if(game->GetCurrentScreen() == GAME_SCREEN::GAME)
+	/*if(game->GetCurrentScreen() == GAME_SCREEN::GAME)
 	{
 	//	game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}
@@ -100,9 +100,9 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 			{
 				if(buttons[i]->GetAction())
 					buttons[i]->GetAction()->DoAction();
-			}*/
+			}
 		}
-	}
+	}*/
 }
 
 static void del_gl(Evas_Object *obj)

@@ -13,7 +13,6 @@ class ButtonAction
 {
 public:
 	virtual void 			DoAction() = 0;
-	virtual ButtonAction*	Clone() = 0;
 	virtual 				~ButtonAction(){};
 };
 

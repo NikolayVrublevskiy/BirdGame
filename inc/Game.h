@@ -14,6 +14,8 @@
 #include "Objects/ScoreObject.h"
 #include <map>
 
+using screen_map = std::map<GAME_SCREEN, std::shared_ptr<Screen>>;
+
 class Game : public ISingleton<Game>
 {
 
@@ -28,16 +30,14 @@ public:
 
 	void Draw(double dt);
 	void SetCurrentScreen(GAME_SCREEN _screen);
-	Screen* GetCurrentTODrawScreen();
-	GAME_SCREEN GetCurrentScreen() const;
+
+	//Screen* GetCurrentTODrawScreen();
+	//GAME_SCREEN GetCurrentScreen() const;
 
 private:
 
-	//PipeManager						m_pipeManager;
-	std::map<GAME_SCREEN, Screen *> m_screens;
-	GAME_SCREEN						m_currentScreen;
-	Screen*							m_screenToDraw;
-	//ScoreObject						m_scoreObject;
+	screen_map				m_screens;
+	std::shared_ptr<Screen>	m_currentScreen;
 };
 
 

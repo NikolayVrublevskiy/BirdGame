@@ -29,11 +29,6 @@ ChangeStateAction& ChangeStateAction::operator=(const ChangeStateAction& rhs)
 	return *this;
 }
 
-ButtonAction* ChangeStateAction::Clone()
-{
-	return new ChangeStateAction(*this);
-}
-
 void ChangeStateAction::DoAction()
 {
 	Game::GetInstance()->SetCurrentScreen(m_screen);

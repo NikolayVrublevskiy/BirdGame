@@ -22,13 +22,14 @@ using logical2DObject_ptr = std::shared_ptr<Logical2DObject>;
 class Screen
 {
 public:
-	Screen();
+	Screen(GAME_SCREEN _screen);
 	Screen(const Screen & rhs);
 	Screen& operator=(const Screen & rhs);
 	~Screen();
 
-	void Init(GAME_SCREEN _screen);
 	void DrawObjects(double dt, double offset = 0);
+
+	GAME_SCREEN GetType() const;
 
 	std::vector<simpleElement_ptr> 		GetSimpleObjects() const;
 	std::vector<logical2DObject_ptr>	GetButtons() const;
@@ -46,6 +47,7 @@ private:
 	std::vector<simpleElement_ptr>		m_simpleObjects; // simple static elements
 	std::vector<logical2DObject_ptr>	m_buttons;
 	std::shared_ptr<BirdObject>			m_birdObject;
+	GAME_SCREEN							m_type;
 };
 
 

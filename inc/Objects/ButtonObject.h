@@ -1,20 +1,30 @@
-/*#pragma once
+/*
+ * ButtonObject.h
+ *
+ *  Created on: Jun 4, 2016
+ *      Author: nikolay.vrublevskiy
+ */
 
-#include "Object.h"
-#include "ButtonActions/ButtonAction.h"
+#ifndef BUTTONOBJECT_H_
+#define BUTTONOBJECT_H_
 
-class ButtonObject : public Object
+#include "Logical2DObject.h"
+#include <vector>
+
+struct Vertex;
+
+class ButtonAction;
+
+class ButtonObject : public Logical2DObject
 {
 public:
 
-	ButtonObject();
+	ButtonObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action);
 	ButtonObject(const ButtonObject& rhs);
 	ButtonObject& operator=(const ButtonObject& rhs);
 	~ButtonObject();
 
-	void Init(const char* path, Vertex coords[4], const char *vs, const char *fs, unsigned int param, ButtonAction* _action);
-
-	void Draw(double dt);
+	void Draw(float dt);
 
 	ButtonObject* Clone();
 
@@ -22,7 +32,9 @@ public:
 
 private:
 
-	ButtonAction* m_action;
+	std::shared_ptr<ButtonAction> m_action;
 
 };
-*/
+
+
+#endif /* BUTTONOBJECT_H_ */

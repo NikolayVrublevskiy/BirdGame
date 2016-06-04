@@ -23,7 +23,7 @@ DrawInformation::DrawInformation(const char* _path, const std::vector<Vertex>& _
 
 	glGenBuffers(1, &m_idxVbo);
 	glBindBuffer(GL_ARRAY_BUFFER, m_idxVbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(m_verticies.data()), m_verticies.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(m_verticies[0]) * m_verticies.size(), m_verticies.data(), GL_STATIC_DRAW);
 
 	glGenBuffers(1, &m_idxIbo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_idxIbo);
