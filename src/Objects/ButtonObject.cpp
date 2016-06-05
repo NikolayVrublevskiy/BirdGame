@@ -39,16 +39,11 @@ ButtonObject& ButtonObject::operator=(const ButtonObject& rhs)
 	return *this;*/
 }
 
-ButtonObject* ButtonObject::Clone()
-{
-	return new ButtonObject(*this);
-}
 
-
-/*ButtonAction* ButtonObject::GetAction() const
+std::shared_ptr<ButtonAction> ButtonObject::GetAction() const
 {
 	return m_action;
-}*/
+}
 
 void ButtonObject::Draw(float dt)
 {

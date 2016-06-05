@@ -32,7 +32,7 @@ public:
 	void SetCurrentScreen(GAME_SCREEN _screen);
 
 	//Screen* GetCurrentTODrawScreen();
-	//GAME_SCREEN GetCurrentScreen() const;
+	std::shared_ptr<Screen> GetCurrentScreen() const;
 
 private:
 

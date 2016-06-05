@@ -63,12 +63,12 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 	}
 }
 
-/*GAME_SCREEN Game::GetCurrentScreen() const
+std::shared_ptr<Screen> Game::GetCurrentScreen() const
 {
 	return m_currentScreen;
 }
 
-Screen* Game::GetCurrentTODrawScreen()
+/*Screen* Game::GetCurrentTODrawScreen()
 {
 	return m_screenToDraw;
 }*/

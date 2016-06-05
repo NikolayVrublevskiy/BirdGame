@@ -18,6 +18,10 @@
 #include <Elementary_GL_Helpers.h>
 #include <efl_extension.h>
 #include "flyingbird.h"
+#include "Objects/Logical2DObject.h"
+#include "Objects/DrawInformation.h"
+#include "Objects/ButtonObject.h"
+#include "ButtonActions/ButtonAction.h"
 
 #include "Camera.h"
 #include "Game.h"
@@ -75,34 +79,33 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 	float py = ((float)ad->glview_h - ev->canvas.y) / (float)ad->glview_h;
 
 	Game *game = Game::GetInstance();
-	Screen* screen = NULL;
-	std::vector<Object*> buttons;
 	const float size = 10.0f;
+	auto screen = game->GetCurrentScreen();
 
-	/*if(game->GetCurrentScreen() == GAME_SCREEN::GAME)
+	if(screen->GetType() == GAME_SCREEN::GAME)
 	{
 	//	game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}
 	else
 	{
-		screen = game->GetCurrentTODrawScreen();
-	//	buttons = screen->GetButtons();
-	//	for(size_t i = 0; i < buttons.size(); i++)
+		auto buttons = screen->GetButtons();
+		for(size_t i = 0; i < buttons.size(); i++)
 		{
-	/*		float xPos = buttons[i]->GetMatrix().m[3][0];
-			float yPos = buttons[i]->GetMatrix().m[3][1];
-			float xSize = buttons[i]->GetXSize();
-			float ySize = buttons[i]->GetYSize();
+			auto di = buttons[i]->GetDrawInformation();
+			float xPos = di->GetMatrix().m[3][0];
+			float yPos = di->GetMatrix().m[3][1];
+			float xSize = di->GetXSize();
+			float ySize = di->GetYSize();
 
 			if(px >= (xPos - xSize) / size && px <= (xPos + xSize) / size &&
 			   py >= (yPos - ySize) / size && py <= (yPos + ySize) / size
 				)
 			{
-				if(buttons[i]->GetAction())
-					buttons[i]->GetAction()->DoAction();
+				if(static_cast<ButtonObject*>(buttons[i].get())->GetAction())
+					static_cast<ButtonObject*>(buttons[i].get())->GetAction()->DoAction();
 			}
 		}
-	}*/
+	}
 }
 
 static void del_gl(Evas_Object *obj)

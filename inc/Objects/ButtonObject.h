@@ -26,9 +26,7 @@ public:
 
 	void Draw(float dt);
 
-	ButtonObject* Clone();
-
-	ButtonAction* GetAction() const;
+	std::shared_ptr<ButtonAction> GetAction() const;
 
 private:
 
