@@ -18,14 +18,13 @@ class BirdObject : public Logical2DObject
 {
 public:
 	BirdObject(const char* _path1, const char* _path2, const char* _path3, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
-	BirdObject(const BirdObject &);
 
 	void InitPoints();
 
 	void Draw(float dt);
 
-	bool CheckInteractWithTube(PipeObject& ob);
-	bool ChechScore(const PipeObject& ob);
+	bool CheckInteractWithTube(std::shared_ptr<PipeObject> pipe);
+	bool CheckScore(std::shared_ptr<PipeObject> pipe);
 
 	void SetShouldUp(bool value);
 
@@ -38,8 +37,8 @@ public:
 
 private:
 
-	bool CheckTopPoints(PipeObject& ob);
-	bool CheckBotPoints(PipeObject& ob);
+	bool CheckTopPoints(std::shared_ptr<PipeObject> pipe);
+	bool CheckBotPoints(std::shared_ptr<PipeObject> pipe);
 
 private:
 	unsigned int texture_2;

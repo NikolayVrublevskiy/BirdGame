@@ -4,36 +4,38 @@
  *  Created on: Jan 31, 2016
  *      Author: exelim
  */
-/*
+
 #ifndef PIPE_OBJECT_H_
 #define PIPE_OBJECT_H_
 
+#include "Logical2DObject.h"
 #include "Object.h"
+#include <vector>
 
-class PipeObject : public Object
+struct Vertex;
+
+class PipeObject : public Logical2DObject
 {
 public:
-	enum TYPE { NONE, TOP, BOTTOM };
+	enum class PIPE_TYPE { NONE, TOP, BOTTOM };
 
-	PipeObject();
-
-	void Init(const char* path1, Vertex coords[4], const char *vs, const char *fs, TYPE type);
+	PipeObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, PIPE_TYPE _type);
 
 	bool ShouldBeDeleted();
 
 	bool IsScored() const;
 
-	void SetIsScored(bool value);
+	void SetIsScored(bool _value);
 
-	virtual void Draw(double dt);
+	virtual void Draw(float _dt);
 
-	PipeObject::TYPE GetType() const;
+	PipeObject::PIPE_TYPE GetType() const;
 
 	~PipeObject();
 
 private:
-	TYPE m_type;
-	bool m_isScored;
+	PIPE_TYPE	m_type;
+	bool		m_isScored;
 };
 
 

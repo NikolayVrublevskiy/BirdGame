@@ -13,6 +13,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "math_3d.h"
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 Vector3f Vector3f::Cross(const Vector3f& v) const
 {
 	const float _x = y * v.z - z * v.y;
@@ -21,6 +23,8 @@ Vector3f Vector3f::Cross(const Vector3f& v) const
 
 	return Vector3f(_x, _y, _z);
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Vector3f& Vector3f::Normalize()
 {
@@ -32,6 +36,8 @@ Vector3f& Vector3f::Normalize()
 
 	return *this;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Vector3f::Rotate(float Angle, const Vector3f& Axe)
 {
@@ -53,6 +59,7 @@ void Vector3f::Rotate(float Angle, const Vector3f& Axe)
 	z = W.z;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Matrix4f::InitScaleTransform(float ScaleX, float ScaleY, float ScaleZ)
 {
@@ -61,6 +68,8 @@ void Matrix4f::InitScaleTransform(float ScaleX, float ScaleY, float ScaleZ)
 	m[2][0] = 0.0f;   m[2][1] = 0.0f;   m[2][2] = ScaleZ; m[2][3] = 0.0f;
 	m[3][0] = 0.0f;   m[3][1] = 0.0f;   m[3][2] = 0.0f;   m[3][3] = 1.0f;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Matrix4f::InitRotateTransform(float RotateX, float RotateY, float RotateZ)
 {
@@ -88,6 +97,8 @@ void Matrix4f::InitRotateTransform(float RotateX, float RotateY, float RotateZ)
 	*this = rz * ry * rx;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Matrix4f::InitTranslationTransform(float x, float y, float z)
 {
 	m[0][0] = 1.0f; m[0][1] = 0.0f; m[0][2] = 0.0f; m[0][3] = x;
@@ -96,6 +107,7 @@ void Matrix4f::InitTranslationTransform(float x, float y, float z)
 	m[3][0] = 0.0f; m[3][1] = 0.0f; m[3][2] = 0.0f; m[3][3] = 1.0f;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Matrix4f::InitCameraTransform(const Vector3f& Target, const Vector3f& Up)
 {
@@ -112,6 +124,8 @@ void Matrix4f::InitCameraTransform(const Vector3f& Target, const Vector3f& Up)
 	m[3][0] = 0.0f;  m[3][1] = 0.0f;  m[3][2] = 0.0f;  m[3][3] = 1.0f;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Matrix4f::InitPersProjTransform(float FOV, float Width, float Height, float zNear, float zFar)
 {
 	const float ar = Width / Height;
@@ -124,6 +138,7 @@ void Matrix4f::InitPersProjTransform(float FOV, float Width, float Height, float
 	m[3][0] = 0.0f;                   m[3][1] = 0.0f;            m[3][2] = 1.0f;          m[3][3] = 0.0;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Quaternion::Quaternion(float _x, float _y, float _z, float _w)
 {
@@ -132,6 +147,8 @@ Quaternion::Quaternion(float _x, float _y, float _z, float _w)
 	z = _z;
 	w = _w;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void Quaternion::Normalize()
 {
@@ -143,12 +160,16 @@ void Quaternion::Normalize()
 	w /= Length;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 Quaternion Quaternion::Conjugate()
 {
 	Quaternion ret(-x, -y, -z, w);
 	return ret;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Quaternion operator*(const Quaternion& l, const Quaternion& r)
 {
@@ -161,6 +182,8 @@ Quaternion operator*(const Quaternion& l, const Quaternion& r)
 
 	return ret;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Quaternion operator*(const Quaternion& q, const Vector3f& v)
 {

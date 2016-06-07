@@ -21,6 +21,7 @@
 #include "Objects/Logical2DObject.h"
 #include "Objects/DrawInformation.h"
 #include "Objects/ButtonObject.h"
+#include "Objects/BirdObject.h"
 #include "ButtonActions/ButtonAction.h"
 
 #include "Camera.h"
@@ -66,7 +67,7 @@ static void draw_gl(Evas_Object *obj)
 static void init_gl(Evas_Object *obj)
 {
 	Game::GetInstance()->Init();
-	Game::GetInstance()->SetCurrentScreen(GAME_SCREEN::CHOOSE_LANGUAGE);
+	//Game::GetInstance()->SetCurrentScreen(GAME_SCREEN::CHOOSE_LANGUAGE);
 }
 
 static void
@@ -84,7 +85,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 
 	if(screen->GetType() == GAME_SCREEN::GAME)
 	{
-	//	game->GetCurrentTODrawScreen()->GetBirdObject()->SetRotationAngle(0.0f);
+		game->GetCurrentScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}
 	else
 	{

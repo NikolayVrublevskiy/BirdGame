@@ -23,8 +23,6 @@ class Screen
 {
 public:
 	Screen(GAME_SCREEN _screen);
-	Screen(const Screen & rhs);
-	Screen& operator=(const Screen & rhs);
 	~Screen();
 
 	void DrawObjects(double dt, double offset = 0);
@@ -33,12 +31,14 @@ public:
 
 	std::vector<simpleElement_ptr> 		GetSimpleObjects() const;
 	std::vector<logical2DObject_ptr>	GetButtons() const;
+	std::shared_ptr<BirdObject>			GetBirdObject();
 
 private:
 
 	void InitLanguageScreen();
 	void InitGameScreen();
 	void InitScoreScreen();
+	void InitMainMenuScreen();
 
 	void InitBackground();
 

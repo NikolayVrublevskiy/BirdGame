@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ApVR0vz7m7tkCOyNxRjMV4KXvXUAD+bdb/vLpz4jyec=</DigestValue>
+<DigestValue>vXqMKnpYMe8CzZ5VPvKYyDuTrOGtl+m32BXC28BYiUg=</DigestValue>
 </Reference>
 <Reference URI="res%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -54,6 +54,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>WMab8zOo+Mu8Te099MoKafdkC1JweYho2+oL2zD26Do=</DigestValue>
 </Reference>
+<Reference URI="res%2Fabout.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ChDFrFcp49ig5/D48jjGilOAx1yd9gHsild039D3Hhc=</DigestValue>
+</Reference>
 <Reference URI="res%2Fbg.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>45jwZ0HBeVVKpp2C+N7kS56j27P5EjCz5bHdFVLbmHU=</DigestValue>
@@ -65,6 +69,18 @@
 <Reference URI="res%2Fbird.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>LA1ppHhLk8JZl9BpxPs2eegA3SbAJ5cPn3xHAbwe7pc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>LA1ppHhLk8JZl9BpxPs2eegA3SbAJ5cPn3xHAbwe7pc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird_2.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>0AUgqIkuyxl2EXet6R95I2Jh/zVcuv4/y5OTFrIruqM=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird_3.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>r66cX120cu5o4eonQBw2o6QS9Pwm83tQzaBVoCOENHM=</DigestValue>
 </Reference>
 <Reference URI="res%2Fbird_2.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -211,11 +227,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-INrvfaxXq1BtzuQl8g2v/1xdpysBqt/xsXq4Kjy3jtwCH1KafM+gssuwZ5QWVUNCyu2ZkHJIiq0o
-fXIhLP9G49WBMYyRc0wnkEFhDMQW70kdn0TOrU/Rqs10v3LTo3DeBeXYtjsXTHu8aqi/oLejuT35
-1n1q0A3CVZp2SGWF0z0xfrZ2/3fCDELpKGIr6pr5dMBsqOskJ8UHTvQilweUKLzS1Kbf1yjnYuq0
-G3Nm/fVJf38LFGHQYjGVLZ5FGpIN3VlUW5o7ipuJGuK7jnyxss+HjzpfatNZtJLj+be7eFzI+vcA
-8ops7OhwfkZenfc/nIBY851B8kUrIykkJ2ZFcA==
+cWApG2l6IyqwO/uPtwhSefQjtTGe8JSO/uUn/hcbk3NOL6oX8fF8/1745gTixyO2/MS1UBaU9Jh6
+TExaoy4yyl0AjoIIfbeTFeotu+6qQigwhtdLkLarl6v/BSs6DoYCrkZqTR94RCszXPmM17m7j8B4
+kgVrqSFw9fATfw4R6jwD6Z72norDoM9KD7QkWPidwmbZ8r9/VB2aI1oP4bGDRyozztgMZFYg/MtQ
+Fs1/WeGGY0RnJmE6RbTqr/uWxk5Ql5ZxtnGp/pqGHQ0N5/J/lbt5oKA9f5WFIi5J7LRdhBn8/btF
+UPchOZOBXB6zxQDSpkGm2ZUqU9GtZk/WVHbguQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

@@ -13,6 +13,8 @@
 
 extern Evas_GL_API * __evas_gl_glapi;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Simple2DObject::Draw(float dt)
 {
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();

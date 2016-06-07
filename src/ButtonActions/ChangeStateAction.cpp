@@ -12,23 +12,6 @@ ChangeStateAction::ChangeStateAction(GAME_SCREEN _screen)
 : m_screen(_screen)
 {}
 
-ChangeStateAction::ChangeStateAction(const ChangeStateAction& rhs)
-:ButtonAction(rhs),
- m_screen(rhs.m_screen)
-{}
-
-ChangeStateAction& ChangeStateAction::operator=(const ChangeStateAction& rhs)
-{
-	if(this == &rhs)
-	{
-		return *this;
-	}
-
-	m_screen = rhs.m_screen;
-
-	return *this;
-}
-
 void ChangeStateAction::DoAction()
 {
 	Game::GetInstance()->SetCurrentScreen(m_screen);

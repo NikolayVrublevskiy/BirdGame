@@ -10,7 +10,9 @@
 
 template <typename T, unsigned int N> unsigned int GetArraySize(T(&)[N]) { return N; }
 
-enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN};
+enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN, MAIN_MENU};
+
+enum class LANGUAGE {NONE, UKRAINE, ENGLISH};
 
 const int verticiesAmount = 4;
 

@@ -17,13 +17,11 @@ class ChangeStateAction : public ButtonAction
 public:
 
 	ChangeStateAction(GAME_SCREEN _screen);
-	ChangeStateAction(const ChangeStateAction& rhs);
-	ChangeStateAction& operator=(const ChangeStateAction& rhs);
 
 	~ChangeStateAction();
 
 
-	virtual void			DoAction()	override;
+	virtual void DoAction();
 
 private:
 	GAME_SCREEN m_screen;

@@ -33,7 +33,7 @@ BirdObject::BirdObject(const char* _path1, const char* _path2, const char* _path
 
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
 	di->AddTexture(_path2, texture_2, GL_NEAREST);
-	di->AddTexture(_path3, texture_2, GL_NEAREST);
+	di->AddTexture(_path3, texture_3, GL_NEAREST);
 
 	m_shouldUpBird = false;
 	m_UpTime = 0.0f;
@@ -44,18 +44,7 @@ BirdObject::BirdObject(const char* _path1, const char* _path2, const char* _path
 	InitPoints();
 }
 
-BirdObject::BirdObject(const BirdObject & rhs)
-: texture_2(rhs.texture_2),
-  texture_3(rhs.texture_3),
-  m_speed(rhs.m_speed),
-  m_shouldUpBird(rhs.m_shouldUpBird),
-  m_UpTime(rhs.m_UpTime),
-  m_isDead(rhs.m_isDead),
-  m_rotationAngle(rhs.m_rotationAngle),
-  m_currentTexture(rhs.m_currentTexture),
-  m_position(rhs.m_position),
-  m_points(rhs.m_points)
-{}
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void BirdObject::Draw(float dt)
 {
@@ -132,83 +121,128 @@ void BirdObject::Draw(float dt)
 	glUseProgram(0);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void BirdObject::SetRotationAngle(float value)
 {
 	m_UpTime = 0.0;
 	m_shouldUpBird = true;
 }
 
-bool BirdObject::CheckInteractWithTube(PipeObject& ob)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::CheckInteractWithTube(std::shared_ptr<PipeObject> pipe)
 {
-	/*switch (ob.GetType())
+	switch (pipe->GetType())
 	{
-	case PipeObject::TOP:
-		return CheckTopPoints(ob);
+	case PipeObject::PIPE_TYPE::TOP:
+		return CheckTopPoints(pipe);
 		break;
-	case PipeObject::BOTTOM:
-		return CheckBotPoints(ob);
+	case PipeObject::PIPE_TYPE::BOTTOM:
+		return CheckBotPoints(pipe);
 		break;
 	default:
 		break;
-	}*/
+	}
 
 	return false;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void BirdObject::InitPoints()
 {
-	m_points.push_back(Vector2f(0.35, 0.105f));
-	//m_points.push_back(Vector2f(0.488f, -0.1875));
+	std::vector<Vector2f> points;
+	points.push_back(Vector2f(226, 115));
+	points.push_back(Vector2f(219, 77));
+	points.push_back(Vector2f(182, 4));
+	points.push_back(Vector2f(90, 5));
+	points.push_back(Vector2f(23, 39));
+	points.push_back(Vector2f(25, 100));
+	points.push_back(Vector2f(72, 126));
+	points.push_back(Vector2f(146, 125));
+
+	const float weight = 6.0f;
+	const float height = 3.0f;
+	const float weight_px = 256.0f;
+	const float height_px = 128.0f;
+
+	for(const auto point : points)
+	{
+		Vector2f tmp;
+		//if(point.x >= weight_px / 2.0f)
+		tmp.x = -(((weight_px / 2.0f) - (weight_px - point.x)) / (weight_px / 2.0f)) / 2.0f;
+		tmp.y = -(((height_px / 2.0f) - (height_px - point.y)) / (height_px / 2.0f)) / 2.0f;
+		m_points.push_back(tmp);
+	}
 }
 
-bool BirdObject::CheckTopPoints(PipeObject& ob)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::CheckTopPoints(std::shared_ptr<PipeObject> pipe)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
-		/*if(	(matrix.m[3][1] + m_points[i].y) >= (ob.GetMatrix().m[3][1] - 3.0f)
-		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
+		if(	(GetDrawInformation()->GetMatrix().m[3][1] + m_points[i].y) >= (pipe->GetDrawInformation()->GetMatrix().m[3][1] - 3.0f)		&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) >= (pipe->GetDrawInformation()->GetMatrix().m[3][0] - 0.45f)	&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) <= (pipe->GetDrawInformation()->GetMatrix().m[3][0] + 0.45f)
 		)
-			return true;*/
+		{
+			return true;
+		}
 	}
 	return false;
 }
 
-bool BirdObject::CheckBotPoints(PipeObject& ob)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::CheckBotPoints(std::shared_ptr<PipeObject> pipe)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
-		/*if(	(matrix.m[3][1] + m_points[i].y) <= (ob.GetMatrix().m[3][1] + 3.0f)
-		&&	(matrix.m[3][0] + m_points[i].x) >= (ob.GetMatrix().m[3][0] - 0.45f)
+		if(	(GetDrawInformation()->GetMatrix().m[3][1] + m_points[i].y) <= (pipe->GetDrawInformation()->GetMatrix().m[3][1] + 3.0f)		&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) >= (pipe->GetDrawInformation()->GetMatrix().m[3][0] - 0.45f)	&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) <= (pipe->GetDrawInformation()->GetMatrix().m[3][0] + 0.45f)
 		)
-			return true;*/
+			return true;
 	}
 	return false;
 }
 
-bool BirdObject::ChechScore(const PipeObject& ob)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::CheckScore(std::shared_ptr<PipeObject> pipe)
 {
-	/*if (matrix.m[3][0] >= ob.GetMatrix().m[3][0])
+	if (GetDrawInformation()->GetMatrix().m[3][0] >= pipe->GetDrawInformation()->GetMatrix().m[3][0])
 	{
 		return true;
-	}*/
+	}
 
-return false;
+	return false;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 void BirdObject::SetIsDead(bool value)
 {
 	m_isDead = value;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 bool BirdObject::GetIsDead() const
 {
 	return m_isDead;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void BirdObject::SetShouldUp(bool value)
 {
 	m_shouldUpBird = value;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 BirdObject::~BirdObject()
 {}

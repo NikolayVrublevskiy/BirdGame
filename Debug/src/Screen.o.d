@@ -212,4 +212,9 @@ src/Screen.o: ../src/Screen.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Simple2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/ButtonObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChangeStateAction.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ButtonAction.h
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ButtonAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ExitGameAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChooseLanguageAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ReinitLevelAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Game.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h

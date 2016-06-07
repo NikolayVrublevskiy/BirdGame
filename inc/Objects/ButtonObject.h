@@ -20,8 +20,6 @@ class ButtonObject : public Logical2DObject
 public:
 
 	ButtonObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action);
-	ButtonObject(const ButtonObject& rhs);
-	ButtonObject& operator=(const ButtonObject& rhs);
 	~ButtonObject();
 
 	void Draw(float dt);

@@ -1,25 +1,31 @@
-/*#pragma once
-#include "Object.h"
+#ifndef SCORE_OBJECT_H_
+#define SCORE_OBJECT_H_
+
+#include "Logical2DObject.h"
 #include <vector>
 
-class ScoreObject : public Object
+class SimpleElement;
+struct Vector3f;
+
+class ScoreObject : public Logical2DObject
 {
 public:
 
 	ScoreObject();
 	~ScoreObject();
 
-	void Init();
-
-	void Draw(double dt, double offset = 0);
+	void Draw(float dt);
 
 	void IncreaseScore();
 
-	void TransateDigits();
+	void TranslateDigits(Vector3f _pos);
+
+	void ResetScore();
 
 private:
-	std::vector<Object> m_digits;
+	std::vector<SimpleElement> m_digits;
 
 	int m_value;
 };
-*/
+
+#endif // SCORE_OBJECT_H_

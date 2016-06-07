@@ -4,11 +4,11 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>O9AnomlbGQlPmHZeRuprNas9BGvSHyq+iv8zCxmz5MM=</DigestValue>
+<DigestValue>7LcXekPHDKft9wCUrv0paa7fwckmqRU6P/LNAQ0mpwg=</DigestValue>
 </Reference>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ApVR0vz7m7tkCOyNxRjMV4KXvXUAD+bdb/vLpz4jyec=</DigestValue>
+<DigestValue>vXqMKnpYMe8CzZ5VPvKYyDuTrOGtl+m32BXC28BYiUg=</DigestValue>
 </Reference>
 <Reference URI="res%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -58,6 +58,10 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>WMab8zOo+Mu8Te099MoKafdkC1JweYho2+oL2zD26Do=</DigestValue>
 </Reference>
+<Reference URI="res%2Fabout.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>ChDFrFcp49ig5/D48jjGilOAx1yd9gHsild039D3Hhc=</DigestValue>
+</Reference>
 <Reference URI="res%2Fbg.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>45jwZ0HBeVVKpp2C+N7kS56j27P5EjCz5bHdFVLbmHU=</DigestValue>
@@ -69,6 +73,18 @@
 <Reference URI="res%2Fbird.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>LA1ppHhLk8JZl9BpxPs2eegA3SbAJ5cPn3xHAbwe7pc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>LA1ppHhLk8JZl9BpxPs2eegA3SbAJ5cPn3xHAbwe7pc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird_2.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>0AUgqIkuyxl2EXet6R95I2Jh/zVcuv4/y5OTFrIruqM=</DigestValue>
+</Reference>
+<Reference URI="res%2Fbird%2Fbird_3.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>r66cX120cu5o4eonQBw2o6QS9Pwm83tQzaBVoCOENHM=</DigestValue>
 </Reference>
 <Reference URI="res%2Fbird_2.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -215,11 +231,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-hOcAt70b14me00eAO0xKnphQnHWsrCORVtN9E90o3h24EdlPd1kouRQ4QJ6ar9ACISZx0XW9yenR
-6/SSpDrmbXw6gMpVAEVMnh5pmZRpdsOqA7gdEYZrskjvi/MVhi6mTtTH4WtCgPmAZredWf0I5pxU
-0dZfdM1CRTv3zLLxf9LwiZtBKywRsQ68Q1Ns46X15mRIV7w+83xAQ4R4sF+gKIF0zxU1u9KW2H7y
-iggpDI8kbPKyVAM6Jq4LAhsQdIzgkGv/TsZatk21uw6CJxZjbkUUG5dgH42du48DSHGGZOEz+6+s
-tzzJPo0CrcMxwTeYk/n8xUuXtR4AjFYlEIEK5g==
+Zgo8i9D60DLJHWIcQLRmnCn8I1dQQDGeThlKQ2wZgmdrKJ9NbqiKu9ukJ1y4pzSt/KuW9onfMOqH
+52O7xleXK+baxjsK4PSSbDbLOhtxnkkQqdWQhtO+q5rnDFLQiKC/6tX9KgTjYAueM0eJi/cvzPG1
+OAS1E/O1a6tzecsBsXO6kk+Lz7bSDd+OMTGGaTNW4P/Tqq4+leUnvUoS1XCJsTJRaTa40MTYiy6J
+37Onbav9P9lKiNlIjjh7R8ZeK/oxxRr3EY0vUCdrA6ydiqYbtOICX61HWEJqfikMwh/wmj/hj0Ri
+ANq5hDMGYwTdyF25bfvVnO6mE4OSd31PfuW9Bw==
 </SignatureValue>
 <KeyInfo>
 <X509Data>
