@@ -8,6 +8,7 @@
 #include "Objects/BirdObject.h"
 #include "Camera.h"
 #include "Objects/PipeObject.h"
+#include "Objects/CoinObject.h"
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
 #include "Objects/DrawInformation.h"
@@ -145,6 +146,23 @@ bool BirdObject::CheckInteractWithTube(std::shared_ptr<PipeObject> pipe)
 		break;
 	}
 
+	return false;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::CheckInteractWithCoin(std::shared_ptr<CoinObject> coin)
+{
+	for(size_t i = 0; i < m_points.size(); i++)
+	{
+		if(	//(GetDrawInformation()->GetMatrix().m[3][1] + m_points[i].y) >= (coin->GetDrawInformation()->GetMatrix().m[3][1] - 0.5f)		&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) >= (coin->GetDrawInformation()->GetMatrix().m[3][0] - 0.25f)	&&
+			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) <= (coin->GetDrawInformation()->GetMatrix().m[3][0] + 0.25f)
+		)
+		{
+			return true;
+		}
+	}
 	return false;
 }
 

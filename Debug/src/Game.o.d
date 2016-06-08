@@ -8,4 +8,7 @@ src/Game.o: ../src/Game.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Drawable2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\math_3d.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/ScoreObject.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/CoinsManager.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/SimpleElement.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Simple2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\PipeManager.h

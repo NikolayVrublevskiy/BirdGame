@@ -7,4 +7,7 @@ src/PipeManager.o: ../src/PipeManager.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Object.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/BirdObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/ScoreObject.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/DrawInformation.h
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/DrawInformation.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/CoinObject.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/SimpleElement.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Simple2DObject.h

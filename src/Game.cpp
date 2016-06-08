@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "Objects/BirdObject.h"
 #include "Objects/ScoreObject.h"
+#include "Objects/CoinsManager.h"
 #include "PipeManager.h"
 
 static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN, GAME_SCREEN::MAIN_MENU};
@@ -28,14 +29,8 @@ void Game::Init()
 	}
 
 	m_pipeManager = std::make_shared<PipeManager>();
-
-	for(int i = 0; i < 5; ++i)
-	{
-		m_pipeManager->AddPipe(true);
-		m_pipeManager->AddPipe(false);
-	}
-
 	m_scoreObject = std::make_shared<ScoreObject>();
+	m_coinsManager = std::make_shared<CoinsManager>();
 
 	m_language = LANGUAGE::NONE;
 	m_currentScreen = m_screens[GAME_SCREEN::CHOOSE_LANGUAGE];
@@ -57,8 +52,11 @@ void Game::Draw(double dt)
 		}
 
 		m_pipeManager->CheckTubes(m_currentScreen->GetBirdObject(), m_scoreObject);
-		m_pipeManager->DrawPipes(dt);
+		if(m_pipeManager->CheckCoins(m_currentScreen->GetBirdObject()))
+			m_coinsManager->IncreaseScore();
+		m_pipeManager->Draw(dt);
 		m_scoreObject->Draw(dt);
+		m_coinsManager->DrawScore(dt);
 		break;
 	case GAME_SCREEN::SCORE_SCREEN:
 		m_scoreObject->Draw(dt);
@@ -123,7 +121,7 @@ const char* Game::GetLanguage() const
 
 void Game::ReinitLevel()
 {
-	m_pipeManager->DeletePipes();
+	m_pipeManager->Clean();
 
 	for(int i = 0; i < 5; ++i)
 	{

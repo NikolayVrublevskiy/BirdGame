@@ -13,6 +13,7 @@
 #include <vector>
 
 class PipeObject;
+class CoinObject;
 
 class BirdObject : public Logical2DObject
 {
@@ -24,6 +25,7 @@ public:
 	void Draw(float dt);
 
 	bool CheckInteractWithTube(std::shared_ptr<PipeObject> pipe);
+	bool CheckInteractWithCoin(std::shared_ptr<CoinObject> coin);
 	bool CheckScore(std::shared_ptr<PipeObject> pipe);
 
 	void SetShouldUp(bool value);

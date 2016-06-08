@@ -4,11 +4,11 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="author-signature.xml">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>7LcXekPHDKft9wCUrv0paa7fwckmqRU6P/LNAQ0mpwg=</DigestValue>
+<DigestValue>G3i5gktBCc06e2aQTZj3G8jGg/2k8gRAfwC8euSN1ak=</DigestValue>
 </Reference>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vXqMKnpYMe8CzZ5VPvKYyDuTrOGtl+m32BXC28BYiUg=</DigestValue>
+<DigestValue>esvgxMlPXU4l2aRhkacQalDTqwa/UvH+13AoXkTnufg=</DigestValue>
 </Reference>
 <Reference URI="res%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -26,13 +26,9 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>6WAAoGqLMIIwYWlkUnpXQZ46tmaI8F73jKp6Fi1hHbs=</DigestValue>
 </Reference>
-<Reference URI="res%2FHolstein.DDS">
+<Reference URI="res%2FMobile%20-%20Flappy%20Bird%20-%20Version%2012%20Sprites.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>K50F4PoxH96dI1rg1sSfGd6WRRBONUpSvq8LntO/Tbg=</DigestValue>
-</Reference>
-<Reference URI="res%2FHolstein.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>K50F4PoxH96dI1rg1sSfGd6WRRBONUpSvq8LntO/Tbg=</DigestValue>
+<DigestValue>vntrB3bKK83DceMQqL4sjGY5kCPQlGAm0651scc2Bic=</DigestValue>
 </Reference>
 <Reference URI="res%2FPipeShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -102,6 +98,14 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>bjnD+Ci34lSNv2eNmCdwpRZt3pCwdLkhgLdDBjUCnbs=</DigestValue>
 </Reference>
+<Reference URI="res%2Fcoin_1.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>DoGZ8aemRZLjOcROWqZyafiBPAOg+uyrG6HxRabidTc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fcoin_2.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>0GX5w8RlY4oAEB24UtWaZUG4uDY9G1EBcGlCOQckoT4=</DigestValue>
+</Reference>
 <Reference URI="res%2FdigitShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>VaEmKAAQRvcVo7gW97nA2pHpdnVKjO+75qNHlSGTZFo=</DigestValue>
@@ -170,10 +174,6 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Wq+ZRbU6i7Z+RCvJE8f8ASHOlK/0Kfci3k3slhVPbnA=</DigestValue>
 </Reference>
-<Reference URI="res%2Fglviewshader6.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>YYsHj0ACG7cljwvhMHpsV1vG8KnglOVts3xiAXqrc2s=</DigestValue>
-</Reference>
 <Reference URI="res%2Flanguage_UA.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Ao7DoKBT3XXDiHxeIcQhl7amckq8k7S9aCDnx7m8JzQ=</DigestValue>
@@ -231,11 +231,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-Zgo8i9D60DLJHWIcQLRmnCn8I1dQQDGeThlKQ2wZgmdrKJ9NbqiKu9ukJ1y4pzSt/KuW9onfMOqH
-52O7xleXK+baxjsK4PSSbDbLOhtxnkkQqdWQhtO+q5rnDFLQiKC/6tX9KgTjYAueM0eJi/cvzPG1
-OAS1E/O1a6tzecsBsXO6kk+Lz7bSDd+OMTGGaTNW4P/Tqq4+leUnvUoS1XCJsTJRaTa40MTYiy6J
-37Onbav9P9lKiNlIjjh7R8ZeK/oxxRr3EY0vUCdrA6ydiqYbtOICX61HWEJqfikMwh/wmj/hj0Ri
-ANq5hDMGYwTdyF25bfvVnO6mE4OSd31PfuW9Bw==
+lG77n1qIhrHguibkwM7zI/E9n8+dip6FZ2qOSK7NG8SVd+Wj62U9vMo2Mpd8DZ6uk7zJOE+6ljfV
+3fykdUwiDLug9JxlACspysMVnRZWeG3m0gyWqeqyOsRFoXpI958xmESWpCAKTS8SexHRjAuj82x1
+UWntn1JAGWqB+KCTvzv1V9eDksdZrtl+W0gN2aqtuGa26hhYDt9ZIQMHoSTimFxsNsn6+nN7YX2g
+v0k2hWH9Ox315jDksLe36wCLHC/w8lJVEiOgzPgnNBG7UuDYe1zXLF648SfMFJjIKc9/ys5/kJjy
+3njzjNIzmMTJ7BB/LNMG8ttQWEQyJoxJRGO79Q==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

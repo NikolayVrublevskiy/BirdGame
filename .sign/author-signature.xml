@@ -4,7 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vXqMKnpYMe8CzZ5VPvKYyDuTrOGtl+m32BXC28BYiUg=</DigestValue>
+<DigestValue>esvgxMlPXU4l2aRhkacQalDTqwa/UvH+13AoXkTnufg=</DigestValue>
 </Reference>
 <Reference URI="res%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -22,13 +22,9 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>6WAAoGqLMIIwYWlkUnpXQZ46tmaI8F73jKp6Fi1hHbs=</DigestValue>
 </Reference>
-<Reference URI="res%2FHolstein.DDS">
+<Reference URI="res%2FMobile%20-%20Flappy%20Bird%20-%20Version%2012%20Sprites.png">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>K50F4PoxH96dI1rg1sSfGd6WRRBONUpSvq8LntO/Tbg=</DigestValue>
-</Reference>
-<Reference URI="res%2FHolstein.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>K50F4PoxH96dI1rg1sSfGd6WRRBONUpSvq8LntO/Tbg=</DigestValue>
+<DigestValue>vntrB3bKK83DceMQqL4sjGY5kCPQlGAm0651scc2Bic=</DigestValue>
 </Reference>
 <Reference URI="res%2FPipeShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -98,6 +94,14 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>bjnD+Ci34lSNv2eNmCdwpRZt3pCwdLkhgLdDBjUCnbs=</DigestValue>
 </Reference>
+<Reference URI="res%2Fcoin_1.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>DoGZ8aemRZLjOcROWqZyafiBPAOg+uyrG6HxRabidTc=</DigestValue>
+</Reference>
+<Reference URI="res%2Fcoin_2.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>0GX5w8RlY4oAEB24UtWaZUG4uDY9G1EBcGlCOQckoT4=</DigestValue>
+</Reference>
 <Reference URI="res%2FdigitShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>VaEmKAAQRvcVo7gW97nA2pHpdnVKjO+75qNHlSGTZFo=</DigestValue>
@@ -166,10 +170,6 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Wq+ZRbU6i7Z+RCvJE8f8ASHOlK/0Kfci3k3slhVPbnA=</DigestValue>
 </Reference>
-<Reference URI="res%2Fglviewshader6.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>YYsHj0ACG7cljwvhMHpsV1vG8KnglOVts3xiAXqrc2s=</DigestValue>
-</Reference>
 <Reference URI="res%2Flanguage_UA.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>Ao7DoKBT3XXDiHxeIcQhl7amckq8k7S9aCDnx7m8JzQ=</DigestValue>
@@ -227,11 +227,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-cWApG2l6IyqwO/uPtwhSefQjtTGe8JSO/uUn/hcbk3NOL6oX8fF8/1745gTixyO2/MS1UBaU9Jh6
-TExaoy4yyl0AjoIIfbeTFeotu+6qQigwhtdLkLarl6v/BSs6DoYCrkZqTR94RCszXPmM17m7j8B4
-kgVrqSFw9fATfw4R6jwD6Z72norDoM9KD7QkWPidwmbZ8r9/VB2aI1oP4bGDRyozztgMZFYg/MtQ
-Fs1/WeGGY0RnJmE6RbTqr/uWxk5Ql5ZxtnGp/pqGHQ0N5/J/lbt5oKA9f5WFIi5J7LRdhBn8/btF
-UPchOZOBXB6zxQDSpkGm2ZUqU9GtZk/WVHbguQ==
+HPSfE1Y0WxY8Fo9tRRhkKf1F7tiXsEDqFZUS7ZyEDkyHyaAx0QL6gzN+W4bSjw95zNOupcuoTyG4
+vAlw/xk55TkzLWjnB0NrvqzuzEr3Ts2Nu3p17zULISY5O93VDWeVtsnG+yyNKk3Tv2YesGy0oiB4
+OOoBHJroie/LdQZbsHTgND7Rm5E5fHZMJNvPr4e0jAm5jG1w6hd3WACwc50olhFUX4Z61MgqsONq
+PcBMXRgMv4kM5rRtXfpnThoRxjmg9509W1NjXN5xblyUR1JRk7ORIfHC/NKTnp/5Mo6o4NxR8KXm
+xk3jdtzkJrHGFrt9a2+qQL3grpD8TorwTyGL9Q==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

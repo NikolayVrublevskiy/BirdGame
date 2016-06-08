@@ -7,7 +7,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 ScoreObject::ScoreObject()
-: m_value(9)
+: m_value(0)
 {
 	std::vector<Vertex> Verticies = {
 		Vertex(Vector3f(-0.35f,	-0.45f,	0.0f),	Vector2f(0.0f, 0.0f)),
