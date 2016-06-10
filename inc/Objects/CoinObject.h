@@ -16,7 +16,7 @@ struct Vertex;
 class CoinObject : public SimpleElement
 {
 public:
-	CoinObject(const char* _path1, const char* _path2, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
+	CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 
 	void Draw(float dt);
 
@@ -26,7 +26,6 @@ public:
 	~CoinObject();
 
 private:
-	unsigned int m_texture2;
 	bool 		 m_isPickedUp;
 	unsigned int m_currentTexture;
 };

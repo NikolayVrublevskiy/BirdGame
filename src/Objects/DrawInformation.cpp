@@ -11,6 +11,7 @@
 #include <app.h>
 #include <Elementary_GL_Helpers.h>
 #include "GameHelper.h"
+#include <string>
 
 extern Evas_GL_API * __evas_gl_glapi;
 GLuint gSampler;

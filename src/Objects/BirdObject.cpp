@@ -12,16 +12,14 @@
 #include <stdio.h>
 #include <Elementary_GL_Helpers.h>
 #include "Objects/DrawInformation.h"
-#include "memory"
+#include <memory>
 
 extern Evas_GL_API * __evas_gl_glapi;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BirdObject::BirdObject(const char* _path1, const char* _path2, const char* _path3, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
-:texture_2(0),
- texture_3(0),
- m_speed(0.01f),
+BirdObject::BirdObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
+://m_speed(0.01f),
  m_shouldUpBird(false),
  m_UpTime(0.0f),
  m_isDead(false),
@@ -33,8 +31,6 @@ BirdObject::BirdObject(const char* _path1, const char* _path2, const char* _path
 	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_NEAREST));
 
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
-	di->AddTexture(_path2, texture_2, GL_NEAREST);
-	di->AddTexture(_path3, texture_3, GL_NEAREST);
 
 	m_shouldUpBird = false;
 	m_UpTime = 0.0f;
@@ -60,28 +56,18 @@ void BirdObject::Draw(float dt)
 
 	if (m_currentTexture <= 4)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 		m_currentTexture++;
 	}
 	else if (m_currentTexture <= 8)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture_2); // unsigned int texture_id;
-		m_currentTexture++;
-	}
-	else if (m_currentTexture <= 12)
-	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture_3); // unsigned int texture_id;
 		m_currentTexture++;
 	}
 	else
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, texture_3); // unsigned int texture_id;
 		m_currentTexture = 1;
 	}
+
+	glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 
 	if(m_rotationAngle > -0.8f)
 	{
@@ -113,6 +99,9 @@ void BirdObject::Draw(float dt)
 	float u_mvp = glGetUniformLocation(di->m_program, "u_mvpMatrix");
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * di->m_matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
+
+	float offset = glGetUniformLocation(di->m_program, "u_offset");
+	glUniform1i(offset, m_currentTexture / 4);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, di->m_idxIbo);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
@@ -180,15 +169,12 @@ void BirdObject::InitPoints()
 	points.push_back(Vector2f(72, 126));
 	points.push_back(Vector2f(146, 125));
 
-	const float weight = 6.0f;
-	const float height = 3.0f;
 	const float weight_px = 256.0f;
 	const float height_px = 128.0f;
 
 	for(const auto point : points)
 	{
 		Vector2f tmp;
-		//if(point.x >= weight_px / 2.0f)
 		tmp.x = -(((weight_px / 2.0f) - (weight_px - point.x)) / (weight_px / 2.0f)) / 2.0f;
 		tmp.y = -(((height_px / 2.0f) - (height_px - point.y)) / (height_px / 2.0f)) / 2.0f;
 		m_points.push_back(tmp);

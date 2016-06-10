@@ -10,6 +10,14 @@ build src/Camera.o: build_cpp ../src/Camera.cpp
 build src/Camera.o.ast: build_cpp_ast ../src/Camera.cpp 
 build src/Camera.o.fn: build_cpp_fn src/Camera.o.ast 
 build src/Camera.o.sa: build_cpp_sa ../src/Camera.cpp | extfn
+build src/CoinsManager.o: build_cpp ../src/CoinsManager.cpp 
+build src/CoinsManager.o.ast: build_cpp_ast ../src/CoinsManager.cpp 
+build src/CoinsManager.o.fn: build_cpp_fn src/CoinsManager.o.ast 
+build src/CoinsManager.o.sa: build_cpp_sa ../src/CoinsManager.cpp | extfn
+build src/Font.o: build_cpp ../src/Font.cpp 
+build src/Font.o.ast: build_cpp_ast ../src/Font.cpp 
+build src/Font.o.fn: build_cpp_fn src/Font.o.ast 
+build src/Font.o.sa: build_cpp_sa ../src/Font.cpp | extfn
 build src/Game.o: build_cpp ../src/Game.cpp 
 build src/Game.o.ast: build_cpp_ast ../src/Game.cpp 
 build src/Game.o.fn: build_cpp_fn src/Game.o.ast 

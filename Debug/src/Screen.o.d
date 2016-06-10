@@ -1,6 +1,7 @@
 src/Screen.o: ../src/Screen.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Screen.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/GameHelper.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/math_3d.h \
   D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1\Elementary_GL_Helpers.h \
   D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/elementary-1\Elementary.h \
   D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/eina-1\Eina.h \
@@ -206,15 +207,16 @@ src/Screen.o: ../src/Screen.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/BirdObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Logical2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Drawable2DObject.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\math_3d.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/DrawInformation.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/SimpleElement.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Simple2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/ButtonObject.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/TextField.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChangeStateAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ButtonAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ExitGameAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChooseLanguageAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ReinitLevelAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Game.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Font.h

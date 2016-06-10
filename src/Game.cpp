@@ -8,15 +8,22 @@
 #include "Game.h"
 #include "Objects/BirdObject.h"
 #include "Objects/ScoreObject.h"
-#include "Objects/CoinsManager.h"
+#include "CoinsManager.h"
 #include "PipeManager.h"
+
+#include "Font.h"
+//#include "Objects/DrawInformation.h"
 
 static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN, GAME_SCREEN::MAIN_MENU};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 Game::Game()
-{}
+:m_language(LANGUAGE::NONE)
+{
+	std::vector<Vertex> tmp;
+	m_font = std::make_shared<Font>("alphabet.tga", tmp , "Shaders/TextShader.vs", "Shaders/TextShader.fs");
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -34,6 +41,10 @@ void Game::Init()
 
 	m_language = LANGUAGE::NONE;
 	m_currentScreen = m_screens[GAME_SCREEN::CHOOSE_LANGUAGE];
+
+
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +52,7 @@ void Game::Init()
 void Game::Draw(double dt)
 {
 	m_currentScreen->DrawObjects(dt);
+
 	switch(m_currentScreen->GetType())
 	{
 	case GAME_SCREEN::GAME:
@@ -90,6 +102,15 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 		m_scoreObject->TranslateDigits(Vector3f(5.0f, 6.3f, 0.0f));
 		break;
 	}
+
+	case GAME_SCREEN::CHOOSE_LANGUAGE:
+		break;
+
+	case GAME_SCREEN::GAME:
+			break;
+
+	case GAME_SCREEN::NONE:
+			break;
 	}
 	m_currentScreen = m_screens[_screen];
 }
@@ -134,9 +155,23 @@ void Game::ReinitLevel()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+int	Game::GetCurrentCoinsCount() const
+{
+	return m_coinsManager->GetScore();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
 void Game::SetLanguage(LANGUAGE _lang)
 {
 	m_language = _lang;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::shared_ptr<Font> Game::GetFont()
+{
+	return m_font;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

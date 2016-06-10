@@ -2,9 +2,11 @@
 #define SCORE_OBJECT_H_
 
 #include "Logical2DObject.h"
+#include <memory>
 #include <vector>
 
 class SimpleElement;
+class DigitObject;
 struct Vector3f;
 
 class ScoreObject : public Logical2DObject
@@ -23,7 +25,7 @@ public:
 	void ResetScore();
 
 private:
-	std::vector<SimpleElement> m_digits;
+	std::shared_ptr<DigitObject> m_digits;
 
 	int m_value;
 };

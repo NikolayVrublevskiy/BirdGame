@@ -15,15 +15,11 @@ extern Evas_GL_API * __evas_gl_glapi;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-CoinObject::CoinObject(const char* _path1, const char* _path2, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
-: m_texture2(0),
-  m_isPickedUp(false),
+CoinObject::CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
+: m_isPickedUp(false),
   m_currentTexture(0)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, 0x2601)); // 0x2601 - GL_LINEAR
-
-	std::shared_ptr<DrawInformation> di = GetDrawInformation();
-	di->AddTexture(_path2, m_texture2, 0x2601); // 0x2601 - GL_LINEAR
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -31,7 +27,6 @@ CoinObject::CoinObject(const char* _path1, const char* _path2, std::vector<Verte
 void CoinObject::Draw(float dt)
 {
 	GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
-	//SimpleElement::Draw(dt);
 
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
 	glUseProgram(di->m_program);
@@ -44,26 +39,25 @@ void CoinObject::Draw(float dt)
 
 	if (m_currentTexture <= 6)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 		m_currentTexture++;
 	}
 	else if (m_currentTexture <= 12)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_texture2); // unsigned int texture_id;
 		m_currentTexture++;
 	}
 	else
 	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, m_texture2); // unsigned int texture_id;
 		m_currentTexture = 1;
 	}
+
+	glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 
 	float u_mvp = glGetUniformLocation(di->m_program, "u_mvpMatrix");
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * di->m_matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
+
+	float offset = glGetUniformLocation(di->m_program, "u_offset");
+	glUniform1i(offset, m_currentTexture / 6);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, di->m_idxIbo);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);

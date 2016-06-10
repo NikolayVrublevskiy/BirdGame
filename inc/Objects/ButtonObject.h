@@ -14,6 +14,7 @@
 struct Vertex;
 
 class ButtonAction;
+class TextField;
 
 class ButtonObject : public Logical2DObject
 {
@@ -25,11 +26,12 @@ public:
 	void Draw(float dt);
 
 	std::shared_ptr<ButtonAction> GetAction() const;
+	void SetTextField(std::shared_ptr<TextField> _textField);
 
 private:
 
 	std::shared_ptr<ButtonAction> m_action;
-
+	std::shared_ptr<TextField>	  m_textField;
 };
 
 

@@ -29,8 +29,6 @@ public:
 	void Clean();
 	void CorrectOffset();
 
-
-
 private:
 
 	void DrawPipes(float dt);

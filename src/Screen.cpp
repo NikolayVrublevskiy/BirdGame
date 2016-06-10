@@ -11,12 +11,16 @@
 #include "Objects/DrawInformation.h"
 #include "Objects/SimpleElement.h"
 #include "Objects/ButtonObject.h"
+#include "Objects/TextField.h"
 #include "ButtonActions/ChangeStateAction.h"
 #include "ButtonActions/ExitGameAction.h"
 #include "ButtonActions/ChooseLanguageAction.h"
 #include "ButtonActions/ReinitLevelAction.h"
 #include "Game.h"
 #include <string>
+
+
+#include "Font.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -42,11 +46,11 @@ void Screen::InitGameScreen()
 	std::vector<Vertex> Vertices_bird = {
 		Vertex(Vector3f(-0.5f,	-0.5f,	0.0f), Vector2f(0.0f, 0.0f)),
 		Vertex(Vector3f(-0.5f,	0.5f,	0.0f), Vector2f(0.0f, 1.0f)),
-		Vertex(Vector3f(0.5f,	0.5f,	0.0f), Vector2f(1.0f, 1.0f)),
-		Vertex(Vector3f(0.5f,	-0.5f,	0.0f), Vector2f(1.0f, 0.0f))
+		Vertex(Vector3f(0.5f,	0.5f,	0.0f), Vector2f(0.25f, 1.0f)),
+		Vertex(Vector3f(0.5f,	-0.5f,	0.0f), Vector2f(0.25f, 0.0f))
 	};
 
-	m_birdObject = std::make_shared<BirdObject>("bird.tga", "bird_2.tga", "bird_3.tga", Vertices_bird, "BirdShader.vs", "BirdShader.fs");
+	m_birdObject = std::make_shared<BirdObject>("bird.tga", Vertices_bird, "Shaders/BirdShader.vs", "Shaders/BirdShader.fs");
 	m_birdObject->GetDrawInformation()->GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
 }
 
@@ -65,7 +69,7 @@ void Screen::InitScoreScreen()
 
 	simpleElement_ptr sb = std::make_shared<SimpleElement>();
 	std::string lang = Game::GetInstance()->GetLanguage();
-	sb->SetDrawInformation(std::make_shared<DrawInformation>(std::string("score_board_" + lang + ".tga").c_str(), score_board_vert, "BgShader.vs", "BgShader.fs", GL_NEAREST));
+	sb->SetDrawInformation(std::make_shared<DrawInformation>(std::string("score_board_" + lang + ".tga").c_str(), score_board_vert, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST));
 	sb->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 7.0f, 0.0f);
 	m_simpleObjects.push_back(sb);
 
@@ -77,12 +81,12 @@ void Screen::InitScoreScreen()
 		Vertex(Vector3f(0.75f,	-0.75f,	0.0f),	Vector2f(1.0f, 0.0f))
 	};
 
-	logical2DObject_ptr playButton = std::make_shared<ButtonObject>("restart.tga", verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
+	logical2DObject_ptr playButton = std::make_shared<ButtonObject>("restart.tga", verticies, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
 	playButton->GetDrawInformation()->GetMatrix().SetTranslation(3.5f, 2.0f, 0.0f);
 	playButton->GetDrawInformation()->SetXSize(0.75f);
 	playButton->GetDrawInformation()->SetYSize(0.75f);
 
-	logical2DObject_ptr goToMMButton = std::make_shared<ButtonObject>("exit.tga", verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::MAIN_MENU));
+	logical2DObject_ptr goToMMButton = std::make_shared<ButtonObject>("exit.tga", verticies, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::MAIN_MENU));
 	goToMMButton->GetDrawInformation()->GetMatrix().SetTranslation(6.5f, 2.0f, 0.0f);
 	goToMMButton->GetDrawInformation()->SetXSize(0.75f);
 	goToMMButton->GetDrawInformation()->SetYSize(0.75f);
@@ -100,16 +104,21 @@ void Screen::InitLanguageScreen()
 	std::vector<Vertex> flag_verticies = {
 		Vertex(Vector3f(-3.0f,	-1.5f,	0.0f),	Vector2f(0.0f, 0.0f)),
 		Vertex(Vector3f(-3.0f,	1.5f,	0.0f),	Vector2f(0.0f, 1.0f)),
-		Vertex(Vector3f(3.0f,	1.5f,	0.0f),	Vector2f(1.0f, 1.0f)),
-		Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(1.0f, 0.0f))
+		Vertex(Vector3f(3.0f,	1.5f,	0.0f),	Vector2f(0.5f, 1.0f)),
+		Vertex(Vector3f(3.0f,	-1.5f,	0.0f),	Vector2f(0.5f, 0.0f))
 	};
 
-	logical2DObject_ptr US = std::make_shared<ButtonObject>("US.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChooseLanguageAction>(LANGUAGE::ENGLISH));
+	logical2DObject_ptr US = std::make_shared<ButtonObject>("flags.tga", flag_verticies, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChooseLanguageAction>(LANGUAGE::ENGLISH));
 	US->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 7.5f, 0.0f);
 	US->GetDrawInformation()->SetXSize(3.0f);
 	US->GetDrawInformation()->SetYSize(1.5f);
 
-	logical2DObject_ptr UA = std::make_shared<ButtonObject>("UA.tga", flag_verticies, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChooseLanguageAction>(LANGUAGE::UKRAINE));
+	flag_verticies[0].m_tex.x = 0.5f;
+	flag_verticies[1].m_tex.x = 0.5f;
+	flag_verticies[2].m_tex.x = 1.0f;
+	flag_verticies[3].m_tex.x = 1.0f;
+
+	logical2DObject_ptr UA = std::make_shared<ButtonObject>("flags.tga", flag_verticies, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChooseLanguageAction>(LANGUAGE::UKRAINE));
 	UA->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 2.5f, 0.0f);
 	UA->GetDrawInformation()->SetXSize(3.0f);
 	UA->GetDrawInformation()->SetYSize(1.5f);
@@ -132,7 +141,7 @@ void Screen::InitMainMenuScreen()
 	};
 
 	simpleElement_ptr titile = std::make_shared<SimpleElement>();
-	titile->SetDrawInformation(std::make_shared<DrawInformation>("fb_title.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST));
+	titile->SetDrawInformation(std::make_shared<DrawInformation>("fb_title.tga", Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST));
 	titile->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 8.0f, 0.0f);
 	m_simpleObjects.push_back(titile);
 
@@ -145,13 +154,14 @@ void Screen::InitMainMenuScreen()
 
 	std::string lang = Game::GetInstance()->GetLanguage();
 
-	logical2DObject_ptr start_btn = std::make_shared<ButtonObject>(std::string("start_btn_" + lang + ".tga").c_str(), Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
+	logical2DObject_ptr start_btn = std::make_shared<ButtonObject>(std::string("start_btn_" + lang + ".tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
 	start_btn->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.5f, 0.0f);
 	start_btn->GetDrawInformation()->SetXSize(2.0f);
 	start_btn->GetDrawInformation()->SetYSize(0.75f);
+	static_cast<ButtonObject*>(start_btn.get())->SetTextField(std::make_shared<TextField>("START", Vector3f(3.6f, 5.25f, 0.0f), 0.6));
 	m_buttons.push_back(start_btn);
 
-	logical2DObject_ptr lang_btn = std::make_shared<ButtonObject>(std::string("language_" + lang + ".tga").c_str(), Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
+	logical2DObject_ptr lang_btn = std::make_shared<ButtonObject>(std::string("language_" + lang + ".tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
 	lang_btn->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 3.3f, 0.0f);
 	lang_btn->GetDrawInformation()->SetXSize(2.0f);
 	lang_btn->GetDrawInformation()->SetYSize(0.75f);
@@ -164,13 +174,13 @@ void Screen::InitMainMenuScreen()
 		Vertex(Vector3f(0.5f,	-0.5f,	0.0f),	Vector2f(1.0f, 0.0f))
 	};
 
-	logical2DObject_ptr exit_btn = std::make_shared<ButtonObject>("exit.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ExitGameAction>());
+	logical2DObject_ptr exit_btn = std::make_shared<ButtonObject>("exit.tga", Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ExitGameAction>());
 	exit_btn->GetDrawInformation()->GetMatrix().SetTranslation(7.0f, 1.0f, 0.0f);
 	exit_btn->GetDrawInformation()->SetXSize(1.0f);
 	exit_btn->GetDrawInformation()->SetYSize(1.0f);
 	m_buttons.push_back(exit_btn);
 
-	logical2DObject_ptr about_btn = std::make_shared<ButtonObject>("about.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
+	logical2DObject_ptr about_btn = std::make_shared<ButtonObject>("about.tga", Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
 	about_btn->GetDrawInformation()->GetMatrix().SetTranslation(3.0f, 1.0f, 0.0f);
 	about_btn->GetDrawInformation()->SetXSize(1.0f);
 	about_btn->GetDrawInformation()->SetYSize(1.0f);
@@ -189,7 +199,7 @@ void Screen::InitBackground()
 		};
 
 	simpleElement_ptr bg = std::make_shared<SimpleElement>();
-	bg->SetDrawInformation(std::make_shared<DrawInformation>("bg.tga", Vertices, "BgShader.vs", "BgShader.fs", GL_NEAREST));
+	bg->SetDrawInformation(std::make_shared<DrawInformation>("bg.tga", Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST));
 	bg->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
 	m_simpleObjects.push_back(bg);
 }

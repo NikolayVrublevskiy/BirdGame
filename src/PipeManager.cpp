@@ -20,8 +20,8 @@ PipeManager::PipeManager()
 
 	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	-0.5f,	0.0f), Vector2f(0.0f, 0.0f)));
 	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	0.5f,	0.0f), Vector2f(0.0f, 1.0f)));
-	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		0.5f,	0.0f), Vector2f(1.0f, 1.0f)));
-	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		-0.5f,	0.0f), Vector2f(1.0f, 0.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		0.5f,	0.0f), Vector2f(0.5f, 1.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		-0.5f,	0.0f), Vector2f(0.5f, 0.0f)));
 
 	time(NULL);
 }
@@ -31,6 +31,9 @@ PipeManager::PipeManager()
 PipeManager::~PipeManager()
 {
 	m_pipes.clear();
+	m_coins.clear();
+	m_initVerticies.clear();
+	m_coinVerticies.clear();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,17 +47,17 @@ void PipeManager::AddPipe(bool isTop)
 	{
 		m_lastRnd = (rand() % 64) / 16.0 ;
 
-		pipe_ptr top_pipe = std::make_shared<PipeObject>("top_tube.tga", m_initVerticies, "PipeShader.vs", "PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
+		pipe_ptr top_pipe = std::make_shared<PipeObject>("top_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
 		top_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd, 0.0f);
 		m_pipes.push_back(top_pipe);
 
-		coin_ptr coin = std::make_shared<CoinObject>("coin_1.tga", "coin_2.tga", m_coinVerticies, "PipeShader.vs", "PipeShader.fs");
+		coin_ptr coin = std::make_shared<CoinObject>("coin.tga", m_coinVerticies, "Shaders/CoinShader.vs", "Shaders/CoinShader.fs");
 		coin->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
 		m_coins.push_back(coin);
 	}
 	else
 	{
-		pipe_ptr bot_pipe = std::make_shared<PipeObject>("bot_tube.tga", m_initVerticies, "PipeShader.vs", "PipeShader.fs", PipeObject::PIPE_TYPE::BOTTOM);
+		pipe_ptr bot_pipe = std::make_shared<PipeObject>("bot_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::BOTTOM);
 		bot_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 3.0f - m_lastRnd, 0.0f);
 		m_pipes.push_back(bot_pipe);
 		m_lastRnd = 0.0;
@@ -84,11 +87,9 @@ void PipeManager::DrawPipes(float dt)
 
 void PipeManager::DrawCoins(float dt)
 {
-	int sdf = m_coins.size();
 	for(size_t i = 0 ; i < m_coins.size(); i++)
 	{
-		if(!m_coins[i]->GetIsPickedUp())
-			m_coins[i]->Draw(dt);
+		m_coins[i]->Draw(dt);
 	}
 }
 

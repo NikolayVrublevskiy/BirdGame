@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <Elementary_GL_Helpers.h>
 #include "Objects/DrawInformation.h"
+#include "Objects/TextField.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,6 +30,15 @@ std::shared_ptr<ButtonAction> ButtonObject::GetAction() const
 void ButtonObject::Draw(float dt)
 {
 	Logical2DObject::Draw(dt);
+	if(m_textField)
+		m_textField->DrawText();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void ButtonObject::SetTextField(std::shared_ptr<TextField> _textField)
+{
+	m_textField = _textField;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

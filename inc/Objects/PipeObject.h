@@ -9,7 +9,6 @@
 #define PIPE_OBJECT_H_
 
 #include "Logical2DObject.h"
-#include "Object.h"
 #include <vector>
 
 struct Vertex;

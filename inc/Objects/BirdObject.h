@@ -18,7 +18,7 @@ class CoinObject;
 class BirdObject : public Logical2DObject
 {
 public:
-	BirdObject(const char* _path1, const char* _path2, const char* _path3, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
+	BirdObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 
 	void InitPoints();
 
@@ -43,10 +43,7 @@ private:
 	bool CheckBotPoints(std::shared_ptr<PipeObject> pipe);
 
 private:
-	unsigned int texture_2;
-	unsigned int texture_3;
-
-	float m_speed;
+	//float m_speed;
 	bool m_shouldUpBird;
 	float m_UpTime;
 	bool m_isDead;
