@@ -33,6 +33,7 @@ Screen::Screen(GAME_SCREEN _screen)
 	case GAME_SCREEN::GAME:				InitGameScreen();		break;
 	case GAME_SCREEN::SCORE_SCREEN:		InitScoreScreen();		break;
 	case GAME_SCREEN::MAIN_MENU:		InitMainMenuScreen();	break;
+	case GAME_SCREEN::DEAD_SCREEN:		InitDeadScreen();		break;
 	case GAME_SCREEN::NONE:										break;
 	}
 }
@@ -52,6 +53,25 @@ void Screen::InitGameScreen()
 
 	m_birdObject = std::make_shared<BirdObject>("bird.tga", Vertices_bird, "Shaders/BirdShader.vs", "Shaders/BirdShader.fs");
 	m_birdObject->GetDrawInformation()->GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
+
+	std::vector<Vertex> cont_vert = {
+		Vertex(Vector3f(-4.0f,	-2.5f,	0.0f),	Vector2f(0.0f, 0.0f)),
+		Vertex(Vector3f(-4.0f,	2.5f,	0.0f),	Vector2f(0.0f, 1.0f)),
+		Vertex(Vector3f(4.0f,	2.5f,	0.0f),	Vector2f(1.0f, 1.0f)),
+		Vertex(Vector3f(4.0f,	-2.5f,	0.0f),	Vector2f(1.0f, 0.0f))
+	};
+
+	simpleElement_ptr cont_game = std::make_shared<SimpleElement>();
+	cont_game->SetDrawInformation(std::make_shared<DrawInformation>(std::string("continue.tga").c_str(), cont_vert, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST));
+	cont_game->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.0f, 0.0f);
+	cont_game->SetTextField(std::make_shared<TextField>("CONTINUE", Vector3f(2.0f, 6.0f, 0.0f), 0.8, 0.7));
+	m_specilSimpleObjects.push_back(cont_game);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Screen::InitDeadScreen()
+{
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,17 +174,26 @@ void Screen::InitMainMenuScreen()
 
 	std::string lang = Game::GetInstance()->GetLanguage();
 
-	logical2DObject_ptr start_btn = std::make_shared<ButtonObject>(std::string("start_btn_" + lang + ".tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
+	logical2DObject_ptr start_btn = std::make_shared<ButtonObject>(std::string("start_btn.tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ReinitLevelAction>(GAME_SCREEN::GAME));
 	start_btn->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.5f, 0.0f);
 	start_btn->GetDrawInformation()->SetXSize(2.0f);
 	start_btn->GetDrawInformation()->SetYSize(0.75f);
-	static_cast<ButtonObject*>(start_btn.get())->SetTextField(std::make_shared<TextField>("START", Vector3f(3.6f, 5.25f, 0.0f), 0.6));
+
+	if(lang == "UA")
+		static_cast<ButtonObject*>(start_btn.get())->SetTextField(std::make_shared<TextField>("CTAPT", Vector3f(3.35f, 5.2f, 0.0f), 0.7, 0.7));
+	else
+		static_cast<ButtonObject*>(start_btn.get())->SetTextField(std::make_shared<TextField>("START", Vector3f(3.35f, 5.2f, 0.0f), 0.7, 0.7));
 	m_buttons.push_back(start_btn);
 
-	logical2DObject_ptr lang_btn = std::make_shared<ButtonObject>(std::string("language_" + lang + ".tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
+	logical2DObject_ptr lang_btn = std::make_shared<ButtonObject>(std::string("language.tga").c_str(), Vertices, "Shaders/BgShader.vs", "Shaders/BgShader.fs", GL_NEAREST, std::make_shared<ChangeStateAction>(GAME_SCREEN::CHOOSE_LANGUAGE));
 	lang_btn->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 3.3f, 0.0f);
 	lang_btn->GetDrawInformation()->SetXSize(2.0f);
 	lang_btn->GetDrawInformation()->SetYSize(0.75f);
+	if(lang == "UA")
+		static_cast<ButtonObject*>(lang_btn.get())->SetTextField(std::make_shared<TextField>("MOBA", Vector3f(3.35f, 3.0f, 0.0f), 0.8, 0.7));
+	else
+		static_cast<ButtonObject*>(lang_btn.get())->SetTextField(std::make_shared<TextField>("LANGUAGE", Vector3f(3.35f, 3.0f, 0.0f), 0.42, 0.7));
+
 	m_buttons.push_back(lang_btn);
 
 	Vertices = {
@@ -222,6 +251,22 @@ void Screen::DrawObjects(double dt, double offset)
 
 	if(m_birdObject)
 		m_birdObject->Draw(dt);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Screen::DrawSpecialObjects(double dt, double offset)
+{
+	for(const auto & object : m_specialButtons)
+	{
+		if(object)
+			object->Draw(dt);
+	}
+	for(const auto & object : m_specilSimpleObjects)
+	{
+		if(object)
+			object->Draw(dt);
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

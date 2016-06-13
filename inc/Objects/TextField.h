@@ -19,7 +19,7 @@ class Font;
 class TextField
 {
 public:
-	TextField(std::string _text, Vector3f _position, float _textsize);
+	TextField(std::string _text, Vector3f _position, float _xTextSize, float _yTextSize);
 	~TextField();
 
 	void DrawText();
@@ -30,7 +30,8 @@ public:
 private:
 	std::string 			m_text;
 	Vector3f				m_position;
-	float					m_textSize;
+	float					m_xTextSize;
+	float					m_yTextSize;
 };
 
 #endif /* TEXTFIELD_H_ */

@@ -20,6 +20,7 @@ class PipeManager;
 class ScoreObject;
 class CoinsManager;
 class Font;
+class SimpleElement;
 
 class Game : public ISingleton<Game>
 {

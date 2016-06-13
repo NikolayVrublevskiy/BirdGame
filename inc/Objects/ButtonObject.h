@@ -27,6 +27,7 @@ public:
 
 	std::shared_ptr<ButtonAction> GetAction() const;
 	void SetTextField(std::shared_ptr<TextField> _textField);
+	std::shared_ptr<TextField> GetTextField() const;
 
 private:
 

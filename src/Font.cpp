@@ -31,22 +31,27 @@ Font::Font(const char* _path1, std::vector<Vertex> _coords, const char* _vs, con
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Font::PrintText(const char * text, float x, float y, float size)
+void Font::PrintText(std::string text, float x, float y, float xSize, float ySize)
 {
 	// Bind shader
 	glUseProgram(m_drawInfo->m_program);
 
-	unsigned int length = strlen(text);
+	unsigned int length = text.size();//strlen((char*)text);
 
 	// Fill buffers
 	std::vector<Vector2f> vertices;
 	std::vector<Vector2f> UVs;
 	for (unsigned int i = 0; i<length; i++) {
 
-		Vector2f vertex_up_left = Vector2f(x + i*size, y + size);
-		Vector2f vertex_up_right = Vector2f(x + i*size + size, y + size);
-		Vector2f vertex_down_right = Vector2f(x + i*size + size, y);
-		Vector2f vertex_down_left = Vector2f(x + i*size, y);
+		Vector2f vertex_up_left = Vector2f(x + i*xSize, y + ySize);
+		Vector2f vertex_up_right = Vector2f(x + i*xSize + xSize, y + ySize);
+		Vector2f vertex_down_right = Vector2f(x + i*xSize + xSize, y);
+		Vector2f vertex_down_left = Vector2f(x + i*xSize, y);
+
+	/*	Vector2f vertex_up_left = Vector2f((x + i / 1.4), y + ySize);
+		Vector2f vertex_up_right = Vector2f((x + i/ 1.4 + xSize), y + ySize);
+		Vector2f vertex_down_right = Vector2f((x + i/ 1.4 + xSize), y);
+		Vector2f vertex_down_left = Vector2f((x + i/ 1.4), y);*/
 
 		vertices.push_back(vertex_up_left);
 		vertices.push_back(vertex_down_left);
@@ -56,7 +61,11 @@ void Font::PrintText(const char * text, float x, float y, float size)
 		vertices.push_back(vertex_up_right);
 		vertices.push_back(vertex_down_left);
 
-		char character = text[i];
+		unsigned char c1 = text[i];
+		unsigned char c2 = text[i + 1];
+
+		int character = text[i];
+		int character2 = text[i + 1];
 		float uv_x = (character % 16) / 16.0f;
 		float uv_y = (character / 16) / 16.0f;
 
@@ -92,6 +101,10 @@ void Font::PrintText(const char * text, float x, float y, float size)
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, m_fontUV);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+	float u_mvp = glGetUniformLocation(m_drawInfo->m_program, "u_mvpMatrix");
+	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * m_drawInfo->m_matrix);
+	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
 
 	// Draw call
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());

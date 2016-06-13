@@ -14,7 +14,7 @@
 #include "Font.h"
 //#include "Objects/DrawInformation.h"
 
-static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN, GAME_SCREEN::MAIN_MENU};
+static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN, GAME_SCREEN::MAIN_MENU, GAME_SCREEN::DEAD_SCREEN};
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -22,7 +22,7 @@ Game::Game()
 :m_language(LANGUAGE::NONE)
 {
 	std::vector<Vertex> tmp;
-	m_font = std::make_shared<Font>("alphabet.tga", tmp , "Shaders/TextShader.vs", "Shaders/TextShader.fs");
+	m_font = std::make_shared<Font>("alphabet1.tga", tmp , "Shaders/TextShader.vs", "Shaders/TextShader.fs");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,19 +56,19 @@ void Game::Draw(double dt)
 	switch(m_currentScreen->GetType())
 	{
 	case GAME_SCREEN::GAME:
-		if(m_currentScreen->GetBirdObject()->GetIsDead())
-		{
-			m_currentScreen->GetBirdObject()->SetIsDead(false);
-			SetCurrentScreen(GAME_SCREEN::SCORE_SCREEN);
-			break;
-		}
-
 		m_pipeManager->CheckTubes(m_currentScreen->GetBirdObject(), m_scoreObject);
 		if(m_pipeManager->CheckCoins(m_currentScreen->GetBirdObject()))
 			m_coinsManager->IncreaseScore();
 		m_pipeManager->Draw(dt);
 		m_scoreObject->Draw(dt);
 		m_coinsManager->DrawScore(dt);
+		if(m_currentScreen->GetBirdObject()->GetIsDead())
+		{
+			m_currentScreen->DrawSpecialObjects(dt);
+			//m_currentScreen->GetBirdObject()->SetIsDead(false);
+			//SetCurrentScreen(GAME_SCREEN::DEAD_SCREEN);
+			//break;
+		}
 		break;
 	case GAME_SCREEN::SCORE_SCREEN:
 		m_scoreObject->Draw(dt);

@@ -11,10 +11,11 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-TextField::TextField(std::string _text, Vector3f _position, float _textSize)
+TextField::TextField(std::string _text, Vector3f _position, float _xTextSize, float _yTextSize)
 : m_text(_text),
   m_position(_position),
-  m_textSize(_textSize)
+  m_xTextSize(_xTextSize),
+  m_yTextSize(_yTextSize)
 {
 }
 
@@ -22,7 +23,7 @@ TextField::TextField(std::string _text, Vector3f _position, float _textSize)
 
 void TextField::DrawText()
 {
-	Game::GetInstance()->GetFont()->PrintText(m_text.c_str(), m_position.x, m_position.y, m_textSize);
+	Game::GetInstance()->GetFont()->PrintText(m_text, m_position.x, m_position.y, m_xTextSize, m_yTextSize);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

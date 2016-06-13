@@ -9,6 +9,7 @@
 #define FONT_H_
 
 #include <memory>
+#include <string>
 
 struct DrawInformation;
 struct Vertex;
@@ -19,7 +20,7 @@ public:
 	Font(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 	~Font();
 
-	void PrintText(const char * text, float x, float y, float size);
+	void PrintText(std::string text, float x, float y, float xSize, float ySize);
 
 private:
 	unsigned int m_fontVBO;

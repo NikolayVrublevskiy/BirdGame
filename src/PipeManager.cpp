@@ -113,11 +113,11 @@ void PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<S
 		AddPipe(true);
 		AddPipe(false);
 	}
-	else if (bird->CheckInteractWithTube(m_pipes[0]) || bird->CheckInteractWithTube(m_pipes[1]))
+	else if (!bird->GetIsDead() && (bird->CheckInteractWithTube(m_pipes[0]) || bird->CheckInteractWithTube(m_pipes[1])))
 	{
 		bird->SetIsDead(true);
 	}
-	else if (!m_pipes[0]->IsScored())
+	else if (!bird->GetIsDead() && !m_pipes[0]->IsScored())
 	{
 		if (bird->CheckScore(m_pipes[0]))
 		{

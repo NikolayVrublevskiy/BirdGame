@@ -26,6 +26,7 @@ public:
 	~Screen();
 
 	void DrawObjects(double dt, double offset = 0);
+	void DrawSpecialObjects(double dt, double offset = 0);
 
 	GAME_SCREEN GetType() const;
 
@@ -39,6 +40,7 @@ private:
 	void InitGameScreen();
 	void InitScoreScreen();
 	void InitMainMenuScreen();
+	void InitDeadScreen();
 
 	void InitBackground();
 
@@ -48,6 +50,9 @@ private:
 	std::vector<logical2DObject_ptr>	m_buttons;
 	std::shared_ptr<BirdObject>			m_birdObject;
 	GAME_SCREEN							m_type;
+
+	std::vector<simpleElement_ptr>		m_specilSimpleObjects; // simple static elements
+	std::vector<logical2DObject_ptr>	m_specialButtons;
 };
 
 

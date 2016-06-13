@@ -206,7 +206,7 @@ static bool app_create(void *data)
 	 * If the GLView object option values are bigger or higher than the rendering engine's,
 	 * the Direct Rendering mode is disabled.
 	 */
-	elm_glview_mode_set(gl, (Elm_GLView_Mode)(ELM_GLVIEW_DEPTH | ELM_GLVIEW_DIRECT | ELM_GLVIEW_CLIENT_SIDE_ROTATION));
+	elm_glview_mode_set(gl, (Elm_GLView_Mode)(ELM_GLVIEW_DEPTH | ELM_GLVIEW_DIRECT | ELM_GLVIEW_CLIENT_SIDE_ROTATION | ELM_GLVIEW_STENCIL));
 
 	/* The resize policy tells GLView what to do with the surface when it
 	 * resizes. ELM_GLVIEW_RESIZE_POLICY_RECREATE will tell it to
