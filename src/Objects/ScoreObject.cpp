@@ -1,6 +1,6 @@
 #include "Objects/ScoreObject.h"
 #include "Objects/DrawInformation.h"
-#include "Objects/SimpleElement.h"
+#include "Objects/Drawable2DObject.h"
 #include "Objects/DigitObject.h"
 #include <stdlib.h>
 #include <vector>
@@ -8,13 +8,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 ScoreObject::ScoreObject()
-: m_value(0)
+:Drawable2DObject("ScoreObject", true),
+ m_value(0)
 {
 	std::vector<Vertex> Verticies = {
-		Vertex(Vector3f(-0.35f,	-0.45f,	0.0f),	Vector2f(0.0f, 0.0f)),
-		Vertex(Vector3f(-0.35f,	0.45f,	0.0f),	Vector2f(0.0f, 1.0f)),
-		Vertex(Vector3f(0.35f,	0.45f,	0.0f),	Vector2f(0.1f, 1.0f)),
-		Vertex(Vector3f(0.35f,	-0.45f,	0.0f),	Vector2f(0.1f, 0.0f))
+		Vertex(Vector3f(-0.35f,	-0.45f,	0.10f),	Vector2f(0.0f, 0.0f)),
+		Vertex(Vector3f(-0.35f,	0.45f,	0.10f),	Vector2f(0.0f, 1.0f)),
+		Vertex(Vector3f(0.35f,	0.45f,	0.10f),	Vector2f(0.1f, 1.0f)),
+		Vertex(Vector3f(0.35f,	-0.45f,	0.10f),	Vector2f(0.1f, 0.0f))
 	};
 
 	m_digits = std::make_shared<DigitObject>();

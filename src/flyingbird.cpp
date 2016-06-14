@@ -18,7 +18,7 @@
 #include <Elementary_GL_Helpers.h>
 #include <efl_extension.h>
 #include "flyingbird.h"
-#include "Objects/Logical2DObject.h"
+#include "Objects/Drawable2DObject.h"
 #include "Objects/DrawInformation.h"
 #include "Objects/ButtonObject.h"
 #include "Objects/BirdObject.h"
@@ -46,6 +46,8 @@ static void resize_gl(Evas_Object *obj)
 
 static void draw_gl(Evas_Object *obj)
 {
+	glEnable(GL_DEPTH_TEST);
+
 	Camera::GetInstance()->UpdateMoveAndRotation();
 	appdata_s *ad = (appdata_s *)evas_object_data_get(obj, "ad");
 
@@ -54,8 +56,9 @@ static void draw_gl(Evas_Object *obj)
 	//glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT  | GL_DEPTH_BUFFER_BIT );
 
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
+
 
 	Game::GetInstance()->Draw(delta_time);
 
@@ -83,7 +86,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 	const float size = 10.0f;
 	auto screen = game->GetCurrentScreen();
 
-	if(screen->GetType() == GAME_SCREEN::GAME)
+	if(screen->GetType() == GAME_SCREEN::GAME && !screen->GetBirdObject()->GetIsDead())
 	{
 		game->GetCurrentScreen()->GetBirdObject()->SetRotationAngle(0.0f);
 	}

@@ -8,9 +8,9 @@
 #ifndef DIGITOBJECT_H_
 #define DIGITOBJECT_H_
 
-#include "SimpleElement.h"
+#include "Drawable2DObject.h"
 
-class DigitObject : public SimpleElement
+class DigitObject : public Drawable2DObject
 {
 public:
 	DigitObject();

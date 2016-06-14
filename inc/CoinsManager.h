@@ -8,7 +8,7 @@
 #ifndef COINSMANAGER_H_
 #define COINSMANAGER_H_
 
-#include "Objects/SimpleElement.h"
+#include "Objects/Drawable2DObject.h"
 #include <memory>
 #include <vector>
 
@@ -30,7 +30,7 @@ public:
 private:
 	int m_coinsScore;
 
-	SimpleElement			   		m_coin;
+	Drawable2DObject		   		m_coin;
 	std::shared_ptr<DigitObject>	m_digits;
 };
 

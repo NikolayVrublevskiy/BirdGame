@@ -205,11 +205,8 @@ src/Screen.o: ../src/Screen.cpp \
   D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1\Evas_GL_GLES1_Helpers.h \
   D:/Tizen/tools/smart-build-interface/../../platforms/tizen-2.3.1/wearable/rootstraps/wearable-2.3.1-emulator.core/usr/include/evas-1\Evas_GL_GLES2_Helpers.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/BirdObject.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Logical2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Drawable2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/DrawInformation.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/SimpleElement.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/Simple2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/ButtonObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/TextField.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChangeStateAction.h \
@@ -217,6 +214,7 @@ src/Screen.o: ../src/Screen.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ExitGameAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChooseLanguageAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ReinitLevelAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ContinueGameAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Game.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Font.h

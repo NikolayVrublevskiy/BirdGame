@@ -1,7 +1,7 @@
 #ifndef SCORE_OBJECT_H_
 #define SCORE_OBJECT_H_
 
-#include "Logical2DObject.h"
+#include "Drawable2DObject.h"
 #include <memory>
 #include <vector>
 
@@ -9,7 +9,7 @@ class SimpleElement;
 class DigitObject;
 struct Vector3f;
 
-class ScoreObject : public Logical2DObject
+class ScoreObject : public Drawable2DObject
 {
 public:
 

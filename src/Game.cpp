@@ -10,6 +10,7 @@
 #include "Objects/ScoreObject.h"
 #include "CoinsManager.h"
 #include "PipeManager.h"
+#include "Objects/DrawInformation.h"
 
 #include "Font.h"
 //#include "Objects/DrawInformation.h"
@@ -57,14 +58,19 @@ void Game::Draw(double dt)
 	{
 	case GAME_SCREEN::GAME:
 		m_pipeManager->CheckTubes(m_currentScreen->GetBirdObject(), m_scoreObject);
-		if(m_pipeManager->CheckCoins(m_currentScreen->GetBirdObject()))
+		if(m_pipeManager->CheckCoins(m_currentScreen->GetBirdObject()) && !m_currentScreen->GetBirdObject()->GetIsDead())
 			m_coinsManager->IncreaseScore();
 		m_pipeManager->Draw(dt);
 		m_scoreObject->Draw(dt);
 		m_coinsManager->DrawScore(dt);
 		if(m_currentScreen->GetBirdObject()->GetIsDead())
 		{
-			m_currentScreen->DrawSpecialObjects(dt);
+			auto obj = m_currentScreen->FindElementByName("cont_game");
+			obj->SetIsVisible(true);
+			obj = m_currentScreen->FindElementByName("yes_btn");
+			obj->SetIsVisible(true);
+			obj = m_currentScreen->FindElementByName("no_btn");
+			obj->SetIsVisible(true);
 			//m_currentScreen->GetBirdObject()->SetIsDead(false);
 			//SetCurrentScreen(GAME_SCREEN::DEAD_SCREEN);
 			//break;
@@ -107,10 +113,13 @@ void Game::SetCurrentScreen(GAME_SCREEN _screen)
 		break;
 
 	case GAME_SCREEN::GAME:
-			break;
+		m_screens[_screen]->GetBirdObject()->SetIsDead(false);
+		m_screens[_screen]->GetBirdObject()->SetIsInvulnerable(true);
+		m_screens[_screen]->GetBirdObject()->GetDrawInformation()->GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
+		break;
 
 	case GAME_SCREEN::NONE:
-			break;
+		break;
 	}
 	m_currentScreen = m_screens[_screen];
 }
@@ -151,6 +160,7 @@ void Game::ReinitLevel()
 	}
 
 	m_scoreObject->ResetScore();
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

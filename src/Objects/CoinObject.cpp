@@ -16,8 +16,9 @@ extern Evas_GL_API * __evas_gl_glapi;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 CoinObject::CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
-: m_isPickedUp(false),
-  m_currentTexture(0)
+:Drawable2DObject("coin", true),
+ m_isPickedUp(false),
+ m_currentTexture(0)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, 0x2601)); // 0x2601 - GL_LINEAR
 }
@@ -72,6 +73,17 @@ void CoinObject::Draw(float dt)
 void CoinObject::SetIsPickedUp(bool value)
 {
 	m_isPickedUp = value;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool CoinObject::ShouldBeDeleted() const
+{
+	auto matrix = GetDrawInformation()->GetMatrix();
+	if (matrix.m[3][0] < -1.0)
+		return true;
+
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

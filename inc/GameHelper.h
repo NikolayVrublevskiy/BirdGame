@@ -31,12 +31,12 @@ const std::map<int, Vector4f> alphabet{
 	{'C', Vector4f( 127 / font_weight, (font_height - 35) / font_height, 177 / font_weight, (font_height - 82) / font_height)},
 	{'D', Vector4f(0, 0, 0.042, 0.214)},
 	{'E', Vector4f( 241 / font_weight, (font_height - 35) / font_height, 282 / font_weight, (font_height - 82) / font_height)},
-	{'F', Vector4f(0, 0, 0.042, 0.214)},
+	{'F', Vector4f( 288 / font_weight, (font_height - 35) / font_height, 329 / font_weight, (font_height - 82) / font_height)},
 	{'G', Vector4f( 335 / font_weight, (font_height - 35) / font_height, 385 / font_weight, (font_height - 82) / font_height)},
-	{'H', Vector4f(0, 0, 0.042, 0.214)},
+	{'H', Vector4f( 392 / font_weight, (font_height - 35) / font_height, 442 / font_weight, (font_height - 82) / font_height)},
 	{'I', Vector4f( 449 / font_weight, (font_height - 35) / font_height, 470 / font_weight, (font_height - 82) / font_height)},
 	{'J', Vector4f(0, 0, 0.042, 0.214)},
-	{'K', Vector4f(0, 0, 0.042, 0.214)},
+	{'K', Vector4f( 534 / font_weight, (font_height - 35) / font_height, 584 / font_weight, (font_height - 82) / font_height)},
 	{'L', Vector4f( 590 / font_weight, (font_height - 35) / font_height, 631 / font_weight, (font_height - 82) / font_height)},
 	{'M', Vector4f( 637 / font_weight, (font_height - 35) / font_height, 699 / font_weight, (font_height - 82) / font_height)},
 	{'N', Vector4f( 23 / font_weight, (font_height - 158) / font_height, 79 / font_weight, (font_height - 199) / font_height)},
@@ -50,7 +50,7 @@ const std::map<int, Vector4f> alphabet{
 	{'V', Vector4f(0, 0, 0.042, 0.214)},
 	{'W', Vector4f(0, 0, 0.042, 0.214)},
 	{'X', Vector4f(0, 0, 0.042, 0.214)},
-	{'Y', Vector4f(0, 0, 0.042, 0.214)},
+	{'Y', Vector4f( 593 / font_weight, (font_height - 158) / font_height, 646 / font_weight, (font_height - 199) / font_height)},
 	{'Z', Vector4f(0, 0, 0.042, 0.214)}
 };
 

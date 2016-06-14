@@ -1,7 +1,5 @@
 src/CoinsManager.o: ../src/CoinsManager.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\CoinsManager.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/SimpleElement.h \
-  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/Simple2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/Objects/Drawable2DObject.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Objects/DrawInformation.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\math_3d.h \

@@ -8,12 +8,12 @@
 #ifndef PIPE_OBJECT_H_
 #define PIPE_OBJECT_H_
 
-#include "Logical2DObject.h"
+#include "Drawable2DObject.h"
 #include <vector>
 
 struct Vertex;
 
-class PipeObject : public Logical2DObject
+class PipeObject : public Drawable2DObject
 {
 public:
 	enum class PIPE_TYPE { NONE, TOP, BOTTOM };

@@ -6,8 +6,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-ButtonObject::ButtonObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action)
-:m_action(NULL)
+ButtonObject::ButtonObject(std::string _objectName, bool _isVisible, const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action)
+:Drawable2DObject(_objectName, _isVisible),
+ m_action(NULL)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path, _coords, _vs, _fs, GL_NEAREST));
 
@@ -29,9 +30,12 @@ std::shared_ptr<ButtonAction> ButtonObject::GetAction() const
 
 void ButtonObject::Draw(float dt)
 {
-	Logical2DObject::Draw(dt);
-	if(m_textField)
-		m_textField->DrawText();
+	if(GetIsVisible())
+	{
+		Drawable2DObject::Draw(dt);
+		if(m_textField)
+			m_textField->DrawText();
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -8,19 +8,20 @@
 #ifndef BUTTONOBJECT_H_
 #define BUTTONOBJECT_H_
 
-#include "Logical2DObject.h"
+#include "Drawable2DObject.h"
 #include <vector>
+#include <string>
 
 struct Vertex;
 
 class ButtonAction;
 class TextField;
 
-class ButtonObject : public Logical2DObject
+class ButtonObject : public Drawable2DObject
 {
 public:
 
-	ButtonObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action);
+	ButtonObject(std::string _objectName, bool _isVisible, const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, unsigned int _param, std::shared_ptr<ButtonAction> _action);
 	~ButtonObject();
 
 	void Draw(float dt);

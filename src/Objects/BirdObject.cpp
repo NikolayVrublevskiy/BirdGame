@@ -18,17 +18,19 @@ extern Evas_GL_API * __evas_gl_glapi;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-BirdObject::BirdObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
-://m_speed(0.01f),
+BirdObject::BirdObject(std::string _objectName, bool _isVisible, const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs)
+:Drawable2DObject(_objectName, _isVisible),
  m_shouldUpBird(false),
  m_UpTime(0.0f),
  m_isDead(false),
  m_rotationAngle(0.0f),
  m_currentTexture(1),
+ m_isInvulnerable(false),
+ m_invulnerableTime(0),
  m_position(1.0, 5.0, 0.0)
 {
 
-	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_NEAREST));
+	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_LINEAR));
 
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
 
@@ -69,29 +71,39 @@ void BirdObject::Draw(float dt)
 
 	glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 
-	if(m_rotationAngle > -0.8f)
+	if(!m_isDead)
 	{
-		if(!m_shouldUpBird)
+		if(m_rotationAngle > -0.8f)
 		{
-			m_rotationAngle -= 0.05;
+			if(!m_shouldUpBird)
+			{
+				m_rotationAngle -= 0.05;
+			}
+			di->GetMatrix().SetRotationZ(m_rotationAngle);
 		}
-		di->GetMatrix().SetRotationZ(m_rotationAngle);
+
+		if(m_shouldUpBird && m_UpTime < 0.60)
+		{
+			if(m_rotationAngle < 0.0f)
+			{
+				m_rotationAngle += 0.10;
+			}
+			m_position.y += dt * 20 ;
+			m_UpTime += 0.1;
+		}
+		else
+		{
+			m_shouldUpBird = false;
+			m_UpTime = 0.0;
+			m_position.y -= dt * 15;
+		}
 	}
 
-	if(m_shouldUpBird && m_UpTime < 0.60)
+	if(m_isInvulnerable)
 	{
-		if(m_rotationAngle < 0.0f)
-		{
-			m_rotationAngle += 0.10;
-		}
-		m_position.y += dt * 20 ;
-		m_UpTime += 0.1;
-	}
-	else
-	{
-		m_shouldUpBird = false;
-		m_UpTime = 0.0;
-		m_position.y -= dt * 15;
+		m_invulnerableTime -= dt;
+		if(m_invulnerableTime <= 0)
+			m_isInvulnerable = false;
 	}
 
 	di->GetMatrix().SetTranslation(m_position.x , m_position.y, m_position.z);
@@ -144,8 +156,7 @@ bool BirdObject::CheckInteractWithCoin(std::shared_ptr<CoinObject> coin)
 {
 	for(size_t i = 0; i < m_points.size(); i++)
 	{
-		if(	//(GetDrawInformation()->GetMatrix().m[3][1] + m_points[i].y) >= (coin->GetDrawInformation()->GetMatrix().m[3][1] - 0.5f)		&&
-			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) >= (coin->GetDrawInformation()->GetMatrix().m[3][0] - 0.25f)	&&
+		if(	(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) >= (coin->GetDrawInformation()->GetMatrix().m[3][0] - 0.25f)	&&
 			(GetDrawInformation()->GetMatrix().m[3][0] + m_points[i].x) <= (coin->GetDrawInformation()->GetMatrix().m[3][0] + 0.25f)
 		)
 		{
@@ -237,6 +248,22 @@ void BirdObject::SetIsDead(bool value)
 bool BirdObject::GetIsDead() const
 {
 	return m_isDead;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BirdObject::SetIsInvulnerable(bool value)
+{
+	m_isInvulnerable = value;
+	if(value)
+		m_invulnerableTime = 60;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool BirdObject::GetIsInvulnerable() const
+{
+	return m_isInvulnerable;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

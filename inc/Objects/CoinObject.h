@@ -8,12 +8,12 @@
 #ifndef COINOBJECT_H_
 #define COINOBJECT_H_
 
-#include "SimpleElement.h"
+#include "Drawable2DObject.h"
 #include <vector>
 
 struct Vertex;
 
-class CoinObject : public SimpleElement
+class CoinObject : public Drawable2DObject
 {
 public:
 	CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
@@ -22,6 +22,8 @@ public:
 
 	void SetIsPickedUp(bool value);
 	bool GetIsPickedUp() const;
+
+	bool ShouldBeDeleted() const;
 
 	~CoinObject();
 

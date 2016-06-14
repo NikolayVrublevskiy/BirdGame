@@ -15,7 +15,8 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 CoinsManager::CoinsManager()
-: m_coinsScore(0)
+: m_coinsScore(0),
+  m_coin("coin", true)
 {
 	std::vector<Vertex> Verticies = {
 		Vertex(Vector3f(-0.25f,	-0.35f,	0.0f),	Vector2f(0.0f, 0.0f)),

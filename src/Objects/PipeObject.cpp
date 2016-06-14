@@ -11,8 +11,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 PipeObject::PipeObject(const char* _path, std::vector<Vertex> _coords, const char* _vs, const char* _fs, PIPE_TYPE _type)
-: m_type(_type)
-, m_isScored(false)
+:Drawable2DObject("pipe", true),
+ m_type(_type),
+ m_isScored(false)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path, _coords, _vs, _fs, 0x2601)); // 0x2601 - GL_LINEAR
 }
@@ -33,7 +34,7 @@ bool PipeObject::ShouldBeDeleted()
 void PipeObject::Draw(float dt)
 {
 	GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
-	Logical2DObject::Draw(dt);
+	Drawable2DObject::Draw(dt);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

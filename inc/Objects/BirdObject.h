@@ -8,17 +8,18 @@
 #ifndef BIRD_OBJECT_H_
 #define BIRD_OBJECT_H_
 
-#include "Logical2DObject.h"
+#include "Drawable2DObject.h"
 #include "math_3d.h"
 #include <vector>
+#include "string"
 
 class PipeObject;
 class CoinObject;
 
-class BirdObject : public Logical2DObject
+class BirdObject : public Drawable2DObject
 {
 public:
-	BirdObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
+	BirdObject(std::string _objectName, bool _isVisible, const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 
 	void InitPoints();
 
@@ -34,6 +35,9 @@ public:
 
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
+
+	void SetIsInvulnerable(bool value);
+	bool GetIsInvulnerable() const;
 
 	~BirdObject();
 
@@ -51,6 +55,9 @@ private:
 	float m_rotationAngle;
 
 	int m_currentTexture;
+
+	bool m_isInvulnerable;
+	time_t m_invulnerableTime;
 
 	Vector3f m_position;
 

@@ -132,7 +132,7 @@ void Camera::UpdateMoveAndRotation()
 
 	// Up vector
 	Vector3f up = right.Cross(direction);
-	m_projectionMatrix = perspective(3.14159274f / 2.5f, 4.0f / 4.0f, 0.1f, 100.0f);
+	m_projectionMatrix = perspective(3.14159274f / 2.5f, 5.0f / 5.0f, 0.1f, 100.0f);
 
 	// Camera matrix
 	m_viewMatrix = lookAt(

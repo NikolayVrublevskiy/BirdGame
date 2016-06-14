@@ -14,6 +14,7 @@
 extern Evas_GL_API * __evas_gl_glapi;
 
 DigitObject::DigitObject()
+:Drawable2DObject("digit", true)
 {}
 
 void DigitObject::Draw(float _dt, int _offset)

@@ -11,13 +11,12 @@
 #include "GameHelper.h"
 #include <vector>
 #include <memory>
+#include <string>
 
-class SimpleElement;
-class Logical2DObject;
+class Drawable2DObject;
 class BirdObject;
 
-using simpleElement_ptr = std::shared_ptr<SimpleElement>;
-using logical2DObject_ptr = std::shared_ptr<Logical2DObject>;
+using drawableElement_ptr = std::shared_ptr<Drawable2DObject>;
 
 class Screen
 {
@@ -26,13 +25,14 @@ public:
 	~Screen();
 
 	void DrawObjects(double dt, double offset = 0);
-	void DrawSpecialObjects(double dt, double offset = 0);
 
 	GAME_SCREEN GetType() const;
 
-	std::vector<simpleElement_ptr> 		GetSimpleObjects() const;
-	std::vector<logical2DObject_ptr>	GetButtons() const;
+	std::vector<drawableElement_ptr>	GetSimpleObjects() const;
+	std::vector<drawableElement_ptr>	GetButtons() const;
 	std::shared_ptr<BirdObject>			GetBirdObject();
+
+	drawableElement_ptr					FindElementByName(std::string _name);
 
 private:
 
@@ -46,13 +46,10 @@ private:
 
 private:
 
-	std::vector<simpleElement_ptr>		m_simpleObjects; // simple static elements
-	std::vector<logical2DObject_ptr>	m_buttons;
+	std::vector<drawableElement_ptr>	m_simpleObjects; // simple static elements
+	std::vector<drawableElement_ptr>	m_buttons;
 	std::shared_ptr<BirdObject>			m_birdObject;
 	GAME_SCREEN							m_type;
-
-	std::vector<simpleElement_ptr>		m_specilSimpleObjects; // simple static elements
-	std::vector<logical2DObject_ptr>	m_specialButtons;
 };
 
 

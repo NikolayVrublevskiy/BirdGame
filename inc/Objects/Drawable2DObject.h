@@ -9,21 +9,43 @@
 #define DRAWABLE2DOBJECT_H_
 
 #include <memory>
+#include <string>
+#include <vector>
 
 struct DrawInformation;
+
+class TextField;
+
+using text_ptr = std::shared_ptr<TextField>;
 
 class Drawable2DObject
 {
 public:
-	virtual void Draw(float dt) = 0;
 
-	std::shared_ptr<DrawInformation> GetDrawInformation() const { return m_drawInformation;}
-	void SetDrawInformation(std::shared_ptr<DrawInformation> _information) {m_drawInformation = _information;}
+	Drawable2DObject(std::string _objectName, bool _isVisible);
+	virtual void Draw(float dt);
 
-	virtual ~Drawable2DObject() {};
+	std::shared_ptr<DrawInformation> GetDrawInformation() const;
+	void SetDrawInformation(std::shared_ptr<DrawInformation> _information);
+
+	void SetIsVisible(bool _isVisible);
+	bool GetIsVisible()const;
+
+	std::string GetObjectName() const;
+
+	void AddTextField(text_ptr _textField);
+
+	virtual ~Drawable2DObject();
 
 private:
-	std::shared_ptr<DrawInformation> m_drawInformation;
+
+	void DrawTextFields() const;
+
+private:
+	std::string							m_objectName;
+	bool								m_isVisible;
+	std::vector<text_ptr>				m_textFields;
+	std::shared_ptr<DrawInformation>	m_drawInformation;
 };
 
 

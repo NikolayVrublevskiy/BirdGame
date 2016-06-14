@@ -13,15 +13,15 @@ PipeManager::PipeManager()
 :m_lastRnd(0.0f),
  m_offset(0.0f)
 {
-	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	-3.0f,	0.0f), Vector2f(0.0f, 0.0f)));
-	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	3.0f,	0.0f), Vector2f(0.0f, 1.0f)));
-	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		3.0f,	0.0f), Vector2f(1.0f, 1.0f)));
-	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		-3.0f,	0.0f), Vector2f(1.0f, 0.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	-3.0f,	-0.0001f), Vector2f(0.0f, 0.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	3.0f,	-0.0001f), Vector2f(0.0f, 1.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		3.0f,	-0.0001f), Vector2f(1.0f, 1.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		-3.0f,	-0.0001f), Vector2f(1.0f, 0.0f)));
 
-	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	-0.5f,	0.0f), Vector2f(0.0f, 0.0f)));
-	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	0.5f,	0.0f), Vector2f(0.0f, 1.0f)));
-	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		0.5f,	0.0f), Vector2f(0.5f, 1.0f)));
-	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		-0.5f,	0.0f), Vector2f(0.5f, 0.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	-0.5f,	-0.0001f), Vector2f(0.0f, 0.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	0.5f,	-0.0001f), Vector2f(0.0f, 1.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		0.5f,	-0.0001f), Vector2f(0.5f, 1.0f)));
+	m_coinVerticies.push_back(Vertex(Vector3f(0.5f,		-0.5f,	-0.0001f), Vector2f(0.5f, 0.0f)));
 
 	time(NULL);
 }
@@ -113,7 +113,7 @@ void PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<S
 		AddPipe(true);
 		AddPipe(false);
 	}
-	else if (!bird->GetIsDead() && (bird->CheckInteractWithTube(m_pipes[0]) || bird->CheckInteractWithTube(m_pipes[1])))
+	else if (!bird->GetIsDead() && !bird->GetIsInvulnerable() && (bird->CheckInteractWithTube(m_pipes[0]) || bird->CheckInteractWithTube(m_pipes[1])))
 	{
 		bird->SetIsDead(true);
 	}
@@ -131,7 +131,11 @@ void PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<S
 
 bool PipeManager::CheckCoins(std::shared_ptr<BirdObject> bird)
 {
-	if(bird->CheckInteractWithCoin(m_coins[0]))
+	if (m_coins[0]->ShouldBeDeleted())
+	{
+		m_coins.erase(m_coins.begin() + 0);
+	}
+	if(!bird->GetIsDead() && bird->CheckInteractWithCoin(m_coins[0]))
 	{
 		m_coins.erase(m_coins.begin() + 0);
 		return true;
