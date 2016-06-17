@@ -48,11 +48,6 @@ void Font::PrintText(std::string text, float x, float y, float xSize, float ySiz
 		Vector2f vertex_down_right = Vector2f(x + i*xSize + xSize, y);
 		Vector2f vertex_down_left = Vector2f(x + i*xSize, y);
 
-	/*	Vector2f vertex_up_left = Vector2f((x + i / 1.4), y + ySize);
-		Vector2f vertex_up_right = Vector2f((x + i/ 1.4 + xSize), y + ySize);
-		Vector2f vertex_down_right = Vector2f((x + i/ 1.4 + xSize), y);
-		Vector2f vertex_down_left = Vector2f((x + i/ 1.4), y);*/
-
 		vertices.push_back(vertex_up_left);
 		vertices.push_back(vertex_down_left);
 		vertices.push_back(vertex_up_right);
@@ -61,13 +56,7 @@ void Font::PrintText(std::string text, float x, float y, float xSize, float ySiz
 		vertices.push_back(vertex_up_right);
 		vertices.push_back(vertex_down_left);
 
-		unsigned char c1 = text[i];
-		unsigned char c2 = text[i + 1];
-
 		int character = text[i];
-		int character2 = text[i + 1];
-		float uv_x = (character % 16) / 16.0f;
-		float uv_y = (character / 16) / 16.0f;
 
 		Vector2f uv_up_left = Vector2f(alphabet.at(character).x, alphabet.at(character).y);//Vector2f(uv_x, uv_y);
 		Vector2f uv_up_right = Vector2f(alphabet.at(character).z, alphabet.at(character).y);//Vector2f(uv_x + 1.0f / 16.0f, uv_y);

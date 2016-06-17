@@ -14,11 +14,13 @@
 
 template <typename T, unsigned int N> unsigned int GetArraySize(T(&)[N]) { return N; }
 
-enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN, MAIN_MENU, DEAD_SCREEN};
+enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN, MAIN_MENU, COUNT};
 
 enum class LANGUAGE {NONE, UKRAINE, ENGLISH};
 
 const int verticiesAmount = 4;
+
+const int respawnPrise = 30;
 
 const unsigned short Indices[] = { 0, 1, 2, 0, 2, 3 };
 
@@ -51,7 +53,18 @@ const std::map<int, Vector4f> alphabet{
 	{'W', Vector4f(0, 0, 0.042, 0.214)},
 	{'X', Vector4f(0, 0, 0.042, 0.214)},
 	{'Y', Vector4f( 593 / font_weight, (font_height - 158) / font_height, 646 / font_weight, (font_height - 199) / font_height)},
-	{'Z', Vector4f(0, 0, 0.042, 0.214)}
+	{'Z', Vector4f(0, 0, 0.042, 0.214)},
+	{'0', Vector4f( 27 / font_weight, (font_height - 221) / font_height, 35 / font_weight, (font_height - 232) / font_height)},
+	{'1', Vector4f( 39 / font_weight, (font_height - 221) / font_height, 47 / font_weight, (font_height - 232) / font_height)},
+	{'2', Vector4f( 50 / font_weight, (font_height - 221) / font_height, 58 / font_weight, (font_height - 232) / font_height)},
+	{'3', Vector4f( 61 / font_weight, (font_height - 221) / font_height, 69 / font_weight, (font_height - 232) / font_height)},
+	{'4', Vector4f( 73 / font_weight, (font_height - 221) / font_height, 81 / font_weight, (font_height - 232) / font_height)},
+	{'5', Vector4f( 84 / font_weight, (font_height - 221) / font_height, 92 / font_weight, (font_height - 232) / font_height)},
+	{'6', Vector4f( 96 / font_weight, (font_height - 221) / font_height, 104 / font_weight, (font_height - 232) / font_height)},
+	{'7', Vector4f( 108 / font_weight, (font_height - 221) / font_height, 116 / font_weight, (font_height - 232) / font_height)},
+	{'8', Vector4f( 122 / font_weight, (font_height - 221) / font_height, 130 / font_weight, (font_height - 232) / font_height)},
+	{'9', Vector4f( 135 / font_weight, (font_height - 221) / font_height, 143 / font_weight, (font_height - 232) / font_height)},
+
 };
 
 #endif /* GAMEHELPER_H_ */

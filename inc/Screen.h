@@ -32,7 +32,7 @@ public:
 	std::vector<drawableElement_ptr>	GetButtons() const;
 	std::shared_ptr<BirdObject>			GetBirdObject();
 
-	drawableElement_ptr					FindElementByName(std::string _name);
+	void SetElementVisible(std::string _name, bool _isVisible);
 
 private:
 
@@ -40,7 +40,6 @@ private:
 	void InitGameScreen();
 	void InitScoreScreen();
 	void InitMainMenuScreen();
-	void InitDeadScreen();
 
 	void InitBackground();
 

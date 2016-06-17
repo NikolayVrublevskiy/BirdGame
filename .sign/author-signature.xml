@@ -4,19 +4,7 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>o8KBgI+nBeuyJuZj2bufUj4sjA+/sPsSpJuNA1b8kz0=</DigestValue>
-</Reference>
-<Reference URI="res%2F66a5c2bdb5c051b90a590a727f712bf7.jpg">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>IZF183WY7bLb7KK1Pe/o+ymNlN+OCfxike7kq0pV0fY=</DigestValue>
-</Reference>
-<Reference URI="res%2FBR1gS.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>WP+ejF5VCe8kPDEYa73MH7SQKHwD6nivexe1Le8MlpM=</DigestValue>
-</Reference>
-<Reference URI="res%2FMobile%20-%20Flappy%20Bird%20-%20Version%2012%20Sprites.png">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>vntrB3bKK83DceMQqL4sjGY5kCPQlGAm0651scc2Bic=</DigestValue>
+<DigestValue>CNTfnkOO5GTmVJMrLFxrBkl3cj1sA65rKhlKV4bsp2c=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -74,17 +62,9 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>ChDFrFcp49ig5/D48jjGilOAx1yd9gHsild039D3Hhc=</DigestValue>
 </Reference>
-<Reference URI="res%2Falphabet.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>lFlfmNgWvuUDP+bMtpdARSvgYGT7Wtpk9v8DvlkFWAY=</DigestValue>
-</Reference>
 <Reference URI="res%2Falphabet1.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>SW2g+UAdG2hIomLxWhJWYmULuNVcYuE24/5J/u7QwUk=</DigestValue>
-</Reference>
-<Reference URI="res%2Faplhabet.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>ULP+iggfJ075BygVsIYayows+SYWCsudqgCVINUNFX4=</DigestValue>
+<DigestValue>EQNvnT8e5TN/YFifDMc+/Hs4cDzLrqE99UN/3XBh2CM=</DigestValue>
 </Reference>
 <Reference URI="res%2Fbg.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -104,7 +84,7 @@
 </Reference>
 <Reference URI="res%2Fcontinue.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>VG9BG+dNemo12blFpn3EIdan4zomRYNYgXFQek/e7EE=</DigestValue>
+<DigestValue>KgtoY5oHv+28GbFzUFrs0bu9mSNjbwL54162Y2s/kB4=</DigestValue>
 </Reference>
 <Reference URI="res%2Fdigits.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -122,14 +102,6 @@
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>GKPVKzGpZoD4afGxJUi4U8rMiuDPERW1bU/A4PO597o=</DigestValue>
 </Reference>
-<Reference URI="res%2Fgame_over_UA.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>aPopKX+jra66M0PEBC0Tt80Awj+oHXemNnrJvmDhHp0=</DigestValue>
-</Reference>
-<Reference URI="res%2Fgame_over_US.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Wq+ZRbU6i7Z+RCvJE8f8ASHOlK/0Kfci3k3slhVPbnA=</DigestValue>
-</Reference>
 <Reference URI="res%2Flanguage.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>MhaDvRnfP3KzuHNxN2Sv9/te9zOvT4XBhDXUvTsrojw=</DigestValue>
@@ -144,11 +116,11 @@
 </Reference>
 <Reference URI="res%2Fscore_board_UA.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>YyjAOgaIKsejGezXdEq/VRiSH1WLzTnF4N3JrSbp7dA=</DigestValue>
+<DigestValue>CwKenw77G2hBC2IowNy9P6GUoz4ThFOPOmA2FCtNLFU=</DigestValue>
 </Reference>
 <Reference URI="res%2Fscore_board_US.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zrnx9oQkSya2EvTXk7ElKq6HF8SsXb5LC8EKnAAuziM=</DigestValue>
+<DigestValue>zABbBkZwLH2EzT4fR5DlVJI4rIBmItxdZlwYS34bsIc=</DigestValue>
 </Reference>
 <Reference URI="res%2Fstart_btn.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -157,22 +129,6 @@
 <Reference URI="res%2Ftop_tube.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>roawAlP8UeAFQDSG+grZcoJ5BUg3I949ykQsQKdr+5s=</DigestValue>
-</Reference>
-<Reference URI="res%2F%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20(1)%20YesNo.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>JVjJ8d0SILaVKoVaf6Uc30QHoU0rU4hxL2JfcaVkTIs=</DigestValue>
-</Reference>
-<Reference URI="res%2F%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20(1)%20alphabet.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>uH+p81ylmcixInInHRgup8RYI+pOMm72lX2WEj6Yw1g=</DigestValue>
-</Reference>
-<Reference URI="res%2F%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20(1)%20aplhabet.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>tCU1jJ9Uas74Bm8SItKyn5/wTUcfsjTC4c1JVqFgOng=</DigestValue>
-</Reference>
-<Reference URI="res%2F%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F%20(1)%20bird.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>9RRN7rbPydTo2xxH/9jpvCsiHKZ6vc95CvPUdkwxTGc=</DigestValue>
 </Reference>
 <Reference URI="shared%2Fres%2Fcoins.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -195,11 +151,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-LiTNPHWE0EvH01Nlv0Yc0QJfIr98tuBFfKq1Wal9Rd/8RwYGeIvjJGRavtPVlPr0YB33ino1ttg+
-bUhVWqI+atS7aVDhMPBDSjdtTPCda/QmwVvAug/C5pq/xwrQxjTYfCa86TkYc+29xZ480+pgDYrD
-7ZhxLnIqHfCuZh1dAzUuFJ0863Q8BbtPyw8G3LcTEPfQ7Yoaw+G1IV24PnTUrPvgvwH2dZM7afAp
-+ooqQfditVM6FoRdQGBsEcybJhwcDeQCHG1nX+R5TXNfdPWOi3Pi93mBEdz2x4IThEp7LaTu897c
-5oj8hYKqq1fgrszfUswbJckfKuCC/clsCQB5VQ==
+KrqBLtWRV4mXJxF6NHh3YJz31evqhB6jv1dSpkPMbK4bM7UIU0Qe66AQUW6JB0HHJoi5qRWz8Nhq
+nWSsddWMSvKw4OgnrtM7PQBlaaAIfYw5tpHyzwV3hV/PqEwz69zqLGfdecIPcX3gF347RrzomR9c
+zFIChEewswRiiHPc5gx9pi12WLFGMf1ogq//VcYqL96S2NJzR4oVgwwqmGBUgnLPjn3KckmfQq24
+Jo1YKVYT+Qs+rwFfwEOs9VGDOz7dnxtzjrrHXkteT+DRj9IDoqunSWrhPd/ygZIklrqEPoqfRnpo
+tGq5jVeqgj5vxfanu53K9po1NuWBbtdY5keP+A==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

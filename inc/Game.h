@@ -17,10 +17,9 @@ using screen_map = std::map<GAME_SCREEN, std::shared_ptr<Screen>>;
 enum class LANGUAGE;
 
 class PipeManager;
-class ScoreObject;
-class CoinsManager;
 class Font;
 class SimpleElement;
+class ScoreManager;
 
 class Game : public ISingleton<Game>
 {
@@ -43,9 +42,14 @@ public:
 
 	const char*				GetLanguage() const;
 	void					SetLanguage(LANGUAGE _lang);
-	int						GetCurrentCoinsCount() const;
+	int						GetCoinsCount() const;
+	void					IncreaseCointCount(int _value);
+	int						GetBestScore() const;
+	void					SetBestScore(int _bestScore);
 
 	std::shared_ptr<Font>	GetFont();
+
+	void					InitScreens();
 
 private:
 
@@ -53,8 +57,7 @@ private:
 	screen_map						m_screens;
 	std::shared_ptr<Screen>			m_currentScreen;
 	std::shared_ptr<PipeManager>	m_pipeManager;
-	std::shared_ptr<ScoreObject>	m_scoreObject;
-	std::shared_ptr<CoinsManager>	m_coinsManager;
+	std::shared_ptr<ScoreManager>	m_scoreManager;
 
 	std::shared_ptr<Font>			m_font;
 };

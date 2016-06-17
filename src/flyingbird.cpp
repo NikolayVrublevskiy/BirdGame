@@ -88,7 +88,7 @@ mouse_down_cb(void *data, Evas *e , Evas_Object *obj , void *event_info)
 
 	if(screen->GetType() == GAME_SCREEN::GAME && !screen->GetBirdObject()->GetIsDead())
 	{
-		game->GetCurrentScreen()->GetBirdObject()->SetRotationAngle(0.0f);
+		game->GetCurrentScreen()->GetBirdObject()->UpBird();
 	}
 	else
 	{

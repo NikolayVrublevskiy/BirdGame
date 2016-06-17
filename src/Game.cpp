@@ -5,17 +5,12 @@
  *      Author: nikolay.vrublevskiy
  */
 
-#include "Game.h"
 #include "Objects/BirdObject.h"
-#include "Objects/ScoreObject.h"
-#include "CoinsManager.h"
-#include "PipeManager.h"
 #include "Objects/DrawInformation.h"
-
+#include "PipeManager.h"
+#include "ScoreManager.h"
 #include "Font.h"
-//#include "Objects/DrawInformation.h"
-
-static GAME_SCREEN SCREENS_ARR[] = {GAME_SCREEN::CHOOSE_LANGUAGE, GAME_SCREEN::GAME, GAME_SCREEN::SCORE_SCREEN, GAME_SCREEN::MAIN_MENU, GAME_SCREEN::DEAD_SCREEN};
+#include "Game.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,22 +25,13 @@ Game::Game()
 
 void Game::Init()
 {
-	size_t size = GetArraySize(SCREENS_ARR);
-	for(size_t i = 0; i < size; i++)
-	{
-		m_screens[GAME_SCREEN::CHOOSE_LANGUAGE] = std::make_shared<Screen>(GAME_SCREEN::CHOOSE_LANGUAGE);
-	}
+	m_screens[GAME_SCREEN::CHOOSE_LANGUAGE] = std::make_shared<Screen>(GAME_SCREEN::CHOOSE_LANGUAGE);
 
 	m_pipeManager = std::make_shared<PipeManager>();
-	m_scoreObject = std::make_shared<ScoreObject>();
-	m_coinsManager = std::make_shared<CoinsManager>();
+	m_scoreManager = std::make_shared<ScoreManager>();
 
 	m_language = LANGUAGE::NONE;
 	m_currentScreen = m_screens[GAME_SCREEN::CHOOSE_LANGUAGE];
-
-
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,31 +43,36 @@ void Game::Draw(double dt)
 	switch(m_currentScreen->GetType())
 	{
 	case GAME_SCREEN::GAME:
-		m_pipeManager->CheckTubes(m_currentScreen->GetBirdObject(), m_scoreObject);
+		if(m_pipeManager->CheckTubes(m_currentScreen->GetBirdObject()))
+			m_scoreManager->IncreaseCurrentScore();
 		if(m_pipeManager->CheckCoins(m_currentScreen->GetBirdObject()) && !m_currentScreen->GetBirdObject()->GetIsDead())
-			m_coinsManager->IncreaseScore();
+			m_scoreManager->IncreaseCoinsCount();
+
 		m_pipeManager->Draw(dt);
-		m_scoreObject->Draw(dt);
-		m_coinsManager->DrawScore(dt);
+		m_scoreManager->DrawCurrentScore();
+		m_scoreManager->DrawCoinsCount(dt);
+
 		if(m_currentScreen->GetBirdObject()->GetIsDead())
 		{
-			auto obj = m_currentScreen->FindElementByName("cont_game");
-			obj->SetIsVisible(true);
-			obj = m_currentScreen->FindElementByName("yes_btn");
-			obj->SetIsVisible(true);
-			obj = m_currentScreen->FindElementByName("no_btn");
-			obj->SetIsVisible(true);
-			//m_currentScreen->GetBirdObject()->SetIsDead(false);
-			//SetCurrentScreen(GAME_SCREEN::DEAD_SCREEN);
-			//break;
+			if(m_scoreManager->GetCoinsCount() >= respawnPrise)
+			{
+				m_currentScreen->SetElementVisible("cont_game", true);
+				m_currentScreen->SetElementVisible("yes_btn", true);
+				m_currentScreen->SetElementVisible("no_btn", true);
+			}
+			else
+			{
+				SetCurrentScreen(GAME_SCREEN::SCORE_SCREEN);
+			}
 		}
 		break;
+
 	case GAME_SCREEN::SCORE_SCREEN:
-		m_scoreObject->Draw(dt);
+		m_scoreManager->DrawCurrentScore();
+		m_scoreManager->DrawBestScore();
 		break;
 
-	case GAME_SCREEN::CHOOSE_LANGUAGE:
-	case GAME_SCREEN::NONE:
+	default:
 		break;
 
 	}
@@ -91,37 +82,34 @@ void Game::Draw(double dt)
 
 void Game::SetCurrentScreen(GAME_SCREEN _screen)
 {
+	m_currentScreen = m_screens[_screen];
+
 	switch(_screen)
 	{
-	case GAME_SCREEN::MAIN_MENU:
-	{
-		size_t size = GetArraySize(SCREENS_ARR);
-		for(size_t i = 0; i < size; i++)
-		{
-			m_screens[(GAME_SCREEN)i] = std::make_shared<Screen>(static_cast<GAME_SCREEN>(i));// new Screen(screen);
-		}
-		break;
-	}
-
-	case GAME_SCREEN::SCORE_SCREEN:
-	{
-		m_scoreObject->TranslateDigits(Vector3f(5.0f, 6.3f, 0.0f));
-		break;
-	}
-
-	case GAME_SCREEN::CHOOSE_LANGUAGE:
-		break;
-
 	case GAME_SCREEN::GAME:
 		m_screens[_screen]->GetBirdObject()->SetIsDead(false);
 		m_screens[_screen]->GetBirdObject()->SetIsInvulnerable(true);
-		m_screens[_screen]->GetBirdObject()->GetDrawInformation()->GetMatrix().SetTranslation(1.0f, 5.0f, 0.0f);
+		m_screens[_screen]->GetBirdObject()->ResetPosition();
+
+		m_currentScreen->SetElementVisible("cont_game", false);
+		m_currentScreen->SetElementVisible("yes_btn", false);
+		m_currentScreen->SetElementVisible("no_btn", false);
 		break;
 
-	case GAME_SCREEN::NONE:
+	default:
 		break;
 	}
-	m_currentScreen = m_screens[_screen];
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Game::InitScreens()
+{
+	for(size_t i = 0; i < static_cast<size_t>(GAME_SCREEN::COUNT); i++)
+	{
+		m_screens[(GAME_SCREEN)i] = std::make_shared<Screen>(static_cast<GAME_SCREEN>(i));
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,9 +130,10 @@ const char* Game::GetLanguage() const
 	case LANGUAGE::UKRAINE: return "UA"; break;
 
 	case LANGUAGE::NONE: return ""; break;
-	}
 
-	return "";
+	default:
+		return "";
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -158,16 +147,35 @@ void Game::ReinitLevel()
 		m_pipeManager->AddPipe(true);
 		m_pipeManager->AddPipe(false);
 	}
-
-	m_scoreObject->ResetScore();
-
+	m_scoreManager->SetCurrentScore(0);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-int	Game::GetCurrentCoinsCount() const
+void Game::IncreaseCointCount(int _value)
 {
-	return m_coinsManager->GetScore();
+	m_scoreManager->IncreaseCoinsCount(_value);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+int Game::GetBestScore() const
+{
+	return m_scoreManager->GetBestScore();
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Game::SetBestScore(int _bestScore)
+{
+	m_scoreManager->SetBestScore(_bestScore);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+int Game::GetCoinsCount() const
+{
+	return m_scoreManager->GetCoinsCount();
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

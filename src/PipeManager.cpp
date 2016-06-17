@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "Objects/PipeObject.h"
 #include "Objects/BirdObject.h"
-#include "Objects/ScoreObject.h"
 #include "Objects/DrawInformation.h"
 #include "Objects/CoinObject.h"
 
@@ -45,15 +44,13 @@ void PipeManager::AddPipe(bool isTop)
 
 	if (isTop)
 	{
-		m_lastRnd = (rand() % 64) / 16.0 ;
+		m_lastRnd = (rand() % 128) / 32.0 ;
 
 		pipe_ptr top_pipe = std::make_shared<PipeObject>("top_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
 		top_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd, 0.0f);
 		m_pipes.push_back(top_pipe);
 
-		coin_ptr coin = std::make_shared<CoinObject>("coin.tga", m_coinVerticies, "Shaders/CoinShader.vs", "Shaders/CoinShader.fs");
-		coin->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
-		m_coins.push_back(coin);
+		AddCoin();
 	}
 	else
 	{
@@ -63,6 +60,15 @@ void PipeManager::AddPipe(bool isTop)
 		m_lastRnd = 0.0;
 		m_offset += 3.5f;
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void PipeManager::AddCoin()
+{
+	coin_ptr coin = std::make_shared<CoinObject>("coin.tga", m_coinVerticies, "Shaders/CoinShader.vs", "Shaders/CoinShader.fs");
+	coin->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
+	m_coins.push_back(coin);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -77,9 +83,9 @@ void PipeManager::Draw(float dt)
 
 void PipeManager::DrawPipes(float dt)
 {
-	for(size_t i = 0 ; i < m_pipes.size(); i++)
+	for(const auto pipe: m_pipes)
 	{
-		m_pipes[i]->Draw(dt);
+		pipe->Draw(dt);
 	}
 }
 
@@ -87,9 +93,9 @@ void PipeManager::DrawPipes(float dt)
 
 void PipeManager::DrawCoins(float dt)
 {
-	for(size_t i = 0 ; i < m_coins.size(); i++)
+	for(const auto coin: m_coins)
 	{
-		m_coins[i]->Draw(dt);
+		coin->Draw(dt);
 	}
 }
 
@@ -103,7 +109,7 @@ void PipeManager::Clean()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<ScoreObject> so)
+bool PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird)
 {
 	if (m_pipes[0]->ShouldBeDeleted())
 	{
@@ -112,19 +118,22 @@ void PipeManager::CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<S
 		m_pipes.erase(m_pipes.begin() + 0);
 		AddPipe(true);
 		AddPipe(false);
+		return false;
 	}
 	else if (!bird->GetIsDead() && !bird->GetIsInvulnerable() && (bird->CheckInteractWithTube(m_pipes[0]) || bird->CheckInteractWithTube(m_pipes[1])))
 	{
 		bird->SetIsDead(true);
+		return false;
 	}
 	else if (!bird->GetIsDead() && !m_pipes[0]->IsScored())
 	{
 		if (bird->CheckScore(m_pipes[0]))
 		{
 			m_pipes[0]->SetIsScored(true);
-			so->IncreaseScore();
+			return true;
 		}
 	}
+	return false;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

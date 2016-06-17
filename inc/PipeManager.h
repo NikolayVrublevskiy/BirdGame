@@ -23,13 +23,15 @@ public:
 	std::vector<pipe_ptr> GetPipes() const;
 
 	void AddPipe( bool isTop);
-	void CheckTubes(std::shared_ptr<BirdObject> bird, std::shared_ptr<ScoreObject> so);
+	bool CheckTubes(std::shared_ptr<BirdObject> bird);
 	bool CheckCoins(std::shared_ptr<BirdObject> bird);
 	void Draw(float dt);
 	void Clean();
 	void CorrectOffset();
 
 private:
+
+	void AddCoin();
 
 	void DrawPipes(float dt);
 	void DrawCoins(float dt);

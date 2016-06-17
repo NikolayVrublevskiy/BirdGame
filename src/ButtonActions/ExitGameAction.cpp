@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
+#include <fstream>
+
 
 ExitGameAction::ExitGameAction()
 {}
@@ -19,17 +21,13 @@ void ExitGameAction::DoAction()
 {
 	std::string path = app_get_data_path();
 	path += "coins.txt";
-	FILE * pf = fopen(path.c_str(), "w");
-	fseek(pf, 0, SEEK_SET);
-	int score = Game::GetInstance()->GetCurrentCoinsCount();
 
-	char buf[4];
-	sprintf(buf,"%d",score);
+	const int score = Game::GetInstance()->GetCoinsCount();
+	const int bestScore = Game::GetInstance()->GetBestScore();
 
-	fputs(buf, pf);
-	fclose(pf);
-
-
+	std::ofstream ofs (path, std::ofstream::out);
+	ofs << score << "\n" << bestScore;
+	ofs.close();
 
 	exit(0);
 }

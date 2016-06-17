@@ -36,8 +36,8 @@ Screen::Screen(GAME_SCREEN _screen)
 	case GAME_SCREEN::GAME:				InitGameScreen();		break;
 	case GAME_SCREEN::SCORE_SCREEN:		InitScoreScreen();		break;
 	case GAME_SCREEN::MAIN_MENU:		InitMainMenuScreen();	break;
-	case GAME_SCREEN::DEAD_SCREEN:		InitDeadScreen();		break;
 	case GAME_SCREEN::NONE:										break;
+	default:													break;
 	}
 }
 
@@ -68,6 +68,7 @@ void Screen::InitGameScreen()
 	cont_game->GetDrawInformation()->GetMatrix().SetTranslation(5.0f, 5.5f, 0.0f);
 	cont_game->AddTextField(std::make_shared<TextField>("CONTINUE", Vector3f(2.0f, 6.5f, 0.0f), 0.8, 0.7));
 	cont_game->AddTextField(std::make_shared<TextField>("FOR", Vector3f(2.0f, 5.0f, 0.0f), 0.8, 0.7));
+	cont_game->AddTextField(std::make_shared<TextField>(std::to_string(respawnPrise), Vector3f(4.5f, 4.9f, 0.0f), 0.8, 1.0));
 	m_simpleObjects.push_back(cont_game);
 
 	std::vector<Vertex> Vertices = {
@@ -100,12 +101,6 @@ void Screen::InitGameScreen()
 	else
 		static_cast<ButtonObject*>(no_btn.get())->SetTextField(std::make_shared<TextField>("NO", Vector3f(6.5f, 3.8f, 0.0f), 0.5, 0.4));
 	m_buttons.push_back(no_btn);
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-void Screen::InitDeadScreen()
-{
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,18 +288,24 @@ void Screen::DrawObjects(double dt, double offset)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-drawableElement_ptr	Screen::FindElementByName(std::string _name)
+void Screen::SetElementVisible(std::string _name, bool _isVisible)
 {
 	for(const auto & object : m_simpleObjects)
 	{
 		if(object->GetObjectName() == _name)
-			return object;
+		{
+			object->SetIsVisible(_isVisible);
+			return;
+		}
 	}
 
 	for(const auto & button : m_buttons)
 	{
 		if(button->GetObjectName() == _name)
-			return button;
+		{
+			button->SetIsVisible(_isVisible);
+			return;
+		}
 	}
 }
 

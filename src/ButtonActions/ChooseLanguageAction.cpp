@@ -16,6 +16,7 @@ ChooseLanguageAction::ChooseLanguageAction(LANGUAGE _lang)
 void ChooseLanguageAction::DoAction()
 {
 	Game::GetInstance()->SetLanguage(m_lang);
+	Game::GetInstance()->InitScreens();
 	ChangeStateAction csa(GAME_SCREEN::MAIN_MENU);
 	csa.DoAction();
 }

@@ -31,13 +31,15 @@ public:
 
 	void SetShouldUp(bool value);
 
-	void SetRotationAngle(float value);
+	void UpBird();
 
 	void SetIsDead(bool value);
 	bool GetIsDead() const;
 
 	void SetIsInvulnerable(bool value);
 	bool GetIsInvulnerable() const;
+
+	void ResetPosition();
 
 	~BirdObject();
 
