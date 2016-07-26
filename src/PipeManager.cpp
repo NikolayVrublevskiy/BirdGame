@@ -1,10 +1,12 @@
 #include "PipeManager.h"
-#include <time.h>
-#include <stdlib.h>
 #include "Objects/PipeObject.h"
 #include "Objects/BirdObject.h"
 #include "Objects/DrawInformation.h"
 #include "Objects/CoinObject.h"
+#include "Game.h"
+
+#include <time.h>
+#include <stdlib.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +49,17 @@ void PipeManager::AddPipe(bool isTop)
 		m_lastRnd = (rand() % 128) / 32.0 ;
 
 		pipe_ptr top_pipe = std::make_shared<PipeObject>("top_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
-		top_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd, 0.0f);
+		switch(Game::GetInstance()->GetGameMode())
+		{
+		case GAME_MODE::CLASSIC:
+			top_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd, 0.0f);
+			break;
+		case GAME_MODE::REVERSE:
+			top_pipe->GetDrawInformation()->GetMatrix().SetTranslation(4.0f - m_offset, 12.0f - m_lastRnd, 0.0f);
+			break;
+		default:
+			break;
+		}
 		m_pipes.push_back(top_pipe);
 
 		AddCoin();
@@ -55,7 +67,18 @@ void PipeManager::AddPipe(bool isTop)
 	else
 	{
 		pipe_ptr bot_pipe = std::make_shared<PipeObject>("bot_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::BOTTOM);
-		bot_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 3.0f - m_lastRnd, 0.0f);
+
+		switch(Game::GetInstance()->GetGameMode())
+		{
+		case GAME_MODE::CLASSIC:
+			bot_pipe->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 3.0f - m_lastRnd, 0.0f);
+			break;
+		case GAME_MODE::REVERSE:
+			bot_pipe->GetDrawInformation()->GetMatrix().SetTranslation(4.0f - m_offset, 3.0f - m_lastRnd, 0.0f);
+			break;
+		default:
+			break;
+		}
 		m_pipes.push_back(bot_pipe);
 		m_lastRnd = 0.0;
 		m_offset += 3.5f;
@@ -67,7 +90,17 @@ void PipeManager::AddPipe(bool isTop)
 void PipeManager::AddCoin()
 {
 	coin_ptr coin = std::make_shared<CoinObject>("coin.tga", m_coinVerticies, "Shaders/CoinShader.vs", "Shaders/CoinShader.fs");
-	coin->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
+	switch(Game::GetInstance()->GetGameMode())
+	{
+	case GAME_MODE::CLASSIC:
+		coin->GetDrawInformation()->GetMatrix().SetTranslation(6.0f + m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
+		break;
+	case GAME_MODE::REVERSE:
+		coin->GetDrawInformation()->GetMatrix().SetTranslation(4.0f - m_offset, 12.0f - m_lastRnd - 4.5f, 0.0f);
+		break;
+	default:
+		break;
+	}
 	m_coins.push_back(coin);
 }
 
@@ -85,6 +118,17 @@ void PipeManager::DrawPipes(float dt)
 {
 	for(const auto pipe: m_pipes)
 	{
+		switch(Game::GetInstance()->GetGameMode())
+		{
+		case GAME_MODE::CLASSIC:
+			pipe->GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
+			break;
+		case GAME_MODE::REVERSE:
+			pipe->GetDrawInformation()->GetMatrix().Translate(+0.05f, 0.0f, 0.0f);
+			break;
+		default:
+			break;
+		}
 		pipe->Draw(dt);
 	}
 }
@@ -95,6 +139,17 @@ void PipeManager::DrawCoins(float dt)
 {
 	for(const auto coin: m_coins)
 	{
+		switch(Game::GetInstance()->GetGameMode())
+		{
+		case GAME_MODE::CLASSIC:
+			coin->GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
+			break;
+		case GAME_MODE::REVERSE:
+			coin->GetDrawInformation()->GetMatrix().Translate(+0.05f, 0.0f, 0.0f);
+			break;
+		default:
+			break;
+		}
 		coin->Draw(dt);
 	}
 }
@@ -156,7 +211,7 @@ bool PipeManager::CheckCoins(std::shared_ptr<BirdObject> bird)
 
 void PipeManager::CorrectOffset()
 {
-	m_offset = m_pipes[m_pipes.size() - 1]->GetDrawInformation()->GetMatrix().m[3][0] - 2.5f;
+	m_offset = 10.5;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,15 +6,19 @@
  */
 
 #include "Objects/BirdObject.h"
-#include "Camera.h"
+#include "Objects/DrawInformation.h"
 #include "Objects/PipeObject.h"
 #include "Objects/CoinObject.h"
-#include <stdio.h>
+#include "Camera.h"
+#include "Game.h"
+
 #include <Elementary_GL_Helpers.h>
-#include "Objects/DrawInformation.h"
 #include <memory>
+#include <stdio.h>
 
 extern Evas_GL_API * __evas_gl_glapi;
+
+#define DEGREES_TO_RADIANS(x) (3.14159265358979323846 * x / 180.0)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,12 +34,6 @@ BirdObject::BirdObject(std::string _objectName, bool _isVisible, const char* _pa
  m_position(1.0, 5.0, 0.0)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_LINEAR));
-
-	m_shouldUpBird = false;
-	m_UpTime = 0.0f;
-	m_isDead = false;
-	m_rotationAngle = 0.0f;
-
 	InitPoints();
 }
 
@@ -67,32 +65,17 @@ void BirdObject::Draw(float dt)
 
 	glBindTexture(GL_TEXTURE_2D, di->m_texture); // unsigned int texture_id;
 
-	if(!m_isDead)
-	{
-		if(m_rotationAngle > -0.8f)
-		{
-			if(!m_shouldUpBird)
-			{
-				m_rotationAngle -= 0.05;
-			}
-			di->GetMatrix().SetRotationZ(m_rotationAngle);
-		}
 
-		if(m_shouldUpBird && m_UpTime < 0.60)
-		{
-			if(m_rotationAngle < 0.0f)
-			{
-				m_rotationAngle += 0.10;
-			}
-			m_position.y += dt * 20 ;
-			m_UpTime += 0.1;
-		}
-		else
-		{
-			m_shouldUpBird = false;
-			m_UpTime = 0.0;
-			m_position.y -= dt * 15;
-		}
+	switch(Game::GetInstance()->GetGameMode())
+	{
+	case GAME_MODE::CLASSIC:
+		ClassicModeBirdMovements(dt);
+		break;
+	case GAME_MODE::REVERSE:
+		ReverseModeBirdMovements(dt);
+		break;
+	default:
+		break;
 	}
 
 	if(m_isInvulnerable)
@@ -102,10 +85,18 @@ void BirdObject::Draw(float dt)
 			m_isInvulnerable = false;
 	}
 
-	di->GetMatrix().SetTranslation(m_position.x , m_position.y, m_position.z);
+	Matrix4f matrix1;
+	Matrix4f matrix2;
+	matrix1.SetRotationZ(DEGREES_TO_RADIANS(m_rotationAngle));
+	matrix2 =m_rotMatrix *  matrix1;// * di->GetMatrix();
+
+	Matrix4f& matr = di->GetMatrix();
+	matr = matrix2;// * di->GetMatrix();// = result;
+
+	matr.SetTranslation(m_position.x , m_position.y, m_position.z);
 
 	float u_mvp = glGetUniformLocation(di->m_program, "u_mvpMatrix");
-	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * di->m_matrix);
+	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * matr);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
 
 	float offset = glGetUniformLocation(di->m_program, "u_offset");
@@ -117,6 +108,70 @@ void BirdObject::Draw(float dt)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glUseProgram(0);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BirdObject::ClassicModeBirdMovements(float dt)
+{
+	if(!m_isDead)
+	{
+		if(m_rotationAngle > -60.0f)
+		{
+			if(!m_shouldUpBird)
+			{
+				m_rotationAngle -= 4.0f;
+			}
+		}
+
+		if(m_shouldUpBird && m_UpTime < 0.60)
+		{
+			if(m_rotationAngle < 0.0f)
+			{
+				m_rotationAngle += 10.0f;
+			}
+			m_position.y += dt * 20 ;
+			m_UpTime += 0.1;
+		}
+		else
+		{
+			m_shouldUpBird = false;
+			m_UpTime = 0.0;
+			m_position.y -= dt * 15;
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void BirdObject::ReverseModeBirdMovements(float dt)
+{
+	if(!m_isDead)
+	{
+		if(m_rotationAngle > -60.0f)
+		{
+			if(!m_shouldUpBird)
+			{
+				m_rotationAngle -= 4.0f;
+			}
+		}
+
+		if(m_shouldUpBird && m_UpTime < 0.60)
+		{
+			if(m_rotationAngle < 0.0f)
+			{
+				m_rotationAngle += 10.0f;
+			}
+			m_position.y += dt * 20 ;
+			m_UpTime += 0.1;
+		}
+		else
+		{
+			m_shouldUpBird = false;
+			m_UpTime = 0.0;
+			m_position.y -= dt * 15;
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,9 +189,9 @@ bool BirdObject::CheckInteractWithTube(std::shared_ptr<PipeObject> pipe)
 	switch (pipe->GetType())
 	{
 	case PipeObject::PIPE_TYPE::TOP:
-		return CheckTopPoints(pipe);
+		return CheckTopTube(pipe);
 	case PipeObject::PIPE_TYPE::BOTTOM:
-		return CheckBotPoints(pipe);
+		return CheckBotTube(pipe);
 	default:
 		return false;
 	}
@@ -163,19 +218,36 @@ bool BirdObject::CheckInteractWithCoin(std::shared_ptr<CoinObject> coin)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-bool BirdObject::CheckTopPoints(std::shared_ptr<PipeObject> pipe)
+bool BirdObject::CheckTopTube(std::shared_ptr<PipeObject> pipe)
 {
 	auto bird_matrix = GetDrawInformation()->GetMatrix();
 	auto pipe_matrix = pipe->GetDrawInformation()->GetMatrix();
 
 	for(const auto point: m_points)
 	{
-		if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
-			(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] - 0.45f)	&&
-			(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] + 0.45f)
-		)
+
+		switch(Game::GetInstance()->GetGameMode())
 		{
-			return true;
+		case GAME_MODE::CLASSIC:
+			if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
+				(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] - 0.45f)	&&
+				(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] + 0.45f)
+			)
+			{
+				return true;
+			}
+			break;
+		case GAME_MODE::REVERSE:
+			if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
+				(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] - 0.45f)	&&
+				(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] + 0.45f)
+			)
+			{
+				return true;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 	return false;
@@ -184,7 +256,7 @@ bool BirdObject::CheckTopPoints(std::shared_ptr<PipeObject> pipe)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-bool BirdObject::CheckBotPoints(std::shared_ptr<PipeObject> pipe)
+bool BirdObject::CheckBotTube(std::shared_ptr<PipeObject> pipe)
 {
 	auto bird_matrix = GetDrawInformation()->GetMatrix();
 	auto pipe_matrix = pipe->GetDrawInformation()->GetMatrix();
@@ -204,9 +276,22 @@ bool BirdObject::CheckBotPoints(std::shared_ptr<PipeObject> pipe)
 
 bool BirdObject::CheckScore(std::shared_ptr<PipeObject> pipe)
 {
-	if (GetDrawInformation()->GetMatrix().m[3][0] >= pipe->GetDrawInformation()->GetMatrix().m[3][0])
+	switch(Game::GetInstance()->GetGameMode())
 	{
-		return true;
+	case GAME_MODE::CLASSIC:
+		if (GetDrawInformation()->GetMatrix().m[3][0] >= pipe->GetDrawInformation()->GetMatrix().m[3][0])
+		{
+			return true;
+		}
+		break;
+	case GAME_MODE::REVERSE:
+		if (GetDrawInformation()->GetMatrix().m[3][0] <= pipe->GetDrawInformation()->GetMatrix().m[3][0])
+		{
+			return true;
+		}
+		break;
+	default:
+		break;
 	}
 
 	return false;
@@ -242,7 +327,20 @@ void BirdObject::InitPoints()
 
 void BirdObject::ResetPosition()
 {
-	 m_position = Vector3f(1.0, 5.0, 0.0);
+	std::shared_ptr<DrawInformation> di = GetDrawInformation();
+
+	switch(Game::GetInstance()->GetGameMode())
+	{
+	case GAME_MODE::CLASSIC:
+		m_position = Vector3f(1.0, 5.0, 0.0);
+		break;
+	case GAME_MODE::REVERSE:
+		m_position = Vector3f(9.0, 5.0, 0.0);
+		m_rotMatrix.SetRotationY(DEGREES_TO_RADIANS(180));
+		break;
+	default:
+		break;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -265,7 +363,7 @@ void BirdObject::SetIsInvulnerable(bool value)
 {
 	m_isInvulnerable = value;
 	if(value)
-		m_invulnerableTime = 60;
+		m_invulnerableTime = 6000;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

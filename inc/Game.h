@@ -15,6 +15,7 @@
 using screen_map = std::map<GAME_SCREEN, std::shared_ptr<Screen>>;
 
 enum class LANGUAGE;
+enum class GAME_MODE;
 
 class PipeManager;
 class Font;
@@ -51,6 +52,9 @@ public:
 
 	void					InitScreens();
 
+	GAME_MODE				GetGameMode();
+	void					SetGameMode(GAME_MODE _gameMode);
+
 private:
 
 	LANGUAGE						m_language;
@@ -60,6 +64,8 @@ private:
 	std::shared_ptr<ScoreManager>	m_scoreManager;
 
 	std::shared_ptr<Font>			m_font;
+
+	GAME_MODE						m_gameMode;
 };
 
 

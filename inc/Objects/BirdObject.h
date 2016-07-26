@@ -45,8 +45,11 @@ public:
 
 private:
 
-	bool CheckTopPoints(std::shared_ptr<PipeObject> pipe);
-	bool CheckBotPoints(std::shared_ptr<PipeObject> pipe);
+	bool CheckTopTube(std::shared_ptr<PipeObject> pipe);
+	bool CheckBotTube(std::shared_ptr<PipeObject> pipe);
+
+	void ClassicModeBirdMovements(float dt);
+	void ReverseModeBirdMovements(float dt);
 
 private:
 	//float m_speed;
@@ -62,6 +65,8 @@ private:
 	time_t m_invulnerableTime;
 
 	Vector3f m_position;
+
+	Matrix4f m_rotMatrix;
 
 	std::vector<Vector2f> m_points;
 };

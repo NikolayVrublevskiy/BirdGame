@@ -32,7 +32,7 @@ ScoreManager::ScoreManager()
 
 	m_coin = std::make_shared<Drawable2DObject>("coin", true);
 	m_coin->SetDrawInformation(std::make_shared<DrawInformation>("coin.tga", coin_verts, "Shaders/BgShader.vs", "Shaders/BgShader.fs", 0x2600));
-	m_coin->GetDrawInformation()->GetMatrix().SetTranslation(0.8f, 9.5f, 0.0f);
+	m_coin->GetDrawInformation()->GetMatrix().SetTranslation(4.2f, 0.8f, 0.0f);
 
 	std::string path = app_get_data_path();
 	path += "coins.txt";
@@ -70,7 +70,7 @@ void ScoreManager::DrawCurrentScore()
 void ScoreManager::DrawCoinsCount(float _dt)
 {
 	m_coin->Draw(_dt);
-	Game::GetInstance()->GetFont()->PrintText(std::to_string(m_coinsCount), 1.2f, 9.2f, 0.5f, 0.6f);
+	Game::GetInstance()->GetFont()->PrintText(std::to_string(m_coinsCount), 4.6f, 0.5f, 0.5f, 0.6f);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

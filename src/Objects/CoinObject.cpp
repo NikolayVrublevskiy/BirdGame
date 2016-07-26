@@ -27,8 +27,6 @@ CoinObject::CoinObject(const char* _path1, std::vector<Vertex> _coords, const ch
 
 void CoinObject::Draw(float dt)
 {
-	GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
-
 	std::shared_ptr<DrawInformation> di = GetDrawInformation();
 	glUseProgram(di->m_program);
 	glEnableVertexAttribArray(0);

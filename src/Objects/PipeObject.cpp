@@ -7,6 +7,7 @@
 
 #include "Objects/PipeObject.h"
 #include "Objects/DrawInformation.h"
+#include "Game.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,8 +24,19 @@ PipeObject::PipeObject(const char* _path, std::vector<Vertex> _coords, const cha
 bool PipeObject::ShouldBeDeleted()
 {
 	auto matrix = GetDrawInformation()->GetMatrix();
-	if (matrix.m[3][0] < -1.0)
-		return true;
+	switch(Game::GetInstance()->GetGameMode())
+	{
+	case GAME_MODE::CLASSIC:
+		if (matrix.m[3][0] < -1.0)
+			return true;
+		break;
+	case GAME_MODE::REVERSE:
+		if (matrix.m[3][0] > 11.0)
+			return true;
+		break;
+	default:
+		break;
+	}
 
 	return false;
 }
@@ -33,7 +45,6 @@ bool PipeObject::ShouldBeDeleted()
 
 void PipeObject::Draw(float dt)
 {
-	GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
 	Drawable2DObject::Draw(dt);
 }
 
