@@ -14,14 +14,14 @@
 
 template <typename T, unsigned int N> unsigned int GetArraySize(T(&)[N]) { return N; }
 
-enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN, MAIN_MENU, COUNT};
+enum class GAME_SCREEN{NONE = -1, CHOOSE_LANGUAGE, GAME, SCORE_SCREEN, MAIN_MENU, ABOUT, MODE_SCREEN, COUNT};
 enum class GAME_MODE{NONE = - 1, CLASSIC, REVERSE, COUNT};
 
 enum class LANGUAGE {NONE, UKRAINE, ENGLISH};
 
 const int verticiesAmount = 4;
 
-const int respawnPrise = 30;
+const int respawnPrise = 25;
 
 const unsigned short Indices[] = { 0, 1, 2, 0, 2, 3 };
 

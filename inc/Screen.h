@@ -40,6 +40,8 @@ private:
 	void InitGameScreen();
 	void InitScoreScreen();
 	void InitMainMenuScreen();
+	void InitAboutScreen();
+	void InitGameModeScreen();
 
 	void InitBackground();
 

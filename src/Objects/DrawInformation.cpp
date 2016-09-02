@@ -18,7 +18,13 @@ GLuint gSampler;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-DrawInformation::DrawInformation(const char* _path, const std::vector<Vertex>& _coords, const char* _vs, const char* _fs, unsigned int _param)
+DrawInformation::DrawInformation(const char* _path, const std::vector<Vertex>& _coords, const char* _vs, const char* _fs, unsigned int _param,
+								float _xOffset, float _yOffset, float _xOffsetCoef, float _yOffsetCoef
+								)
+:m_xOffset(_xOffset),
+ m_yOffset(_yOffset),
+ m_xOffsetCoef(_xOffsetCoef),
+ m_yOffsetCoef(_yOffsetCoef)
 {
 	m_verticies = _coords;
 
@@ -145,4 +151,12 @@ void DrawInformation::InitShader(const char* _vs, const char* _fs)
 	glLinkProgram(m_program);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
+void DrawInformation::SetOffsetInformation(float _xOffset, float _yOffset, float _xOffsetCoef, float _yOffsetCoef)
+{
+	m_xOffset = _xOffset;
+	m_yOffset = _yOffset;
+	m_xOffsetCoef = _xOffsetCoef;
+	m_yOffsetCoef = _yOffsetCoef;
+}

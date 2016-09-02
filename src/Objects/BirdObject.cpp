@@ -34,6 +34,10 @@ BirdObject::BirdObject(std::string _objectName, bool _isVisible, const char* _pa
  m_position(1.0, 5.0, 0.0)
 {
 	SetDrawInformation(std::make_shared<DrawInformation>(_path1, _coords, _vs, _fs, GL_LINEAR));
+	m_shouldUpBird = false;
+	m_UpTime = 0.0f;
+	m_isDead = false;
+	m_rotationAngle = 0.0f;
 	InitPoints();
 }
 
@@ -124,7 +128,7 @@ void BirdObject::ClassicModeBirdMovements(float dt)
 			}
 		}
 
-		if(m_shouldUpBird && m_UpTime < 0.60)
+		if(m_shouldUpBird && m_UpTime < 0.80)
 		{
 			if(m_rotationAngle < 0.0f)
 			{
@@ -156,7 +160,7 @@ void BirdObject::ReverseModeBirdMovements(float dt)
 			}
 		}
 
-		if(m_shouldUpBird && m_UpTime < 0.60)
+		if(m_shouldUpBird && m_UpTime < 0.80)
 		{
 			if(m_rotationAngle < 0.0f)
 			{
@@ -225,29 +229,12 @@ bool BirdObject::CheckTopTube(std::shared_ptr<PipeObject> pipe)
 
 	for(const auto point: m_points)
 	{
-
-		switch(Game::GetInstance()->GetGameMode())
+		if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
+			(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] - 0.45f)	&&
+			(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] + 0.45f)
+		)
 		{
-		case GAME_MODE::CLASSIC:
-			if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
-				(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] - 0.45f)	&&
-				(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] + 0.45f)
-			)
-			{
-				return true;
-			}
-			break;
-		case GAME_MODE::REVERSE:
-			if(	(bird_matrix.m[3][1] + point.y) >= (pipe_matrix.m[3][1] - 3.0f)		&&
-				(bird_matrix.m[3][0] + point.x) <= (pipe_matrix.m[3][0] - 0.45f)	&&
-				(bird_matrix.m[3][0] + point.x) >= (pipe_matrix.m[3][0] + 0.45f)
-			)
-			{
-				return true;
-			}
-			break;
-		default:
-			break;
+			return true;
 		}
 	}
 	return false;
@@ -333,6 +320,7 @@ void BirdObject::ResetPosition()
 	{
 	case GAME_MODE::CLASSIC:
 		m_position = Vector3f(1.0, 5.0, 0.0);
+		m_rotMatrix.SetRotationY(DEGREES_TO_RADIANS(0));
 		break;
 	case GAME_MODE::REVERSE:
 		m_position = Vector3f(9.0, 5.0, 0.0);
@@ -363,7 +351,7 @@ void BirdObject::SetIsInvulnerable(bool value)
 {
 	m_isInvulnerable = value;
 	if(value)
-		m_invulnerableTime = 6000;
+		m_invulnerableTime = 60;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -44,6 +44,19 @@ void Drawable2DObject::Draw(float dt)
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * di->m_matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
 
+	float xOffset = glGetUniformLocation(di->m_program, "u_xOffset");
+	glUniform1f(xOffset, di->m_xOffset);
+
+	float yOffset = glGetUniformLocation(di->m_program, "u_yOffset");
+	glUniform1f(yOffset, di->m_yOffset);
+
+	float xOffsetCoef = glGetUniformLocation(di->m_program, "u_xOffsetCoef");
+	glUniform1f(xOffsetCoef, di->m_xOffsetCoef);
+
+	float yOffsetCoef = glGetUniformLocation(di->m_program, "u_yOffsetCoef");
+	glUniform1f(yOffsetCoef, di->m_yOffsetCoef);
+
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, di->m_idxIbo);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 

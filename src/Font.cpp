@@ -31,7 +31,7 @@ Font::Font(const char* _path1, std::vector<Vertex> _coords, const char* _vs, con
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Font::PrintText(std::string text, float x, float y, float xSize, float ySize)
+void Font::PrintText(std::string text, float x, float y, float xSize, float ySize, Vector3f _color)
 {
 	// Bind shader
 	glUseProgram(m_drawInfo->m_program);
@@ -94,6 +94,10 @@ void Font::PrintText(std::string text, float x, float y, float xSize, float ySiz
 	float u_mvp = glGetUniformLocation(m_drawInfo->m_program, "u_mvpMatrix");
 	Matrix4f tmp = (Camera::GetInstance()->GetProjectionMatrix() * Camera::GetInstance()->GetViewMatrix() * m_drawInfo->m_matrix);
 	glUniformMatrix4fv(u_mvp, 1, GL_FALSE, (GLfloat*)& tmp);
+
+	float u_texcolor = glGetUniformLocation(m_drawInfo->m_program, "u_texColor");
+	glUniform3f(u_texcolor, _color.x, _color.y, _color.z);
+	//glUniform3f(u_texcolor, 0.0, 1.0, 0.0);
 
 	// Draw call
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());

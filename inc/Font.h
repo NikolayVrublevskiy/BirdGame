@@ -20,7 +20,7 @@ public:
 	Font(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
 	~Font();
 
-	void PrintText(std::string text, float x, float y, float xSize, float ySize);
+	void PrintText(std::string text, float x, float y, float xSize, float ySize, Vector3f _color = Vector3f(0.0, 0.0, 0.0));
 
 private:
 	unsigned int m_fontVBO;

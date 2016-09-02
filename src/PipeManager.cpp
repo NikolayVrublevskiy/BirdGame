@@ -16,8 +16,8 @@ PipeManager::PipeManager()
 {
 	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	-3.0f,	-0.0001f), Vector2f(0.0f, 0.0f)));
 	m_initVerticies.push_back(Vertex(Vector3f(-0.5f,	3.0f,	-0.0001f), Vector2f(0.0f, 1.0f)));
-	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		3.0f,	-0.0001f), Vector2f(1.0f, 1.0f)));
-	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		-3.0f,	-0.0001f), Vector2f(1.0f, 0.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		3.0f,	-0.0001f), Vector2f(0.5f, 1.0f)));
+	m_initVerticies.push_back(Vertex(Vector3f(0.5f,		-3.0f,	-0.0001f), Vector2f(0.5f, 0.0f)));
 
 	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	-0.5f,	-0.0001f), Vector2f(0.0f, 0.0f)));
 	m_coinVerticies.push_back(Vertex(Vector3f(-0.5f,	0.5f,	-0.0001f), Vector2f(0.0f, 1.0f)));
@@ -48,7 +48,7 @@ void PipeManager::AddPipe(bool isTop)
 	{
 		m_lastRnd = (rand() % 128) / 32.0 ;
 
-		pipe_ptr top_pipe = std::make_shared<PipeObject>("top_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
+		pipe_ptr top_pipe = std::make_shared<PipeObject>("tubes.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::TOP);
 		switch(Game::GetInstance()->GetGameMode())
 		{
 		case GAME_MODE::CLASSIC:
@@ -60,13 +60,14 @@ void PipeManager::AddPipe(bool isTop)
 		default:
 			break;
 		}
+		top_pipe->GetDrawInformation()->SetOffsetInformation(1.0f, 0.0f, 0.5f, 0.0f);
 		m_pipes.push_back(top_pipe);
 
 		AddCoin();
 	}
 	else
 	{
-		pipe_ptr bot_pipe = std::make_shared<PipeObject>("bot_tube.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::BOTTOM);
+		pipe_ptr bot_pipe = std::make_shared<PipeObject>("tubes.tga", m_initVerticies, "Shaders/PipeShader.vs", "Shaders/PipeShader.fs", PipeObject::PIPE_TYPE::BOTTOM);
 
 		switch(Game::GetInstance()->GetGameMode())
 		{

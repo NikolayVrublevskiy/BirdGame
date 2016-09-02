@@ -4,7 +4,15 @@
 <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></SignatureMethod>
 <Reference URI="bin%2Fflyingbird">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>yCpoZXzMgzV2Lus7zNa59iyONDP7MiRFfdtpbXfYfOM=</DigestValue>
+<DigestValue>Ejkdm0ynL3qT8y9cB7JBRdHwlM27ChkWoX8cPwsJ2Vc=</DigestValue>
+</Reference>
+<Reference URI="res%2FGameMode.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>JtA56dHZr6DC2WSFTReXWE/h19wxQ6qGH8A2nJurj5s=</DigestValue>
+</Reference>
+<Reference URI="res%2FModeButtons.tga">
+<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
+<DigestValue>PwPs7aSJrJ6Z1a4rRxDq7LRBTUVTgnIyK3T893nLyc0=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FBgShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -12,7 +20,7 @@
 </Reference>
 <Reference URI="res%2FShaders%2FBgShader.vs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>R4OfqD9Qp4dpNbDk+tXT0rPgRT4HoZh/AZ/G9iDMB3Y=</DigestValue>
+<DigestValue>djDQ4HJs+L4Yv8LPQCj8OrVJTs4QJ+SVb15mIIrvUnE=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FBirdShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -28,7 +36,7 @@
 </Reference>
 <Reference URI="res%2FShaders%2FCoinShader.vs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>em7W++msyXjrUUxJD783f9kGWoA4EvwoGMk8m6F3bqU=</DigestValue>
+<DigestValue>fqgOnnTfqOmoxIn55ctjRuMa5u3IdOJMF2wTn0ybtbw=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FPipeShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -36,15 +44,15 @@
 </Reference>
 <Reference URI="res%2FShaders%2FPipeShader.vs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>Q962vhkau0EQ9K0bUT1B/XWFP7wbu2qht5ooLVwdeB4=</DigestValue>
+<DigestValue>W+cZclHfcqWPlXFIY82KmTliuJ6XX5sZgyGygKB7QYw=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FTextShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>DSzCHGFou+Zanzdt1FJJ2lAi0G7hWIG+agZvjqFavKs=</DigestValue>
+<DigestValue>VgYsBObRks0zpIzTUVgNRT6M40KOEzZzJDKZW2H61bQ=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FTextShader.vs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>0nIJ3ENNVsuL6U9a9chLwOhIjzlfsTsX7r6vg728G4A=</DigestValue>
+<DigestValue>XuueKcTHny3bKTHVIKjEBtPs8reeGf7TajmBpk9CP2w=</DigestValue>
 </Reference>
 <Reference URI="res%2FShaders%2FdigitShader.fs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -52,11 +60,11 @@
 </Reference>
 <Reference URI="res%2FShaders%2FdigitShader.vs">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>9UZJyKgrWuxc/Z0awipPIj0/TE3kgqAEWs997PkPxqI=</DigestValue>
+<DigestValue>/YxnaHJJd4b27x1HCdJGvkKZxY8DiFjHLYua4VZ9zLE=</DigestValue>
 </Reference>
 <Reference URI="res%2FYesNo.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>lQtO/NNhAEwf5IJHtO127UeE4Ou+xwH8IoBjeYaUSfE=</DigestValue>
+<DigestValue>oiQ0D1oUTcimuhkCQI7PPeL923HytfIBSC1iKFOPSDk=</DigestValue>
 </Reference>
 <Reference URI="res%2Fabout.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -64,19 +72,19 @@
 </Reference>
 <Reference URI="res%2Falphabet1.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>EQNvnT8e5TN/YFifDMc+/Hs4cDzLrqE99UN/3XBh2CM=</DigestValue>
+<DigestValue>VeThyrOjDb5BmOKukZxlcFc4GMOT/EKQuiprHy9l/KU=</DigestValue>
 </Reference>
 <Reference URI="res%2Fbg.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>45jwZ0HBeVVKpp2C+N7kS56j27P5EjCz5bHdFVLbmHU=</DigestValue>
+<DigestValue>5+JHb3la1rjvpDiRZ1ACMIk8vWkBS1B6J/GmZC4LTZ0=</DigestValue>
 </Reference>
 <Reference URI="res%2Fbird.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>9RRN7rbPydTo2xxH/9jpvCsiHKZ6vc95CvPUdkwxTGc=</DigestValue>
 </Reference>
-<Reference URI="res%2Fbot_tube.tga">
+<Reference URI="res%2Fbots.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>7j54yVztphL+tozC4Zx+3oW9vgd36VnJCNBJaoibZ3A=</DigestValue>
+<DigestValue>l3CIKat6Zh5njYUTwtr+K8NIi1Y9HUebpnBOI9tc2wU=</DigestValue>
 </Reference>
 <Reference URI="res%2Fcoin.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -84,7 +92,7 @@
 </Reference>
 <Reference URI="res%2Fcontinue.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>KgtoY5oHv+28GbFzUFrs0bu9mSNjbwL54162Y2s/kB4=</DigestValue>
+<DigestValue>CWEKpH0TilaATTwqmyQ7K5P/6C7RCq8iM+cADQPfucw=</DigestValue>
 </Reference>
 <Reference URI="res%2Fdigits.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -100,35 +108,27 @@
 </Reference>
 <Reference URI="res%2Fflags.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>GKPVKzGpZoD4afGxJUi4U8rMiuDPERW1bU/A4PO597o=</DigestValue>
+<DigestValue>xsT0rsHMZLTWvYdvQBc1NU4XaZRzj2T+5eKLEQRn47M=</DigestValue>
 </Reference>
 <Reference URI="res%2Flanguage.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>MhaDvRnfP3KzuHNxN2Sv9/te9zOvT4XBhDXUvTsrojw=</DigestValue>
+<DigestValue>lnb5KS2i7l0hZO2gTQxd6ZNz3gcqm1fhvQgTPPwEG/A=</DigestValue>
 </Reference>
 <Reference URI="res%2Flittle_buttons.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
 <DigestValue>AWls1W6zqVNz9g2qLV2L4mFzJorPxqIi6PlM/z3VRWw=</DigestValue>
 </Reference>
-<Reference URI="res%2Frestart.tga">
+<Reference URI="res%2Fscore_board.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>agGNgGhNKrwJ2xCqm8BxKrnGEcY8r61bV47dNA/IA84=</DigestValue>
-</Reference>
-<Reference URI="res%2Fscore_board_UA.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>CwKenw77G2hBC2IowNy9P6GUoz4ThFOPOmA2FCtNLFU=</DigestValue>
-</Reference>
-<Reference URI="res%2Fscore_board_US.tga">
-<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>zABbBkZwLH2EzT4fR5DlVJI4rIBmItxdZlwYS34bsIc=</DigestValue>
+<DigestValue>Lhi+z/EkHo7H0XHuztoIpvwFLZzD0OkCSRsE2pP/UZM=</DigestValue>
 </Reference>
 <Reference URI="res%2Fstart_btn.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>MhaDvRnfP3KzuHNxN2Sv9/te9zOvT4XBhDXUvTsrojw=</DigestValue>
+<DigestValue>IKJ/XiIy7PVUog2xP8xjuqkIqjcWbSOfcMiNDUSNU7Y=</DigestValue>
 </Reference>
-<Reference URI="res%2Ftop_tube.tga">
+<Reference URI="res%2Ftubes.tga">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
-<DigestValue>roawAlP8UeAFQDSG+grZcoJ5BUg3I949ykQsQKdr+5s=</DigestValue>
+<DigestValue>l3CIKat6Zh5njYUTwtr+K8NIi1Y9HUebpnBOI9tc2wU=</DigestValue>
 </Reference>
 <Reference URI="shared%2Fres%2Fcoins.txt">
 <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></DigestMethod>
@@ -151,11 +151,11 @@
 </Reference>
 </SignedInfo>
 <SignatureValue>
-fScxws23FKCLvxDToVfnz+RCMwSTGUVh5N24Cx2kW230O0CFe5Co5+W1fTUK6OuoG/wDETr4Tn2p
-UMXU8rFFenmzDyMTagMKspJQR5Vstj54wk9Tl9lO/1H8l172FCOFZOwBWLoIu9jrYlqkCB5FBQuu
-CqCeLgmmfDEleH/jAWDTJ/vfyRrPA5jj3ioWQtclZmxjavDhNXh4R3RoheqNQS+UcFpgwNAD61ef
-Qp+WF6nvoBmNf01Qo8HRGpWivKpOfq1hmLI+REK0T5JlDlt/iDepAL9MUXgDLEbWCtRpF1tnjg2M
-wwqofIi/s+dFa5MJ/zRjSDGxZ6aDlVh8t4Haow==
+ONktiha99fpejiJY/aWjZJURy2eiDDWrSyHgw0fu26u6s9QM9S6yz8QtPDm3peEQc+NBlGjax0lE
+NTqNLDCdx0gLql8eweoRVH7WjJMrorgAUzH34C3Wv1TwvWf3+qYW9cToYgWC0ZzzTtlgNul2XWBR
+4YAnqVmXtUSkPd/Bo+hLYmNdUPSPMexqu97u91R3ksolDvrXdi9NqyCXvn/voXsIZop0qJ77KouH
+3Vm3MYpav9gMvBxYtRkcwURYhdCjjlv41QesACEsUbb60j0Q/RI3UdfQmS8N7xd2F0Qaf1C+f7SB
+ArphS5hF0qj1oJlPR0Dus3r/9qp0XjssrAOeHQ==
 </SignatureValue>
 <KeyInfo>
 <X509Data>

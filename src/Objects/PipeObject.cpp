@@ -45,6 +45,7 @@ bool PipeObject::ShouldBeDeleted()
 
 void PipeObject::Draw(float dt)
 {
+	//GetDrawInformation()->GetMatrix().Translate(-0.05f, 0.0f, 0.0f);
 	Drawable2DObject::Draw(dt);
 }
 

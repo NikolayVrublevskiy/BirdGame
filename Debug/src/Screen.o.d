@@ -215,6 +215,7 @@ src/Screen.o: ../src/Screen.cpp \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ChooseLanguageAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ReinitLevelAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/ContinueGameAction.h \
+  C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\ButtonActions/SetupGameModeAction.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Game.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc/ISingleton.h \
   C:/Users/nikolay.vrublevskiy/workspace/BirdGame/inc\Font.h

@@ -16,7 +16,9 @@ struct Vertex;
 class CoinObject : public Drawable2DObject
 {
 public:
-	CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs);
+	CoinObject(const char* _path1, std::vector<Vertex> _coords, const char* _vs, const char* _fs,
+			   float _xOffset = 0.0f, float _yOffset = 0.0f, float _xOffsetCoef = 0.0f, float _yOffsetCoef = 0.0f
+			  );
 
 	void Draw(float dt);
 

@@ -7,6 +7,7 @@
 
 #include "ButtonActions/ContinueGameAction.h"
 #include "Game.h"
+#include "GameHelper.h"
 
 ContinueGameAction::ContinueGameAction(bool _wantToContinue)
 : m_wantToContinue(_wantToContinue)
@@ -16,7 +17,7 @@ void ContinueGameAction::DoAction()
 {
 	if(m_wantToContinue)
 	{
-		Game::GetInstance()->IncreaseCointCount(-30);
+		Game::GetInstance()->IncreaseCointCount(-respawnPrise);
 		Game::GetInstance()->SetCurrentScreen(GAME_SCREEN::GAME);
 	}
 	else
